@@ -16,3 +16,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+Route::get('newOrder','App\Http\Controllers\newController@newOrder');
+Route::post('dashboard/submitOrder','App\Http\Controllers\newController@submitOrder');
+Route::get('dashboard','App\Http\Controllers\dashboardController@viewDashboard');
