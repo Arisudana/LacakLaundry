@@ -17,9 +17,9 @@ class newController extends Controller
             'orderWeight'=> $orders->orderWeight,
             'orderType'=> $orders->orderType,
             'nominalOrder'=> $orders->nominalOrder,
-            'orderDate'=> now()
+            'orderDate'=> date('Y-m-d')
         ]);
 
-        return redirect('dashboard');
+        return redirect('/');
     }
 }
