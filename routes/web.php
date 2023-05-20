@@ -19,3 +19,4 @@ Route::get('/', function () {
 Route::get('newOrder','App\Http\Controllers\newController@newOrder');
 Route::post('dashboard/submitOrder','App\Http\Controllers\newController@submitOrder');
 Route::get('dashboard','App\Http\Controllers\dashboardController@viewDashboard');
+Route::get('login','App\Http\Controllers\loginController@viewLogin');
