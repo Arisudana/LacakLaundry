@@ -38,14 +38,15 @@ h5, h6 {
             </div>
             <h2 class="card-title text-center">Log In to LacakLaundry</h2>
             <h6 class="mt-4 mb-4 card-text text-center">Enter your username and password below</h6>
-            <form>
+            <form method="POST" action="">
+                @csrf
               <div class="mb-3">
                 <label for="email" class="form-label">Username</label>
-                <input type="email" class="form-control" id="email" placeholder="Username">
+                <input type="text" name="username" class="form-control" id="email" placeholder="Username">
               </div>
               <div class="mb-3">
                 <label for="password" class="form-label">Password</label>
-                <input type="password" class="form-control" id="password" placeholder="Password">
+                <input type="password" name="password" class="form-control" id="password" placeholder="Password">
                 <div class="form-text text-end">
                   <a href="#">Forgot Password?</a>
                 </div>
