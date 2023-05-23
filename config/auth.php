@@ -40,6 +40,14 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'akun_admin' => [
+            'driver' => 'session',
+            'provider' => 'akun_admin',
+        ],
+        'akun_staff' => [
+            'driver' => 'session',
+            'provider' => 'akun_staff',
+        ],
     ],
 
     /*
@@ -63,6 +71,14 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\Models\User::class,
+        ],
+        'akun_admin' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\AkunAdmin::class,
+        ],
+        'akun_staff' => [
+            'driver' => 'eloquent',
+            'model' => App\Models\AkunStaff::class,
         ],
 
         // 'users' => [

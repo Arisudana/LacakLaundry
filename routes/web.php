@@ -1,6 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\newController;
+use App\Http\Controllers\dashboardController;
+use App\Http\Controllers\loginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,9 +17,20 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('dashboard');
+    return redirect(route('dashboard'));
 });
-Route::get('newOrder','App\Http\Controllers\newController@newOrder');
-Route::get('login','App\Http\Controllers\loginController@viewLogin');
-Route::post('/input','App\Http\Controllers\newController@submitOrder');
-Route::get('','App\Http\Controllers\dashboardController@viewDashboard');
+
+Route::middleware(['guest'])->group(function(){
+    Route::get('login', [loginController::class, 'viewLogin'])->name('login');
+    Route::post('login', [loginController::class, 'login']);
+});
+
+Route::middleware(['authAdminStaff'])->group(function(){
+    Route::get('dashboard', [dashboardController::class, 'viewDashboard'])->name('dashboard');
+    Route::get('newOrder', [newController::class, 'newOrder'])->name('newOrder');
+    Route::get('logout', [loginController::class, 'logout'])->name('logout');
+    Route::post('/input', [newController::class, 'submitOrder']);
+});
+
+
+
