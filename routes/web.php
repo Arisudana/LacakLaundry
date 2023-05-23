@@ -26,6 +26,15 @@ Route::middleware(['guest'])->group(function(){
 });
 
 Route::middleware(['authAdminStaff'])->group(function(){
+
+    Route::get('admin', function () {
+        return "admin";
+    })->name('admin')->middleware('role:admin');
+
+    Route::get('staff', function () {
+        return "staff";
+    })->name('staff')->middleware('role:staff');
+
     Route::get('dashboard', [dashboardController::class, 'viewDashboard'])->name('dashboard');
     Route::get('newOrder', [newController::class, 'newOrder'])->name('newOrder');
     Route::get('logout', [loginController::class, 'logout'])->name('logout');
