@@ -49,9 +49,9 @@
                 <h5 class="card-title">Orders</h5>
             </div>
             <ul class="list-group list-group-flush">
-                <li class="list-group-item">An item</li>
-                <li class="list-group-item">A second item</li>
-                <li class="list-group-item">A third item</li>
+                <li class="list-group-item">Total: {{ $orderTotals['totalOrders'] }}</li>
+                <li class="list-group-item">Current month: {{ $orderTotals['currentMonthOrders'] }}</li>
+                <li class="list-group-item">Last month: {{ $orderTotals['lastMonthOrders'] }}</li>
             </ul>
         </div>
     </div>
