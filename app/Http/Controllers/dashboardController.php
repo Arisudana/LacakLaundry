@@ -8,7 +8,9 @@ use Illuminate\Support\Facades\DB;
 class dashboardController extends Controller
 {
     public function viewDashboard(){
-        return view('dashboard');
+
+        $orderTotals = $this->orderTotals();
+        return view('dashboard')->with(compact('orderTotals'));
 }
     public function orderTotals(){
     $totalOrders = DB::connection('mysql')->table('orders')->count();
@@ -31,6 +33,6 @@ class dashboardController extends Controller
         'lastMonthOrders' => $lastMonthOrders,
     ];
 
-    return view('dashboard', compact('orderTotals'));
+    return $orderTotals;
     }
 }

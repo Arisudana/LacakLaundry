@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\newController;
 use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\loginController;
+use App\Http\Controllers\SettingsAdminController;
 
 /*
 |--------------------------------------------------------------------------
@@ -35,10 +36,11 @@ Route::middleware(['authAdminStaff'])->group(function(){
         return "staff";
     })->name('staff')->middleware('role:staff');
 
-    Route::get('dashboard', [dashboardController::class, 'viewDashboard', 'orderTotals'])->name('dashboard');
+    Route::get('dashboard', [dashboardController::class, 'viewDashboard'])->name('dashboard');
     Route::get('newOrder', [newController::class, 'newOrder'])->name('newOrder');
     Route::get('logout', [loginController::class, 'logout'])->name('logout');
     Route::post('/input', [newController::class, 'submitOrder']);
+    Route::get('/settings', [SettingsAdminController::class, 'SettingsAdmin']);
 });
 
 
