@@ -346,6 +346,22 @@
             cursor: pointer;
         }
 
+        .settings-item button {
+            font-size: 15px;
+            letter-spacing: 0.2px;
+            line-height: normal;
+            min-height: 18px;
+            white-space: nowrap;
+            padding: 10px 0;
+            cursor: pointer;
+            background: none;
+            border: none;
+            cursor: pointer;
+            text-align: left;
+            width: 1100px;
+            text-decoration: none;
+        }
+
         .settings-item a {
             text-decoration: none;
             color: #363740;
@@ -435,7 +451,7 @@
                     <div class="settings">
                         <div class="settings-list-row">
                             <ul class="settings-list">
-                                <li class="settings-item mulish-bold-steel-gray-20px bold-text"><a href="#">Staff</a>
+                                <li class="settings-item"><a href="#"><button class="mulish-bold-steel-gray-20px bold-text">Staff</button></a>
                                 </li>
                             </ul>
                             <img class="icon-arrow-right-1"
@@ -444,8 +460,8 @@
                         </div>
                         <div class="settings-list-row">
                             <ul class="settings-list">
-                                <li class="settings-item mulish-bold-steel-gray-20px bold-text"
-                                    style="margin-top: 10px;"><a href="#">Order Settings</a></li>
+                                <li class="settings-item"
+                                    style="margin-top: 10px;"><a href="#"><button class="mulish-bold-steel-gray-20px bold-text">Order Settings</button></a></li>
                             </ul>
                             <img class="icon-arrow-right-2"
                                 src="https://anima-uploads.s3.amazonaws.com/projects/646bcdfa56fd98051a2e06f4/releases/646bd21885600e5d5e42adf8/img/icon---arrow---right-1.svg"
@@ -453,8 +469,8 @@
                         </div>
                         <div class="settings-list-row">
                             <ul class="settings-list">
-                                <li class="settings-item mulish-bold-steel-gray-20px bold-text"
-                                    style="margin-top: 10px;"><a href="/logout">Log Out</a></li>
+                                <li class="settings-item"
+                                    style="margin-top: 10px;"><a href="/logout"><button class="mulish-bold-steel-gray-20px bold-text">Log Out</button></a></li>
                             </ul>
                         </div>
                     </div>
