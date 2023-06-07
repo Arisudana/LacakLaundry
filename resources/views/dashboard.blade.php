@@ -33,7 +33,8 @@
             <p>Dashboard</p>
         </div>
         <div class="row">
-            <a class="btn btn-primary btn-sm col-2" type="button" href="/newOrder" style="height: 55px, width:5px;">+ New Order</a>
+            <a class="btn btn-primary btn-sm col-2" type="button" href="/newOrder" style="height: 55px, width:5px;">+
+                New Order</a>
         </div>
         <div class="row">
             <div class="col-sm-4">
@@ -84,7 +85,7 @@
                                 <div class="col-12 ">Average revenue per day</div>
                             </div>
                             <div class="row">
-                                <div class="col-12">Rp {{$averageMonthlyRevenue}}</div>
+                                <div class="col-12">Rp {{ $averageMonthlyRevenue }}</div>
                             </div>
                         </li>
                         <li class="list-group-item text-center">
@@ -100,7 +101,7 @@
                                 <div class="col-12 ">Average laundry time</div>
                             </div>
                             <div class="row">
-                                <div class="col-12">{{ $averageLaundryTime}}</div>
+                                <div class="col-12">{{ $averageLaundryTime }}</div>
                             </div>
                         </li>
                     </ul>
@@ -139,48 +140,69 @@
 
     <script>
         var ctx = document.getElementById('chart').getContext('2d');
-        var chart = null; // Store the chart instance
+        var chart = null;
 
-        function generateChart(labels, values) {
+        function generateChart(labels, values, previousMonthValues) {
+            var currentDate = new Date();
+            var currentMonth = currentDate.toLocaleString('default', {
+                month: 'long'
+            });
+
+            var previousDate = new Date();
+            previousDate.setMonth(previousDate.getMonth() - 1);
+            var previousMonth = previousDate.toLocaleString('default', {
+                month: 'long'
+            });
             var data = {
                 labels: labels,
                 datasets: [{
-                    label: 'Sales',
-                    data: values,
-                    fill: 'origin',
-                    borderColor: 'rgba(75, 192, 192, 1)',
-                    backgroundColor: 'rgba(20, 72, 150, 0.3)',
-                    borderWidth: 1,
-                    lineTension: 0.4,
-                    pointRadius: values.map(value => value > 0 ? 2 : 0)
-                }]
+                        label: currentMonth,
+                        data: values,
+                        fill: 'origin',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        backgroundColor: 'rgba(20, 72, 150, 0.15)',
+                        borderWidth: 1,
+                        lineTension: 0.4,
+                        pointRadius: values.map((value) => (value > 0 ? 2 : 0)),
+                    },
+                    {
+                        label: previousMonth,
+                        data: previousMonthValues,
+                        fill: 'none',
+                        borderColor: 'rgba(255, 99, 132, 1)',
+                        backgroundColor: 'rgba(255, 99, 132, 0.8)',
+                        borderWidth: 1,
+                        lineTension: 0.4,
+                        pointRadius: previousMonthValues.map((value) => (value > 0 ? 2 : 0)),
+                    },
+                ],
             };
 
             var options = {
                 scales: {
                     x: {
                         grid: {
-                            display: false // Hide the x-axis grid lines
-                        }
+                            display: false, // Hide the x-axis grid lines
+                        },
                     },
                     y: {
                         beginAtZero: true,
                         grid: {
-                            display: true // Hide the y-axis grid lines
-                        }
-                    }
+                            display: true, // Hide the y-axis grid lines
+                        },
+                    },
                 },
                 interaction: {
                     intersect: false, // Disable line interactions to only show data point when hovering
-                    mode: 'index'
+                    mode: 'index',
                 },
                 plugins: {
                     tooltip: {
                         mode: 'index',
-                        intersect: false
-                    }
-                }
-            }
+                        intersect: false,
+                    },
+                },
+            };
 
             // Check if a chart instance already exists
             // If it does, destroy the previous chart before creating a new one
@@ -191,19 +213,20 @@
             chart = new Chart(ctx, {
                 type: 'line',
                 data: data,
-                options: options
+                options: options,
             });
         }
 
         // Function to update the chart dynamically
-        function updateChart(newLabels, newValues) {
+        function updateChart(newLabels, newValues, newPreviousMonthValues) {
             chart.data.labels = newLabels;
             chart.data.datasets[0].data = newValues;
+            chart.data.datasets[1].data = newPreviousMonthValues;
             chart.update();
         }
 
         // Call the generateChart function initially
-        generateChart(@json($labels), @json($values));
+        generateChart(@json($labels), @json($values), @json($previousMonthValues));
     </script>
 
 </body>

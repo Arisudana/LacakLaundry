@@ -21,7 +21,8 @@ class dashboardController extends Controller
 
         $labels = $chartData['labels'];
         $values = $chartData['values'];
-        return view('dashboard')->with(compact('orderTotals', 'labels', 'values', 'totalRevenue', 'averageMonthlyRevenue', 'averageLaundryWeight','averageLaundryTime'));
+        $previousMonthValues = $chartData['previousMonthValues'];
+        return view('dashboard')->with(compact('orderTotals', 'labels', 'values','previousMonthValues','totalRevenue', 'averageMonthlyRevenue', 'averageLaundryWeight','averageLaundryTime'));
     }
     public function orderTotals()
     {
@@ -53,45 +54,66 @@ class dashboardController extends Controller
 
         return $orderTotals;
     }
+
     public function chart()
-    {
-        date_default_timezone_set('Asia/Jakarta');
-        $currentMonth = Carbon::now()->startOfMonth();
-        $nextMonth = Carbon::now()->startOfMonth()->addMonth();
+{
+    date_default_timezone_set('Asia/Jakarta');
+    $currentMonth = Carbon::now()->startOfMonth();
+    $previousMonth = Carbon::now()->startOfMonth()->subMonth(); // Get the start of the previous month
 
-        $data = DB::table('orders')
-            ->where('orderDate', '>=', $currentMonth)
-            ->where('orderDate', '<', $nextMonth)
-            ->selectRaw('DATE(orderDate) as orderDay, SUM(nominalOrder) as totalNominalOrder')
-            ->groupBy('orderDay')
-            ->orderBy('orderDay')
-            ->get();
+    // Retrieve data for the current month
+    $currentMonthData = DB::table('orders')
+        ->where('orderDate', '>=', $currentMonth)
+        ->where('orderDate', '<', $currentMonth->copy()->addMonth())
+        ->selectRaw('DATE(orderDate) as orderDay, SUM(nominalOrder) as totalNominalOrder')
+        ->groupBy('orderDay')
+        ->orderBy('orderDay')
+        ->get();
 
-        $labels = [];
-        $values = [];
+    // Retrieve data for the previous month
+    $previousMonthData = DB::table('orders')
+        ->where('orderDate', '>=', $previousMonth)
+        ->where('orderDate', '<', $previousMonth->copy()->addMonth())
+        ->selectRaw('DATE(orderDate) as orderDay, SUM(nominalOrder) as totalNominalOrder')
+        ->groupBy('orderDay')
+        ->orderBy('orderDay')
+        ->get();
 
-        $startDate = $currentMonth->copy();
-        $endDate = $currentMonth->copy()->endOfMonth(); // Set end date to the last day of the current month
+    $labels = [];
+    $values = [];
+    $previousMonthValues = [];
 
-        while ($startDate->lte($endDate)) {
-            $labels[] = $startDate->format('j');
-            $values[] = 0;
+    $startDate = $currentMonth->copy();
+    $endDate = $currentMonth->copy()->endOfMonth();
 
-            $startDate->addDay();
-        }
+    while ($startDate->lte($endDate)) {
+        $labels[] = $startDate->format('j');
+        $values[] = 0;
+        $previousMonthValues[] = 0;
 
-        // Update values based on the data from the orders
-        foreach ($data as $item) {
-            $orderDay = Carbon::parse($item->orderDay);
-            $dayIndex = $orderDay->diffInDays($currentMonth);
-            $values[$dayIndex] = $item->totalNominalOrder;
-        }
-
-        return [
-            'labels' => $labels,
-            'values' => $values,
-        ];
+        $startDate->addDay();
     }
+
+    // Update values based on the data from the current month's orders
+    foreach ($currentMonthData as $item) {
+        $orderDay = Carbon::parse($item->orderDay);
+        $dayIndex = $orderDay->diffInDays($currentMonth);
+        $values[$dayIndex] = $item->totalNominalOrder;
+    }
+
+    // Update values based on the data from the previous month's orders
+    foreach ($previousMonthData as $item) {
+        $orderDay = Carbon::parse($item->orderDay);
+        $dayIndex = $orderDay->diffInDays($previousMonth);
+        $previousMonthValues[$dayIndex] = $item->totalNominalOrder;
+    }
+
+    return [
+        'labels' => $labels,
+        'values' => $values,
+        'previousMonthValues' => $previousMonthValues,
+    ];
+}
 
     public function totalRevenue()
     {
