@@ -4,29 +4,24 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-<<<<<<< Updated upstream
-=======
 use Illuminate\Support\Facades\Redirect;
 use Carbon\Carbon;
 use Illuminate\View\View;
->>>>>>> Stashed changes
 
 class dashboardController extends Controller
 {
-<<<<<<< HEAD
-    public function viewDashboard(){
-
-        $orderTotals = $this->orderTotals();
-        return view('dashboard')->with(compact('orderTotals'));
-=======
     public function viewDashboard()
     {
         $orderTotals = $this->orderTotals();
         $chartData = $this->chart();
+        $totalRevenue = $this->totalRevenue();
+        $averageMonthlyRevenue = $this->averageRevenue();
+        $averageLaundryWeight = $this->averageWeight();
+        $averageLaundryTime = $this->averageLaundryTime();
 
         $labels = $chartData['labels'];
         $values = $chartData['values'];
-        return view('dashboard')->with(compact('orderTotals', 'labels', 'values'));
+        return view('dashboard')->with(compact('orderTotals', 'labels', 'values', 'totalRevenue', 'averageMonthlyRevenue', 'averageLaundryWeight','averageLaundryTime'));
     }
     public function orderTotals()
     {
@@ -34,14 +29,14 @@ class dashboardController extends Controller
         $totalOrders = DB::connection('mysql')->table('orders')->count();
 
         $currentMonthOrders = DB::table('orders')
-        ->whereYear('orderDate', now()->year)
-        ->whereMonth('orderDate', now()->month)
-        ->count();
+            ->whereYear('orderDate', now()->year)
+            ->whereMonth('orderDate', now()->month)
+            ->count();
 
-    $lastMonthOrders = DB::table('orders')
-        ->whereYear('orderDate', now()->subMonth()->year)
-        ->whereMonth('orderDate', now()->subMonth()->month)
-        ->count();
+        $lastMonthOrders = DB::table('orders')
+            ->whereYear('orderDate', now()->subMonth()->year)
+            ->whereMonth('orderDate', now()->subMonth()->month)
+            ->count();
 
         $finishedCount = DB::table('orders')->where('orderStatus', 'Finished')->count();
         $ongoingCount = DB::table('orders')->where('orderStatus', 'Ongoing')->count();
@@ -59,67 +54,90 @@ class dashboardController extends Controller
         return $orderTotals;
     }
     public function chart()
-{
-    date_default_timezone_set('Asia/Jakarta');
-    $currentMonth = Carbon::now()->startOfMonth();
-    $nextMonth = Carbon::now()->startOfMonth()->addMonth();
+    {
+        date_default_timezone_set('Asia/Jakarta');
+        $currentMonth = Carbon::now()->startOfMonth();
+        $nextMonth = Carbon::now()->startOfMonth()->addMonth();
 
-    $data = DB::table('orders')
-        ->where('orderDate', '>=', $currentMonth)
-        ->where('orderDate', '<', $nextMonth)
-        ->selectRaw('DATE(orderDate) as orderDay, SUM(nominalOrder) as totalNominalOrder')
-        ->groupBy('orderDay')
-        ->orderBy('orderDay')
-        ->get();
+        $data = DB::table('orders')
+            ->where('orderDate', '>=', $currentMonth)
+            ->where('orderDate', '<', $nextMonth)
+            ->selectRaw('DATE(orderDate) as orderDay, SUM(nominalOrder) as totalNominalOrder')
+            ->groupBy('orderDay')
+            ->orderBy('orderDay')
+            ->get();
 
-    $labels = [];
-    $values = [];
+        $labels = [];
+        $values = [];
 
-    // Generate labels and values for each day in the current month
-    $startDate = $currentMonth->copy();
-    $endDate = Carbon::now()->endOfDay(); // Set end date to the current day
+        $startDate = $currentMonth->copy();
+        $endDate = $currentMonth->copy()->endOfMonth(); // Set end date to the last day of the current month
 
-    while ($startDate->lte($endDate)) {
-        $labels[] = $startDate->format('j');
-        $values[] = 0; // Set initial value to 0 for each day
+        while ($startDate->lte($endDate)) {
+            $labels[] = $startDate->format('j');
+            $values[] = 0;
 
-        $startDate->addDay();
+            $startDate->addDay();
+        }
+
+        // Update values based on the data from the orders
+        foreach ($data as $item) {
+            $orderDay = Carbon::parse($item->orderDay);
+            $dayIndex = $orderDay->diffInDays($currentMonth);
+            $values[$dayIndex] = $item->totalNominalOrder;
+        }
+
+        return [
+            'labels' => $labels,
+            'values' => $values,
+        ];
     }
 
-    // Update values based on the data from the orders
-    foreach ($data as $item) {
-        $orderDay = Carbon::parse($item->orderDay);
-        $dayIndex = $orderDay->diffInDays($currentMonth);
-        $values[$dayIndex] = $item->totalNominalOrder;
+    public function totalRevenue()
+    {
+        $currentMonth = Carbon::now()->format('Y-m');
+
+        $totalRevenue = DB::connection('mysql')
+            ->table('orders')
+            ->where('orderDate', 'like', $currentMonth . '%')
+            ->sum('nominalOrder');
+
+        return $totalRevenue;
     }
 
-    return [
-        'labels' => $labels,
-        'values' => $values,
-    ];
->>>>>>> 70ecb55 (update dashboard)
-}
-    public function orderTotals(){
-    $totalOrders = DB::connection('mysql')->table('orders')->count();
+    public function averageRevenue()
+    {
 
-    $currentMonth = now()->format('Y-m');
-    $currentMonthOrders = DB::connection('mysql')
-        ->table('orders')
-        ->whereRaw('DATE_FORMAT(orderDate, "%Y-%m") = ?', [$currentMonth])
-        ->count();
+        $averageMonthlyRevenue = DB::connection('mysql')
+            ->table('orders')
+            ->whereMonth('orderDate', Carbon::now()->month)
+            ->avg('nominalOrder');
+        $averageMonthlyRevenue = round($averageMonthlyRevenue, 0);
+        return $averageMonthlyRevenue;
+    }
 
-    $lastMonth = now()->subMonth()->format('Y-m');
-    $lastMonthOrders = DB::connection('mysql')
-        ->table('orders')
-        ->whereRaw('DATE_FORMAT(orderDate, "%Y-%m") = ?', [$lastMonth])
-        ->count();
+    public function averageWeight()
+    {
+        $averageLaundryWeight = DB::connection('mysql')
+            ->table('orders')
+            ->whereMonth('orderDate', Carbon::now()->month)
+            ->avg('orderWeight');
+        $averageLaundryWeight = round($averageLaundryWeight, 1);
+        return $averageLaundryWeight;
+    }
 
-    $orderTotals = [
-        'totalOrders' => $totalOrders,
-        'currentMonthOrders' => $currentMonthOrders,
-        'lastMonthOrders' => $lastMonthOrders,
-    ];
+    public function averageLaundryTime()
+    {
+        $averageTimeDifference = DB::table('orders')
+            ->selectRaw('AVG(TIMESTAMPDIFF(DAY, orderDate, dateReady)) as avg_days, AVG(TIMESTAMPDIFF(HOUR, orderDate, dateReady)) as avg_hours')
+            ->whereMonth('orderDate', Carbon::now()->month)
+            ->first();
 
-    return $orderTotals;
+        $averageDays = floor($averageTimeDifference->avg_days);
+        $averageHours = $averageTimeDifference->avg_hours % 24;
+
+        $averageLaundryTime = "{$averageDays}d {$averageHours}h";
+
+        return $averageLaundryTime;
     }
 }

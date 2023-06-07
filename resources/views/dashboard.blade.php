@@ -19,7 +19,7 @@
 
         <div class="sidebar">
             <div class="sidebar-brand">
-                <img class="sidebar-brand-picture"src="Logo.jpg" alt="Profile Picture">
+                <img class="sidebar-brand-picture" src="{{ asset('Image/logo.jpg') }}" alt="Profile Picture">
                 <span class="brand-text">LacakLaundry</span>
             </div>
             <ul class="sidebar-nav">
@@ -33,7 +33,7 @@
             <p>Dashboard</p>
         </div>
         <div class="row">
-            <a class="btn btn-primary btn-sm col-1" type="button" href="/newOrder" style="height: 55px">+ New Order</a>
+            <a class="btn btn-primary btn-sm col-2" type="button" href="/newOrder" style="height: 55px, width:5px;">+ New Order</a>
         </div>
         <div class="row">
             <div class="col-sm-4">
@@ -62,33 +62,77 @@
             </div>
         </div>
 
-        <div class="card-body">
-            <canvas id="chart">
-
-            </canvas>
+        <div class="card">
+            <h5 class="card-title">Monthly Sales Performance</h5>
+            <div class="row">
+                <div class="col-8">
+                    <canvas id="chart">
+                    </canvas>
+                </div>
+                <div class="salesperformance" style="width: 20rem; height:40%">
+                    <ul class="list-group list-group-flush ">
+                        <li class="list-group-item text-center">
+                            <div class="row">
+                                <div class="col-12 ">Total Revenue</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">Rp {{ $totalRevenue }}</div>
+                            </div>
+                        </li>
+                        <li class="list-group-item text-center">
+                            <div class="row">
+                                <div class="col-12 ">Average revenue per day</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">Rp {{$averageMonthlyRevenue}}</div>
+                            </div>
+                        </li>
+                        <li class="list-group-item text-center">
+                            <div class="row">
+                                <div class="col-12 ">Average laundry weight</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">{{ $averageLaundryWeight }} Kg</div>
+                            </div>
+                        </li>
+                        <li class="list-group-item text-center">
+                            <div class="row">
+                                <div class="col-12 ">Average laundry time</div>
+                            </div>
+                            <div class="row">
+                                <div class="col-12">{{ $averageLaundryTime}}</div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
         </div>
 
-        <div class="card">
+
+        <div class="card ordersCount">
             <div class="card-body">
                 <h5 class="card-title">Orders</h5>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-6">Total</div>
+                            <div class="col-6 text-end">{{ $orderTotals['totalOrders'] }}</div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-6">Current Month</div>
+                            <div class="col-6 text-end">{{ $orderTotals['currentMonthOrders'] }}</div>
+                        </div>
+                    </li>
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-6">Last Month</div>
+                            <div class="col-6 text-end">{{ $orderTotals['lastMonthOrders'] }}</div>
+                        </div>
+                    </li>
+                </ul>
             </div>
-<<<<<<< Updated upstream
-            <ul class="list-group list-group-flush">
-                <li class="list-group-item">Total: {{ $orderTotals['totalOrders'] }}</li>
-=======
-            <ul class="list-group list-group-flush" >
-                <li class="list-group-item">
-                    <div class="row" >
-                        <p class="col-6">Total
-                        <p class="text-end orderAmount col-6" style="color: gray">
-                            {{ $orderTotals['totalOrders'] }}
-                        <p>
-                    </div>
-                </li>
->>>>>>> Stashed changes
-                <li class="list-group-item">Current month: {{ $orderTotals['currentMonthOrders'] }}</li>
-                <li class="list-group-item">Last month: {{ $orderTotals['lastMonthOrders'] }}</li>
-            </ul>
         </div>
 
     </div>
@@ -122,7 +166,7 @@
                     y: {
                         beginAtZero: true,
                         grid: {
-                            display: false // Hide the y-axis grid lines
+                            display: true // Hide the y-axis grid lines
                         }
                     }
                 },
