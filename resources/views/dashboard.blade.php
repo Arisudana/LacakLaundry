@@ -11,7 +11,7 @@
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous">
     </script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <title>Dashboard</title>
+    <title>LacakLaundry</title>
 </head>
 
 <body>
@@ -23,10 +23,10 @@
                 <span class="brand-text">LacakLaundry</span>
             </div>
             <ul class="sidebar-nav">
-                <li><a href="#">Overview</a></li>
-                <li><a href="#">Performance</a></li>
-                <li><a href="#">History</a></li>
-                <li><a href="#">Settings</a></li>
+                <li><a href="/dashboard">Dashboard</a></li>
+                <li><a href="/revenueDetail">Performance</a></li>
+                <li><a href="/viewOrder">History</a></li>
+                <li><a href="/settings">Settings</a></li>
             </ul>
         </div>
         <div class="row">
