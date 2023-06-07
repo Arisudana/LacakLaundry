@@ -140,4 +140,10 @@ class dashboardController extends Controller
 
         return $averageLaundryTime;
     }
+    public function viewRevenueDetail(){
+        return view('revenueDetail');
+}
+    public function viewOrderDetail(){
+        return view('viewOrder');
+}
 }
