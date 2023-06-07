@@ -20,7 +20,11 @@ class CreateOrdersTable extends Migration
             $table->string('orderType');
             $table->integer('nominalOrder');
             $table->integer('orderWeight');
-            $table->timestamp('orderDate')->default(now());
+            $table->timestamp('orderDate')->nullable();
+            $table->string('orderStatus');
+            $table->timestamp('dateWashed')->nullable();
+            $table->timestamp('dateIroned')->nullable();
+            $table->timestamp('dateReady')->nullable();
         });
     }
 
