@@ -5,6 +5,9 @@ use App\Http\Controllers\newController;
 use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\loginController;
 use App\Http\Controllers\SettingsAdminController;
+use App\Http\Controllers\SettingsStaffController;
+use App\Http\Controllers\revenueDetailController;
+use App\Http\Controllers\OrdersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,9 +41,12 @@ Route::middleware(['authAdminStaff'])->group(function(){
 
     Route::get('dashboard', [dashboardController::class, 'viewDashboard'])->name('dashboard');
     Route::get('newOrder', [newController::class, 'newOrder'])->name('newOrder');
+    Route::get('revenueDetail', [revenueDetailController::class, 'viewRevenueDetail'])->name('revenueDetail');
+    Route::get('viewOrder', [OrdersController::class, 'viewOrder'])->name('viewOrder');
     Route::get('logout', [loginController::class, 'logout'])->name('logout');
     Route::post('/input', [newController::class, 'submitOrder']);
-    Route::get('/settings', [SettingsAdminController::class, 'SettingsAdmin']);
+    Route::get('/settings', [SettingsAdminController::class, 'SettingsAdmin'])->name('SettingAdmin');
+    // Route::get('/settings', [SettingsStaffController::class, 'SettingsStaff'])->name('SettingsStaff')->middleware('role:staff');
 });
 
 

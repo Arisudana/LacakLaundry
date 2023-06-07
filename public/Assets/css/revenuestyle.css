@@ -1,0 +1,303 @@
+        body {
+            background-color: #F7F8FC;
+            font-family: Mulish;
+        }
+
+        .container {
+            margin-top: 10px;
+        }
+
+        .table-container {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            margin-left: 0px;
+            flex: 1;
+            /* Tambahkan margin kiri */
+        }
+
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+
+        th,
+        td {
+            border: 0;
+            padding: 8px;
+            text-align: left;
+        }
+
+        td {
+            border-top: 1px solid #eee;
+        }
+
+        .table-title {
+            text-align: left;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+
+        .table-content {
+            font-size: 13px;
+        }
+
+        .table-head {
+            color: #9FA2B4;
+        }
+
+        .customer-info {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .date-info {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .sidebar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            margin: 0;
+            height: 100vh;
+            width: 180px;
+            background-color: #363740;
+            padding-top: 20px;
+
+            flex: 1;
+        }
+
+        .sidebar-brand {
+            font-size: 14px;
+            font-weight: 700;
+            color: #A4A6B3;
+            margin-left: 6px;
+            vertical-align: middle;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 40px;
+            margin-top: 10px;
+        }
+
+        .sidebar-brand-picture {
+            width: 19px;
+            height: 19px;
+            border-radius: 50%;
+            align-items: center;
+            margin-right: 7px;
+        }
+
+        .sidebar-nav {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .sidebar-nav li {
+            position: relative;
+        }
+
+        .sidebar-nav li a {
+            font-size: 13px;
+            display: block;
+            color: #A4A6B3;
+            text-decoration: none;
+            text-indent: 55px;
+            padding-top: 15px;
+            padding-bottom: 15px;
+        }
+
+        .sidebar-nav li:hover::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 2px;
+            background-color: #ffffff;
+        }
+
+        .sidebar-nav li a:hover {
+            background-color: rgb(156, 157, 164, .08);
+            color: #A4A6B3;
+        }
+
+        .sheet {
+            background-color: rgb(156, 157, 164, .08);
+            content: '';
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 180px;
+        }
+
+        .selected {
+            content: '';
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 2px;
+            background-color: #ffffff;
+        }
+
+        .profile-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        .left-container {
+            display: inline-flex;
+            flex: 1;
+            margin-left: 0px;
+            align-items: center;
+        }
+
+        .profile-text {
+            font-weight: bold;
+            font-size: 18px;
+            margin-left: 15px;
+        }
+
+        .profile-picture {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            align-items: center;
+            border: 2px solid #ccc;
+            padding: 1px;
+        }
+
+        .admin-text {
+            font-weight: 500;
+            font-size: 13px;
+            margin-right: 10px;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: end;
+            align-items: center;
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+        }
+
+        .page-item {
+            margin: 0 2px;
+        }
+
+        .page-link {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 30px;
+            height: 30px;
+            border-radius: 5px;
+            color: #9FA2B4;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .page-link:hover {
+            background-color: #f5f5f5;
+        }
+
+        .page-item.disabled .page-link {
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .page-item.disabled .page-link:hover {
+            background-color: transparent;
+        }
+
+        .pagination-info {
+            margin-right: 17px;
+            margin-top: 2px;
+            font-size: 12px;
+            color: #9FA2B4;
+            align-items: center;
+            display: flex;
+        }
+
+        .rowpage-text {
+            margin-right: 50px;
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+            margin-right: 10px;
+            font-size: 10px;
+        }
+
+        .dropdown-menu {
+            font-size: 12px;
+            min-width: unset;
+            text-align: center;
+        }
+
+        .dropdown-toggle::after {
+            display: none;
+        }
+
+        .btn-sm {
+            padding: 0.01rem 0.2rem;
+            font-size: 12px;
+            line-height: 1.5;
+            border-radius: 0.2rem;
+            background-color: transparent;
+            border-color: transparent;
+            color: #9FA2B4;
+        }
+
+        .btn-sm:hover {
+            background-color: transparent;
+            border-color: transparent;
+            color: #000;
+        }
+
+        .table-header {
+            display: flex;
+            align-items: center;
+            justify-content: end;
+            margin-top: -40px;
+            margin-bottom: 20px;
+        }
+
+        .sort-btn {
+            cursor: pointer;
+            color: #000;
+            font-size: 13px;
+            font-weight: 700;
+            margin-right: 20px;
+            margin-left: 3px;
+        }
+
+        .sort-btn:hover {
+            background-color: transparent;
+            border-color: transparent;
+            color: #363740;
+        }
+
+        .ascending-icon::after {
+            content: "Sort";
+        }
+
+        .descending-icon::after {
+            content: "Sort";
+        }
+
+        .filter-btn {
+            cursor: pointer;
+            color: #000;
+            font-size: 13px;
+            font-weight: 700;
+        }
