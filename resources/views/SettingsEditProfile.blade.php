@@ -25,6 +25,15 @@
             /* Tambahkan margin kiri */
         }
 
+        .card {
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            margin-left: 200px;
+        }
+
         table {
             border-collapse: collapse;
             width: 100%;
@@ -152,7 +161,6 @@
         }
 
         .table-container {
-            display: flex;
             margin-left: 350px;
             margin-right: 170px;
         }
@@ -162,6 +170,16 @@
             align-items: center;
             justify-content: space-between;
             margin-bottom: 20px;
+        }
+
+        .left-container {
+            flex: 1;
+            margin-left: 200px;
+        }
+
+        .left-container a {
+            text-decoration: none;
+            color: #363740;
         }
 
         .left-container {
@@ -192,6 +210,8 @@
             position: absolute;
             top: 8px;
             width: 135px;
+            border-radius: 75.5px;
+            object-fit: cover;
         }
 
         .profile-circle {
@@ -248,22 +268,13 @@
         }
 
         .length-pair {
+            width: 1000px;
             padding: 5px;
             align-items: center;
             margin-bottom: 10px;
         }
 
-        .title-1 {
-            color: var(--chicago);
-            font-weight: 400;
-            line-height: normal;
-            margin-top: 36px;
-            min-height: 18px;
-            white-space: nowrap;
-        }
-
         .title-5 {
-            display: flex;
             letter-spacing: 0.2px;
             line-height: normal;
             margin-top: 16px;
@@ -280,10 +291,11 @@
         }
 
         .overlap-group-1:hover {
-            background-color: #036AB5;
+            background-color: #059fd4;
         }
 
         .overlap-group-1 {
+            transform: translateX(+170px);
             align-items: center;
             background-color: #034c81;
             border-radius: 8px;
@@ -294,6 +306,11 @@
             margin-top: 36px;
             min-width: 168px;
             padding: 11px 13px;
+        }
+
+        .text-group {
+            transform: translateY(+190px);
+            text-align: center;
         }
 
         .label {
@@ -308,6 +325,11 @@
             width: 113px;
         }
 
+        .form-control {
+            width: 600px;
+            height: 40px;
+        }
+
         .vector-1 {
             height: 17px;
             margin-top: 1px;
@@ -316,71 +338,13 @@
         }
 
         .title-4 {
-            display: flex;
             color: chicago;
+            font-size: smaller;
             font-weight: 400;
             margin-right: 10px;
             line-height: normal;
             min-height: 18px;
             white-space: nowrap;
-        }
-
-        .settings-list-row {
-            width: 1130px;
-            border-bottom: 1px solid #DADADA;
-            display: flex;
-        }
-
-        .settings-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-
-        .settings-item {
-            letter-spacing: 0.2px;
-            line-height: normal;
-            min-height: 18px;
-            white-space: nowrap;
-            padding: 10px 0;
-            cursor: pointer;
-        }
-
-        .settings-item button {
-            font-size: 15px;
-            letter-spacing: 0.2px;
-            line-height: normal;
-            min-height: 18px;
-            white-space: nowrap;
-            padding: 10px 0;
-            cursor: pointer;
-            background: none;
-            border: none;
-            cursor: pointer;
-            text-align: left;
-            width: 1100px;
-            text-decoration: none;
-        }
-
-        .settings-item a {
-            text-decoration: none;
-            color: #363740;
-        }
-
-        .settings-list-row:last-child {
-            border-bottom: none;
-        }
-
-        .settings-list-row:hover {
-            background-color: #f5f5f5;
-        }
-
-        .icon-arrow-right-1 {
-            margin-left: auto;
-        }
-
-        .icon-arrow-right-2 {
-            margin-left: auto;
         }
     </style>
 </head>
@@ -388,7 +352,7 @@
 <body>
     <div class="sidebar">
         <div class="sidebar-brand">
-            <img class="sidebar-brand-picture" src="{{ asset('Image/logo.jpg')}}" alt="Profile Picture">
+            <img class="sidebar-brand-picture" src="Logo.jpg" alt="Profile Picture">
             <span class="brand-text">LacakLaundry</span>
         </div>
         <ul class="sidebar-nav">
@@ -407,75 +371,61 @@
             <div class="col-lg-9 offset-lg-3">
                 <div class="profile-container">
                     <div class="left-container">
-                        <span class="profile-text" style="font-weight: bold; font-size: 20px;"> Settings</span>
+                        <a href="/settings" style="text-decoration: none;"><svg xmlns="http://www.w3.org/2000/svg"
+                                width="16" height="16" fill="currentColor" class="bi-caret-left-fill"
+                                viewBox="0 0 16 16">
+                                <path
+                                    d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />
+                            </svg></a>
+                        <span class="profile-text" style="font-weight: bold; font-size: 20px; padding-left: 10px;">
+                            Settings</span>
                     </div>
                 </div>
                 <div class="table-container" style="padding-bottom: 30px;">
                     <div class="subtitle-1 bold19px">Profile</div>
                     <div class="flex-row-1">
                         <div class="overlap-group1">
-                            <img class="profilepicture"
-                                src="https://cdns.klimg.com/bola.net/library/upload/21/2023/04/645x430/maguire-dt-1_f8b85a8.jpg"
-                                alt="avatar / man / _header" />
+                            <img class="profilepicture" src="Surya.jpeg" alt="avatar / man / _header" />
                             <div class="profile-circle"></div>
+                            <div class="text-group">
+                                <div class="title-5 mulish-bold-steel-gray-20px bold-text">Alif Destiano</div>
+                                <div class="title-4 regular16px bold">alifdestiano47@gmail.com</div>
+                            </div>
                         </div>
                         <img class="line-1"
                             src="https://anima-uploads.s3.amazonaws.com/projects/646bcdfa56fd98051a2e06f4/releases/646bd21885600e5d5e42adf8/img/line-1.svg"
                             alt="Line 1" />
                         <div class="flex-col">
-                            <div class="length-pair">
-                                <div class="title-4 regular16px">Name</div>
-                                <div class="title-5 mulish-bold-steel-gray-20px bold-text">Alif Destiano</div>
-                            </div>
-                            <div class="length-pair">
-                                <div class="title-4 regular16px">Role</div>
-                                <div class="title-5 mulish-bold-steel-gray-20px bold-text">Administrator</div>
-                            </div>
-                            <div class="length-pair">
-                                <div class="title-4 regular16px">Email</div>
-                                <div class="title-5 mulish-bold-steel-gray-20px bold-text">alifdestiano47@gmail.com
+                            <div class="col-sm-9">
+                                <div class="length-pair" style="padding-bottom: 20px;">
+                                    <label for="nama" class="col-form-label bold-text"
+                                        style="padding-right: 80px;">First Name</label>
+                                    <input type="text" class="form-control" id="kupon" placeholder="Alif">
+                                </div>
+                                <div class="length-pair" style="padding-bottom: 20px;">
+                                    <label for="nama" class="col-form-label bold-text"
+                                        style="padding-right: 80px;">Last
+                                        Name</label>
+                                    <input type="text" class="form-control" id="kupon" placeholder="Destiano">
+                                </div>
+                                <div class="length-pair">
+                                    <label for="nama" class="col-form-label bold-text"
+                                        style="padding-right: 119px;">Email</label>
+                                    <input type="text" class="form-control" id="kupon"
+                                        placeholder="alifdestiano47@gmail.com">
                                 </div>
                             </div>
-                            <a href="/settings/edit" style="text-decoration: none;">
+                            <a href="#" style="text-decoration: none;">
                                 <div class="overlap-group-1">
                                     <img class="vector-1"
                                         src="https://anima-uploads.s3.amazonaws.com/projects/646bcdfa56fd98051a2e06f4/releases/646bd21885600e5d5e42adf8/img/vector-5.svg"
                                         alt="Vector" />
-                                    <div class="label">Edit Profile</div>
+                                    <div class="label">Save Changes</div>
                                 </div>
                             </a>
                         </div>
                     </div>
                 </div>
-                <div class="table-container">
-                    <div class="settings">
-                        <div class="settings-list-row">
-                            <ul class="settings-list">
-                                <li class="settings-item"><a href="/settings/staff"><button class="mulish-bold-steel-gray-20px bold-text">Staff</button></a>
-                                </li>
-                            </ul>
-                            <img class="icon-arrow-right-1"
-                                src="https://anima-uploads.s3.amazonaws.com/projects/646bcdfa56fd98051a2e06f4/releases/646bd21885600e5d5e42adf8/img/icon---arrow---right-1.svg"
-                                alt="icon / arrow - right" />
-                        </div>
-                        <div class="settings-list-row">
-                            <ul class="settings-list">
-                                <li class="settings-item"
-                                    style="margin-top: 10px;"><a href="/settings/order"><button class="mulish-bold-steel-gray-20px bold-text">Order Settings</button></a></li>
-                            </ul>
-                            <img class="icon-arrow-right-2"
-                                src="https://anima-uploads.s3.amazonaws.com/projects/646bcdfa56fd98051a2e06f4/releases/646bd21885600e5d5e42adf8/img/icon---arrow---right-1.svg"
-                                alt="icon / arrow - right" />
-                        </div>
-                        <div class="settings-list-row">
-                            <ul class="settings-list">
-                                <li class="settings-item"
-                                    style="margin-top: 10px;"><a href="/logout"><button class="mulish-bold-steel-gray-20px bold-text">Log Out</button></a></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
             </div>
         </div>
     </div>
