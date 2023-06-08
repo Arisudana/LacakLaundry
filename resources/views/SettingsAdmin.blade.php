@@ -63,7 +63,7 @@
                                 <div class="title-5 mulish-bold-steel-gray-20px bold-text">{{Auth::user()->email}}
                                 </div>
                             </div>
-                            <a href="#" style="text-decoration: none;">
+                            <a href="/settings/edit" style="text-decoration: none;">
                                 <div class="overlap-group-1">
                                     <img class="vector-1"
                                         src="https://anima-uploads.s3.amazonaws.com/projects/646bcdfa56fd98051a2e06f4/releases/646bd21885600e5d5e42adf8/img/vector-5.svg"
@@ -78,7 +78,7 @@
                     <div class="settings">
                         <div class="settings-list-row">
                             <ul class="settings-list">
-                                <li class="settings-item"><a href="#"><button class="mulish-bold-steel-gray-20px bold-text">Staff</button></a>
+                                <li class="settings-item"><a href="/settings/staff"><button class="mulish-bold-steel-gray-20px bold-text">Staff</button></a>
                                 </li>
                             </ul>
                             <img class="icon-arrow-right-1"
@@ -88,7 +88,7 @@
                         <div class="settings-list-row">
                             <ul class="settings-list">
                                 <li class="settings-item"
-                                    style="margin-top: 10px;"><a href="#"><button class="mulish-bold-steel-gray-20px bold-text">Order Settings</button></a></li>
+                                    style="margin-top: 10px;"><a href="/settings/order"><button class="mulish-bold-steel-gray-20px bold-text">Order Settings</button></a></li>
                             </ul>
                             <img class="icon-arrow-right-2"
                                 src="https://anima-uploads.s3.amazonaws.com/projects/646bcdfa56fd98051a2e06f4/releases/646bd21885600e5d5e42adf8/img/icon---arrow---right-1.svg"

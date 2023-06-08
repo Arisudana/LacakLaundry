@@ -10,4 +10,25 @@ class SettingsAdminController extends Controller
     {
         return view('SettingsAdmin');
     }
+
+    public function SettingsEditProfile()
+    {
+        return view('SettingsEditProfile');
+    }
+
+    public function SettingsListStaff()
+    {
+        return view('SettingsListStaff');
+    }
+
+    public function SettingsAddStaff()
+    {
+        return view('SettingsAddStaff');
+    }
+
+    public function SettingsOrder()
+    {
+        return view('SettingsOrder');
+    }
+
 }
