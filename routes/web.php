@@ -5,6 +5,9 @@ use App\Http\Controllers\newController;
 use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\loginController;
 use App\Http\Controllers\SettingsAdminController;
+use App\Http\Controllers\SettingsStaffController;
+use App\Http\Controllers\revenueDetailController;
+use App\Http\Controllers\OrdersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -38,12 +41,11 @@ Route::middleware(['authAdminStaff'])->group(function(){
 
     Route::get('dashboard', [dashboardController::class, 'viewDashboard'])->name('dashboard');
     Route::get('newOrder', [newController::class, 'newOrder'])->name('newOrder');
+    Route::get('revenueDetail', [revenueDetailController::class, 'viewRevenueDetail'])->name('revenueDetail');
+    Route::get('viewOrder', [OrdersController::class, 'viewOrder'])->name('viewOrder');
     Route::get('logout', [loginController::class, 'logout'])->name('logout');
     Route::post('/input', [newController::class, 'submitOrder']);
-<<<<<<< Updated upstream
-    Route::get('/settings', [SettingsAdminController::class, 'SettingsAdmin']);
-=======
-
+  
     Route::controller(SettingsAdminController::class)->group(function(){
         Route::get('/settings', 'SettingsAdmin');
         Route::get('/settings/edit', 'SettingsEditProfile');
@@ -51,8 +53,6 @@ Route::middleware(['authAdminStaff'])->group(function(){
         Route::get('/settings/staff/add', 'SettingsAddStaff');
         Route::get('/settings/order', 'SettingsOrder');
     });
-    // Route::get('/settings', [SettingsStaffController::class, 'SettingsStaff'])->name('SettingsStaff')->middleware('role:staff');
->>>>>>> Stashed changes
 });
 
 
