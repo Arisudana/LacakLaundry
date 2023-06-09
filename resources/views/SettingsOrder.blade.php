@@ -374,7 +374,7 @@
         </div>
         <ul class="sidebar-nav">
             <li><a href="/dashboard">Dashboard</a></li>
-            <li><a href="#">Performance</a></li>
+            <li><a href="{{ route('performance') }}">Performance</a></li>
             <li><a href="#">Orders</a></li>
             <div class="selected">
                 <div class="sheet">

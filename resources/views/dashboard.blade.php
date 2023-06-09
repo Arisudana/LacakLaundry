@@ -33,7 +33,7 @@
                         <li><a href="/dashboard">Dashboard</a></li>
                     </div>
                 </div>
-                <li><a href="{{ route('revenueDetail') }}">Performance</a></li>
+                <li><a href="{{ route('performance') }}">Performance</a></li>
                 <li><a href="{{ route('viewOrder') }}">Orders</a></li>
                 <li><a href="/settings">Settings</a></li>
             </ul>
@@ -92,7 +92,7 @@
                         <p class="card-subtitle mb-2 text-muted ms-2" id="current-date"></p>
                     </div>
                     <div>
-                        <a href="{{ route('revenueDetail') }}">View Details</a>
+                        <a href="{{ route('performance') }}">View Details</a>
                     </div>
                 </div>
                 <div class="row">
@@ -142,7 +142,12 @@
 
             <div class="card ordersCount">
                 <div class="card-body">
-                    <h5 class="card-title">Orders</h5>
+                    <div class="card-title d-flex justify-content-between">
+                        <h5> Orders</h5>
+                        <span class="view-details">
+                            <a href="#"> View Details</a>
+                        </span>
+                    </div>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
                             <div class="row">
