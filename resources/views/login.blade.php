@@ -2,69 +2,78 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css">
-  <style>
-    body {
-  background-color: #363740;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 92vh;
-}
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #363740;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 92vh;
+        }
 
-h5, h6 {
-  color: #A4A6B3;
-}
+        h5,
+        h6 {
+            color: #A4A6B3;
+        }
 
-.full-width-btn {
-  width: 100%;
-}
-  </style>
-  <title>Login Page</title>
+        .full-width-btn {
+            width: 100%;
+        }
+    </style>
+    <title>Login Page</title>
 </head>
-<body>
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-md-5 mt-5">
-        <div class="card">
-          <div class="card-body">
-            <div class="text-center mt-4">
-              <img src="{{ asset('Image/logo.jpg')}}" alt="Logo" height="45">
-            </div>
-            <div>
-              <h5 class="mb-4 card-text text-center">LacakLaundry</h6>
-            </div>
-            <h2 class="card-title text-center">Log In to LacakLaundry</h2>
-            <h6 class="mt-4 mb-4 card-text text-center">Enter your username and password below</h6>
-            <form method="POST" action="">
-                @csrf
-              <div class="mb-3">
-                <label for="email" class="form-label">Username</label>
-                <input type="text" name="username" class="form-control" id="email" placeholder="Username">
-              </div>
-              <div class="mb-3">
-                <label for="password" class="form-label">Password</label>
-                <input type="password" name="password" class="form-control" id="password" placeholder="Password">
-                <div class="form-text text-end">
-                  <a href="#">Forgot Password?</a>
-                </div>
-              </div>
-              <div class="text-center">
-                <button type="submit" class="btn btn-primary full-width-btn">Log In</button>
-              </div>
-              <div class="mt-4 form-text text-center">
-                <h6>Want to join? <a href="#">Contact our Sales Department</a></h6>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
 
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
+<body>
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-md-5 mt-5">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="text-center mt-4">
+                            <img src="{{ asset('Image/logo.jpg') }}" alt="Logo" height="45">
+                        </div>
+                        <div>
+                            <h5 class="mb-4 card-text text-center">LacakLaundry</h6>
+                        </div>
+                        <h2 class="card-title text-center">Log In to LacakLaundry</h2>
+                        <h6 class="mt-4 mb-4 card-text text-center">Enter your username and password below</h6>
+                        @if (session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                    @endif
+                        <form method="POST" action="">
+                            @csrf
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Username</label>
+                                <input type="text" name="username" class="form-control" id="email"
+                                    placeholder="Username">
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password</label>
+                                <input type="password" name="password" class="form-control" id="password"
+                                    placeholder="Password">
+                                <div class="form-text text-end">
+                                    <a href="#">Forgot Password?</a>
+                                </div>
+                            </div>
+                            <div class="text-center">
+                                <button type="submit" class="btn btn-primary full-width-btn">Log In</button>
+                            </div>
+                            <div class="mt-4 form-text text-center">
+                                <h6>Want to join? <a href="#">Contact our Sales Department</a></h6>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 
 </html>

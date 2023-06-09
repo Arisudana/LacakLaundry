@@ -14,8 +14,8 @@ function sortTableByNominal() {
             x = rows[i].getElementsByTagName("TD")[3];
             y = rows[i + 1].getElementsByTagName("TD")[3];
 
-            var xValue = parseFloat(x.innerHTML.replace("$", ""));
-            var yValue = parseFloat(y.innerHTML.replace("$", ""));
+            var xValue = parseFloat(x.innerHTML.replace("Rp", ""));
+            var yValue = parseFloat(y.innerHTML.replace("Rp", ""));
 
             if (sortDirection === "ascending") {
                 if (xValue > yValue) {
