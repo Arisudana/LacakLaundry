@@ -21,7 +21,8 @@ class dashboardController extends Controller
 
         $labels = $chartData['labels'];
         $values = $chartData['values'];
-        return view('dashboard')->with(compact('orderTotals', 'labels', 'values', 'totalRevenue', 'averageMonthlyRevenue', 'averageLaundryWeight','averageLaundryTime'));
+        $previousMonthValues = $chartData['previousMonthValues'];
+        return view('dashboard')->with(compact('orderTotals', 'labels', 'values', 'previousMonthValues', 'totalRevenue', 'averageMonthlyRevenue', 'averageLaundryWeight', 'averageLaundryTime'));
     }
     public function orderTotals()
     {
@@ -53,15 +54,26 @@ class dashboardController extends Controller
 
         return $orderTotals;
     }
+
     public function chart()
     {
         date_default_timezone_set('Asia/Jakarta');
         $currentMonth = Carbon::now()->startOfMonth();
-        $nextMonth = Carbon::now()->startOfMonth()->addMonth();
+        $previousMonth = Carbon::now()->startOfMonth()->subMonth(); // Get the start of the previous month
 
-        $data = DB::table('orders')
+        // Retrieve data for the current month
+        $currentMonthData = DB::table('orders')
             ->where('orderDate', '>=', $currentMonth)
-            ->where('orderDate', '<', $nextMonth)
+            ->where('orderDate', '<', $currentMonth->copy()->addMonth())
+            ->selectRaw('DATE(orderDate) as orderDay, SUM(nominalOrder) as totalNominalOrder')
+            ->groupBy('orderDay')
+            ->orderBy('orderDay')
+            ->get();
+
+        // Retrieve data for the previous month
+        $previousMonthData = DB::table('orders')
+            ->where('orderDate', '>=', $previousMonth)
+            ->where('orderDate', '<', $previousMonth->copy()->addMonth())
             ->selectRaw('DATE(orderDate) as orderDay, SUM(nominalOrder) as totalNominalOrder')
             ->groupBy('orderDay')
             ->orderBy('orderDay')
@@ -69,27 +81,37 @@ class dashboardController extends Controller
 
         $labels = [];
         $values = [];
+        $previousMonthValues = [];
 
         $startDate = $currentMonth->copy();
-        $endDate = $currentMonth->copy()->endOfMonth(); // Set end date to the last day of the current month
+        $endDate = $currentMonth->copy()->endOfMonth();
 
         while ($startDate->lte($endDate)) {
             $labels[] = $startDate->format('j');
             $values[] = 0;
+            $previousMonthValues[] = 0;
 
             $startDate->addDay();
         }
 
-        // Update values based on the data from the orders
-        foreach ($data as $item) {
+        // Update values based on the data from the current month's orders
+        foreach ($currentMonthData as $item) {
             $orderDay = Carbon::parse($item->orderDay);
             $dayIndex = $orderDay->diffInDays($currentMonth);
             $values[$dayIndex] = $item->totalNominalOrder;
         }
 
+        // Update values based on the data from the previous month's orders
+        foreach ($previousMonthData as $item) {
+            $orderDay = Carbon::parse($item->orderDay);
+            $dayIndex = $orderDay->diffInDays($previousMonth);
+            $previousMonthValues[$dayIndex] = $item->totalNominalOrder;
+        }
+
         return [
             'labels' => $labels,
             'values' => $values,
+            'previousMonthValues' => $previousMonthValues,
         ];
     }
 
@@ -120,6 +142,7 @@ class dashboardController extends Controller
     {
         $averageLaundryWeight = DB::connection('mysql')
             ->table('orders')
+            ->whereYear('orderDate', Carbon::now()->year)
             ->whereMonth('orderDate', Carbon::now()->month)
             ->avg('orderWeight');
         $averageLaundryWeight = round($averageLaundryWeight, 1);
@@ -128,9 +151,10 @@ class dashboardController extends Controller
 
     public function averageLaundryTime()
     {
+        $currentMonth = Carbon::now()->format('Y-m');
         $averageTimeDifference = DB::table('orders')
             ->selectRaw('AVG(TIMESTAMPDIFF(DAY, orderDate, dateReady)) as avg_days, AVG(TIMESTAMPDIFF(HOUR, orderDate, dateReady)) as avg_hours')
-            ->whereMonth('orderDate', Carbon::now()->month)
+            ->where('orderDate', 'like', $currentMonth . '%')
             ->first();
 
         $averageDays = floor($averageTimeDifference->avg_days);
@@ -140,10 +164,4 @@ class dashboardController extends Controller
 
         return $averageLaundryTime;
     }
-    public function viewRevenueDetail(){
-        return view('revenueDetail');
-}
-    public function viewOrderDetail(){
-        return view('viewOrder');
-}
 }
