@@ -11,12 +11,6 @@
         integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous">
     </script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;0,1000;1,300&display=swap"
-        rel="stylesheet">
-
     <title>LacakLaundry</title>
 </head>
 
@@ -28,12 +22,12 @@
                 <span class="brand-text">LacakLaundry</span>
             </div>
             <ul class="sidebar-nav">
+                <li><a href="/dashboard">Dashboard</a></li>
                 <div class="selected">
                     <div class="sheet">
-                        <li><a href="/dashboard">Dashboard</a></li>
+                        <li><a href="{{ route('performance') }}">Performance</a></li>
                     </div>
                 </div>
-                <li><a href="{{ route('revenueDetail') }}">Performance</a></li>
                 <li><a href="{{ route('viewOrder') }}">Orders</a></li>
                 <li><a href="/settings">Settings</a></li>
             </ul>
@@ -42,7 +36,7 @@
             <div class="profile-container" style="margin-bottom: 3%; margin-top:2%">
                 <div class="row">
                     <div class="col">
-                        <span class="profile-text">Dashboard</span>
+                        <span class="profile-text">Performance</span>
                     </div>
                     <div class="col align-self-end text-end">
                         <span class="admin-text">{{ Auth::user()->firstName }}</span>
@@ -50,89 +44,58 @@
                     </div>
                 </div>
 
-                <div class="row mt-2">
-                    <!-- Added mt-2 class to add some top margin -->
-                    <div class="col">
-                        <a class="btn btn-primary btn-sm" type="button" href="/newOrder">+ New Order</a>
-                    </div>
-                </div>
-            </div>
-
-            <div class="row" style="margin-bottom: 3%">
-                <div class="col-sm-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Finished</h5>
-                            <p class="card-text">{{ $orderTotals['finishedCount'] }}</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Overdue</h5>
-                            <p class="card-text">{{ $orderTotals['overdueCount'] }}</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-sm-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <h5 class="card-title">Ongoing</h5>
-                            <p class="card-text">{{ $orderTotals['ongoingCount'] }}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card" style="margin-bottom: 3%">
+            <div class="card" style="margin-bottom: 3%; margin-top:3%">
                 <div class="card-body d-flex justify-content-between align-items-start">
                     <div>
-                        <h5 class="card-title ms-2">Monthly Sales Performance</h5>
-                        <p class="card-subtitle mb-2 text-muted ms-2" id="current-date"></p>
+                      <h5 class="card-title ms-2">Monthly Sales Performance</h5>
+                      <p class="card-subtitle mb-2 text-muted ms-2" id="current-date"></p>
                     </div>
-                    <div>
-                        <a href="{{ route('revenueDetail') }}">View Details</a>
-                    </div>
-                </div>
+                  </div>
                 <div class="row">
                     <div class="col-8">
                         <canvas id="chart">
                         </canvas>
                     </div>
-                    <div class="salesperformance" style="width: 20rem; height:40%">
-                        <ul class="list-group list-group-flush ">
-                            <li class="list-group-item text-center" style="padding-bottom: 8%">
+                    <div class="salesperformance" style="width: 20rem;">
+                        <ul class="list-group list-group-flush" style="margin-top: -25%">
+                            <li class="list-group-item text-center" style="padding-bottom: 5%">
                                 <div class="row">
-                                    <div class="col-12 ">Total Revenue</div>
+                                    <div class="col-12 ">Total Orders</div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-12">Rp {{ $totalRevenue }}</div>
+                                    <h4 class="col-12">{{ $totalOrdersMonthly }}</h4>
                                 </div>
                             </li>
-                            <li class="list-group-item text-center " style="padding-bottom: 8%; padding-top:8%;">
+                            <li class="list-group-item text-center " style="padding-bottom: 5%; padding-top:3%;">
+                                <div class="row">
+                                    <div class="col-12 ">Average order per day</div>
+                                </div>
+                                <div class="row">
+                                    <h4 class="col-12">{{ $averageOrdersPerDayMonthly }}</h4>
+                                </div>
+                            </li>
+                            <li class="list-group-item text-center" style="padding-bottom: 5%; padding-top:3%;">
                                 <div class="row">
                                     <div class="col-12 ">Average revenue per day</div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-12">Rp {{ $averageMonthlyRevenue }}</div>
+                                    <h4 class="col-12">Rp {{ $averageRevenuePerDayMonthly }}</h4>
                                 </div>
                             </li>
-                            <li class="list-group-item text-center" style="padding-bottom: 8%; padding-top:8%;">
-                                <div class="row">
-                                    <div class="col-12 ">Average laundry weight</div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-12">{{ $averageLaundryWeight }} Kg</div>
-                                </div>
-                            </li>
-                            <li class="list-group-item text-center" style="padding-bottom: 8%; padding-top:8%;">
+                            <li class="list-group-item text-center" style="padding-bottom: 5%; padding-top:3%;">
                                 <div class="row">
                                     <div class="col-12 ">Average laundry time</div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-12">{{ $averageLaundryTime }}</div>
+                                    <h4 class="col-12">{{ $averageLaundryTime }}</h4>
                                 </div>
+                                <li class="list-group-item text-center" style="padding-bottom: 5%; padding-top:3%;">
+                                    <div class="row">
+                                        <div class="col-12 ">Most orders in a day</div>
+                                    </div>
+                                    <div class="row">
+                                        <h4 class="col-12">{{ $mostOrdersDay}}</h4>
+                                    </div>
                             </li>
                         </ul>
                     </div>
@@ -140,26 +103,26 @@
             </div>
 
 
-            <div class="card ordersCount">
+            <div class="card revenueCount">
                 <div class="card-body">
-                    <h5 class="card-title">Orders</h5>
+                    <h5 class="card-title">Revenue</h5>
                     <ul class="list-group list-group-flush">
                         <li class="list-group-item">
                             <div class="row">
                                 <div class="col-6">Total</div>
-                                <div class="col-6 text-end">{{ $orderTotals['totalOrders'] }}</div>
+                                <div class="col-6 text-end">{{ $totalRevenue}}</div>
                             </div>
                         </li>
                         <li class="list-group-item">
                             <div class="row">
                                 <div class="col-6">Current Month</div>
-                                <div class="col-6 text-end">{{ $orderTotals['currentMonthOrders'] }}</div>
+                                <div class="col-6 text-end">{{ $currentMonthRevenue }}</div>
                             </div>
                         </li>
                         <li class="list-group-item">
                             <div class="row">
                                 <div class="col-6">Last Month</div>
-                                <div class="col-6 text-end">{{ $orderTotals['lastMonthOrders'] }}</div>
+                                <div class="col-6 text-end">{{ $lastMonthRevenue}}</div>
                             </div>
                         </li>
                     </ul>
