@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\newController;
 use App\Http\Controllers\dashboardController;
+use App\Http\Controllers\performanceController;
 use App\Http\Controllers\loginController;
 use App\Http\Controllers\SettingsAdminController;
 use App\Http\Controllers\SettingsStaffController;
@@ -40,15 +41,17 @@ Route::middleware(['authAdminStaff'])->group(function(){
     })->name('staff')->middleware('role:staff');
 
     Route::get('dashboard', [dashboardController::class, 'viewDashboard'])->name('dashboard');
+    Route::get('performance', [performanceController::class, 'viewPerformance'])->name('performance');
     Route::get('newOrder', [newController::class, 'newOrder'])->name('newOrder');
     Route::get('revenueDetail', [revenueDetailController::class, 'viewRevenueDetail'])->name('revenueDetail');
     Route::get('viewOrder', [OrdersController::class, 'viewOrder'])->name('viewOrder');
     Route::get('logout', [loginController::class, 'logout'])->name('logout');
     Route::post('/input', [newController::class, 'submitOrder']);
-  
+
     Route::controller(SettingsAdminController::class)->group(function(){
         Route::get('/settings', 'SettingsAdmin');
-        Route::get('/settings/edit', 'SettingsEditProfile');
+        Route::get('/settings/edit/{id}', 'SettingsEditProfile');
+        Route::post('/settings/edit/update', 'SubmitEdit');
         Route::get('/settings/staff', 'SettingsListStaff');
         Route::get('/settings/staff/add', 'SettingsAddStaff');
         Route::get('/settings/order', 'SettingsOrder');

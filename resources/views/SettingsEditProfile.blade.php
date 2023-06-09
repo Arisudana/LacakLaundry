@@ -291,10 +291,11 @@
         }
 
         .overlap-group-1:hover {
-            background-color: #059fd4;
+            background-color: #036AB5;
         }
 
         .overlap-group-1 {
+            cursor: pointer;
             transform: translateX(+170px);
             align-items: center;
             background-color: #034c81;
@@ -326,7 +327,7 @@
         }
 
         .form-control {
-            width: 600px;
+            width: 450px;
             height: 40px;
         }
 
@@ -352,16 +353,16 @@
 <body>
     <div class="sidebar">
         <div class="sidebar-brand">
-            <img class="sidebar-brand-picture" src="Logo.jpg" alt="Profile Picture">
+            <img class="sidebar-brand-picture" src="{{ asset('Image/logo.jpg') }}" alt="Profile Picture">
             <span class="brand-text">LacakLaundry</span>
         </div>
         <ul class="sidebar-nav">
             <li><a href="/dashboard">Dashboard</a></li>
-            <li><a href="#">Performance</a></li>
-            <li><a href="#">Orders</a></li>
+            <li><a href="{{ route('performance') }}">Performance</a></li>
+            <li><a href="{{ route('viewOrder') }}">Orders</a></li>
             <div class="selected">
                 <div class="sheet">
-                    <li><a href="#">Settings</a></li>
+                    <li><a href="/settings">Settings</a></li>
                 </div>
             </div>
         </ul>
@@ -388,47 +389,59 @@
                             <img class="profilepicture" src="Surya.jpeg" alt="avatar / man / _header" />
                             <div class="profile-circle"></div>
                             <div class="text-group">
-                                <div class="title-5 mulish-bold-steel-gray-20px bold-text">Alif Destiano</div>
-                                <div class="title-4 regular16px bold">alifdestiano47@gmail.com</div>
+                                <div class="title-5 mulish-bold-steel-gray-20px bold-text">{{ Auth::user()->lastName }}
+                                    {{ Auth::user()->firstName }}</div>
+                                <div class="title-4 regular16px bold">{{ Auth::user()->email }}</div>
                             </div>
                         </div>
                         <img class="line-1"
                             src="https://anima-uploads.s3.amazonaws.com/projects/646bcdfa56fd98051a2e06f4/releases/646bd21885600e5d5e42adf8/img/line-1.svg"
                             alt="Line 1" />
-                        <div class="flex-col">
-                            <div class="col-sm-9">
-                                <div class="length-pair" style="padding-bottom: 20px;">
-                                    <label for="nama" class="col-form-label bold-text"
-                                        style="padding-right: 80px;">First Name</label>
-                                    <input type="text" class="form-control" id="kupon" placeholder="Alif">
+                        <form id="update" action="/settings/edit/update" method="post">
+                            <div class="flex-col">
+                                <div class="col-sm-9">
+                                    <div class="length-pair" style="padding-bottom: 20px;">
+                                        {{ csrf_field() }}
+                                        <label for="nama" class="col-form-label bold-text"
+                                            style="padding-right: 80px;">First Name</label>
+                                        <input type="hidden" name="id" value="{{ Auth::user()->username }}">
+                                        <input type="text" class="form-control" name="lastName"
+                                            value="{{ Auth::user()->lastName }}"
+                                            placeholder="{{ Auth::user()->lastName }}">
+                                    </div>
+                                    <div class="length-pair" style="padding-bottom: 20px;">
+                                        <label for="nama" class="col-form-label bold-text"
+                                            style="padding-right: 80px;">Last
+                                            Name</label>
+                                        <input type="text" class="form-control" name="firstName"
+                                            value="{{ Auth::user()->firstName }}"
+                                            placeholder="{{ Auth::user()->firstName }}">
+                                    </div>
+                                    <div class="length-pair">
+                                        <label for="nama" class="col-form-label bold-text"
+                                            style="padding-right: 119px;">Email</label>
+                                        <input type="text" class="form-control" name="email"
+                                            value="{{ Auth::user()->email }}" placeholder="{{ Auth::user()->email }}">
+                                    </div>
                                 </div>
-                                <div class="length-pair" style="padding-bottom: 20px;">
-                                    <label for="nama" class="col-form-label bold-text"
-                                        style="padding-right: 80px;">Last
-                                        Name</label>
-                                    <input type="text" class="form-control" id="kupon" placeholder="Destiano">
-                                </div>
-                                <div class="length-pair">
-                                    <label for="nama" class="col-form-label bold-text"
-                                        style="padding-right: 119px;">Email</label>
-                                    <input type="text" class="form-control" id="kupon"
-                                        placeholder="alifdestiano47@gmail.com">
-                                </div>
-                            </div>
-                            <a href="#" style="text-decoration: none;">
-                                <div class="overlap-group-1">
+                                <div class="overlap-group-1" onclick="submitForm()">
                                     <img class="vector-1"
                                         src="https://anima-uploads.s3.amazonaws.com/projects/646bcdfa56fd98051a2e06f4/releases/646bd21885600e5d5e42adf8/img/vector-5.svg"
                                         alt="Vector" />
                                     <div class="label">Save Changes</div>
                                 </div>
-                            </a>
-                        </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+    <script>
+        function submitForm() {
+            document.getElementById('update').submit();
+        }
+    </script>
 
 
 </body>

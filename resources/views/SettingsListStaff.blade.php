@@ -383,17 +383,17 @@
 
 <body>
     <div class="sidebar">
-        <div class="sidebar-brand">
-            <img class="sidebar-brand-picture" src="Logo.jpg" alt="Profile Picture">
+        <<div class="sidebar-brand">
+            <img class="sidebar-brand-picture" src="{{ asset('Image/logo.jpg')}}" alt="Profile Picture">
             <span class="brand-text">LacakLaundry</span>
         </div>
         <ul class="sidebar-nav">
             <li><a href="/dashboard">Dashboard</a></li>
-            <li><a href="#">Performance</a></li>
-            <li><a href="#">Orders</a></li>
+            <li><a href="{{ route('performance') }}">Performance</a></li>
+            <li><a href="{{ route('viewOrder') }}">Orders</a></li>
             <div class="selected">
                 <div class="sheet">
-                    <li><a href="#">Settings</a></li>
+                    <li><a href="/settings">Settings</a></li>
                 </div>
             </div>
         </ul>

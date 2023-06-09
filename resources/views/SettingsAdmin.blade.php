@@ -20,7 +20,7 @@
         </div>
         <ul class="sidebar-nav">
             <li><a href="/dashboard">Dashboard</a></li>
-            <li><a href="{{ route('revenueDetail') }}">Performance</a></li>
+            <li><a href="{{ route('performance') }}">Performance</a></li>
             <li><a href="{{ route('viewOrder') }}">Orders</a></li>
             <div class="selected">
                 <div class="sheet">
@@ -52,7 +52,7 @@
                         <div class="flex-col">
                             <div class="length-pair">
                                 <div class="title-4 regular16px">Name</div>
-                                <div class="title-5 mulish-bold-steel-gray-20px bold-text">{{Auth::user()->firstName}}</div>
+                                <div class="title-5 mulish-bold-steel-gray-20px bold-text">{{Auth::user()->lastName}} {{Auth::user()->firstName}}</div>
                             </div>
                             <div class="length-pair">
                                 <div class="title-4 regular16px">Role</div>
@@ -63,7 +63,7 @@
                                 <div class="title-5 mulish-bold-steel-gray-20px bold-text">{{Auth::user()->email}}
                                 </div>
                             </div>
-                            <a href="/settings/edit" style="text-decoration: none;">
+                            <a href="/settings/edit/{id}" style="text-decoration: none;">
                                 <div class="overlap-group-1">
                                     <img class="vector-1"
                                         src="https://anima-uploads.s3.amazonaws.com/projects/646bcdfa56fd98051a2e06f4/releases/646bd21885600e5d5e42adf8/img/vector-5.svg"

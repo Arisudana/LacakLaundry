@@ -305,11 +305,29 @@
             background-color: #059fd4;
         }
 
+        .overlap-group-1 button {
+            background: none;
+            border: none;
+            cursor: pointer;
+            text-align: left;
+            text-decoration: none;
+            width: 1180px;
+            margin-left: 350px;
+            margin-right: 170px;
+            border-radius: 8px;
+            gap: 9px;
+            height: 42px;
+            justify-content: center;
+            margin-top: 36px;
+            min-width: 168px;
+            padding: 11px 13px;
+        }
+
         .overlap-group-1 {
             align-items: center;
             background-color: #034c81;
             display: flex;
-            width: 1180px;
+            width: 980px;
             margin-left: 350px;
             margin-right: 170px;
             border-radius: 8px;
@@ -339,7 +357,7 @@
         }
 
         .form-control {
-            width: 1200px;
+            width: 1000px;
             height: 40px;
         }
 
@@ -369,16 +387,16 @@
 <body>
     <div class="sidebar">
         <div class="sidebar-brand">
-            <img class="sidebar-brand-picture" src="Logo.jpg" alt="Profile Picture">
+            <img class="sidebar-brand-picture" src="{{ asset('Image/logo.jpg') }}" alt="Profile Picture">
             <span class="brand-text">LacakLaundry</span>
         </div>
         <ul class="sidebar-nav">
             <li><a href="/dashboard">Dashboard</a></li>
-            <li><a href="#">Performance</a></li>
-            <li><a href="#">Orders</a></li>
+            <li><a href="{{ route('performance') }}">Performance</a></li>
+            <li><a href="{{ route('viewOrder') }}">Orders</a></li>
             <div class="selected">
                 <div class="sheet">
-                    <li><a href="#">Settings</a></li>
+                    <li><a href="/settings">Settings</a></li>
                 </div>
             </div>
         </ul>
@@ -388,8 +406,9 @@
             <div class="col-lg-9 offset-lg-3">
                 <div class="profile-container">
                     <div class="left-container">
-                        <a href="/settings/staff" style="text-decoration: none;"><svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                height="16" fill="currentColor" class="bi-caret-left-fill" viewBox="0 0 16 16">
+                        <a href="/settings/staff" style="text-decoration: none;"><svg xmlns="http://www.w3.org/2000/svg"
+                                width="16" height="16" fill="currentColor" class="bi-caret-left-fill"
+                                viewBox="0 0 16 16">
                                 <path
                                     d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />
                             </svg></a>

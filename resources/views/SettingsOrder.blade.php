@@ -309,7 +309,7 @@
             align-items: center;
             background-color: #034c81;
             display: flex;
-            width: 1180px;
+            width: 980px;
             margin-left: 350px;
             margin-right: 170px;
             border-radius: 8px;
@@ -339,7 +339,7 @@
         }
 
         .form-control {
-            width: 1200px;
+            width: 1000px;
             height: 40px;
         }
 
@@ -374,7 +374,7 @@
         </div>
         <ul class="sidebar-nav">
             <li><a href="/dashboard">Dashboard</a></li>
-            <li><a href="#">Performance</a></li>
+            <li><a href="{{ route('performance') }}">Performance</a></li>
             <li><a href="#">Orders</a></li>
             <div class="selected">
                 <div class="sheet">
