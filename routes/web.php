@@ -47,8 +47,14 @@ Route::middleware(['authAdminStaff'])->group(function(){
     Route::get('viewOrder', [OrdersController::class, 'viewOrder'])->name('viewOrder');
     Route::get('logout', [loginController::class, 'logout'])->name('logout');
     Route::post('/input', [newController::class, 'submitOrder']);
-    Route::get('/settings', [SettingsAdminController::class, 'SettingsAdmin'])->name('SettingAdmin');
-    // Route::get('/settings', [SettingsStaffController::class, 'SettingsStaff'])->name('SettingsStaff')->middleware('role:staff');
+  
+    Route::controller(SettingsAdminController::class)->group(function(){
+        Route::get('/settings', 'SettingsAdmin');
+        Route::get('/settings/edit', 'SettingsEditProfile');
+        Route::get('/settings/staff', 'SettingsListStaff');
+        Route::get('/settings/staff/add', 'SettingsAddStaff');
+        Route::get('/settings/order', 'SettingsOrder');
+    });
 });
 
 
