@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use Illuminate\Support\Facades\Auth;
 use App\Models\AkunAdmin;
 use App\Models\AkunStaff;
@@ -23,5 +24,27 @@ class SettingsAdminController extends Controller
         }
 
         return view('SettingsAdmin', compact('role'));
+    }
+        return view('SettingsAdmin');
+    }
+
+    public function SettingsEditProfile()
+    {
+        return view('SettingsEditProfile');
+    }
+
+    public function SettingsListStaff()
+    {
+        return view('SettingsListStaff');
+    }
+
+    public function SettingsAddStaff()
+    {
+        return view('SettingsAddStaff');
+    }
+
+    public function SettingsOrder()
+    {
+        return view('SettingsOrder');
     }
 }

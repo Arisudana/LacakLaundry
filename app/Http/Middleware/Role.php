@@ -16,7 +16,7 @@ class Role
      *
      * @param  \Closure(\Illuminate\Http\Request): (\Symfony\Component\HttpFoundation\Response)  $next
      */
-    public function handle ($request, Closure $next, $role)
+    public function handle($request, Closure $next, $role)
     {
         $isAdmin = AkunAdmin::where('username', Auth::user()->username)->first();
         $isStaff = AkunStaff::where('username', Auth::user()->username)->first();

@@ -3,56 +3,30 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Redirect;
 use Carbon\Carbon;
-use Illuminate\View\View;
+use Illuminate\Support\Facades\DB;
 
-class dashboardController extends Controller
+class performanceController extends Controller
 {
-    public function viewDashboard()
-    {
-        $orderTotals = $this->orderTotals();
-        $chartData = $this->chart();
-        $totalRevenue = $this->totalRevenue();
-        $averageMonthlyRevenue = $this->averageRevenue();
-        $averageLaundryWeight = $this->averageWeight();
-        $averageLaundryTime = $this->averageLaundryTime();
 
+    public function viewPerformance()
+    {
+        $totalOrdersMonthly = $this->totalOrdersMonthly();
+        $averageOrdersPerDayMonthly = $this->averageOrdersPerDayMonthly();
+        $averageRevenuePerDayMonthly = $this->averageRevenuePerDayMonthly();
+        $averageLaundryTime = $this->averageLaundryTime();
+        $mostOrdersDay = $this->mostOrdersDay();
+
+        $chartData = $this->chart();
         $labels = $chartData['labels'];
         $values = $chartData['values'];
         $previousMonthValues = $chartData['previousMonthValues'];
-        return view('dashboard')->with(compact('orderTotals', 'labels', 'values', 'previousMonthValues', 'totalRevenue', 'averageMonthlyRevenue', 'averageLaundryWeight', 'averageLaundryTime'));
-    }
-    public function orderTotals()
-    {
-        date_default_timezone_set('Asia/Jakarta');
-        $totalOrders = DB::connection('mysql')->table('orders')->count();
 
-        $currentMonthOrders = DB::table('orders')
-            ->whereYear('orderDate', now()->year)
-            ->whereMonth('orderDate', now()->month)
-            ->count();
+        $totalRevenue = $this->totalRevenue();
+        $currentMonthRevenue = $this->currentMonthRevenue();
+        $lastMonthRevenue = $this->lastMonthRevenue();
 
-        $lastMonthOrders = DB::table('orders')
-            ->whereYear('orderDate', now()->subMonth()->year)
-            ->whereMonth('orderDate', now()->subMonth()->month)
-            ->count();
-
-        $finishedCount = DB::table('orders')->where('orderStatus', 'Finished')->count();
-        $ongoingCount = DB::table('orders')->where('orderStatus', 'Ongoing')->count();
-        $overdueCount = DB::table('orders')->where('orderStatus', 'Overdue')->count();
-
-        $orderTotals = [
-            'totalOrders' => $totalOrders,
-            'currentMonthOrders' => $currentMonthOrders,
-            'lastMonthOrders' => $lastMonthOrders,
-            'finishedCount' => $finishedCount,
-            'ongoingCount' => $ongoingCount,
-            'overdueCount' => $overdueCount,
-        ];
-
-        return $orderTotals;
+        return view('performance')->with(compact('labels', 'values', 'previousMonthValues', 'totalOrdersMonthly', 'averageOrdersPerDayMonthly', 'totalRevenue', 'currentMonthRevenue', 'lastMonthRevenue', 'averageRevenuePerDayMonthly', 'averageLaundryTime', 'mostOrdersDay'));
     }
 
     public function chart()
@@ -115,38 +89,71 @@ class dashboardController extends Controller
         ];
     }
 
-    public function totalRevenue()
+    public function totalOrdersMonthly()
     {
+        date_default_timezone_set('Asia/Jakarta');
         $currentMonth = Carbon::now()->format('Y-m');
 
-        $totalRevenue = DB::connection('mysql')
+        $totalOrdersMonthly = DB::connection('mysql')
             ->table('orders')
             ->where('orderDate', 'like', $currentMonth . '%')
+            ->count();
+
+        return $totalOrdersMonthly;
+    }
+
+    public function averageOrdersPerDayMonthly()
+    {
+        date_default_timezone_set('Asia/Jakarta');
+        $totalOrdersMonthly = $this->totalOrdersMonthly();
+        $currentDay = Carbon::now()->day;
+
+        $averageOrdersPerDayMonthly = round(($totalOrdersMonthly / $currentDay), 1);
+
+        return $averageOrdersPerDayMonthly;
+    }
+
+    public function averageRevenuePerDayMonthly()
+    {
+        $currentMonthRevenue = $this->currentMonthRevenue();
+        $currentDay = Carbon::now()->day;
+
+        $averageRevenuePerDayMonthly = round(($currentMonthRevenue / $currentDay), 0);
+
+        return $averageRevenuePerDayMonthly;
+    }
+
+    public function totalRevenue()
+    {
+        date_default_timezone_set('Asia/Jakarta');
+        $totalRevenue = DB::connection('mysql')
+            ->table('orders')
             ->sum('nominalOrder');
 
         return $totalRevenue;
     }
 
-    public function averageRevenue()
+    public function currentMonthRevenue()
     {
-
-        $averageMonthlyRevenue = DB::connection('mysql')
+        date_default_timezone_set('Asia/Jakarta');
+        $currentMonth = Carbon::now()->format('Y-m');
+        $currentMonthRevenue = DB::connection('mysql')
             ->table('orders')
-            ->whereMonth('orderDate', Carbon::now()->month)
-            ->avg('nominalOrder');
-        $averageMonthlyRevenue = round($averageMonthlyRevenue, 0);
-        return $averageMonthlyRevenue;
+            ->where('orderDate', 'like', $currentMonth . '%')
+            ->sum('nominalOrder');
+
+        return $currentMonthRevenue;
     }
 
-    public function averageWeight()
+    public function lastMonthRevenue()
     {
-        $averageLaundryWeight = DB::connection('mysql')
-            ->table('orders')
-            ->whereYear('orderDate', Carbon::now()->year)
-            ->whereMonth('orderDate', Carbon::now()->month)
-            ->avg('orderWeight');
-        $averageLaundryWeight = round($averageLaundryWeight, 1);
-        return $averageLaundryWeight;
+        date_default_timezone_set('Asia/Jakarta');
+        $lastMonthRevenue = DB::table('orders')
+            ->whereYear('orderDate', now()->subMonth()->year)
+            ->whereMonth('orderDate', now()->subMonth()->month)
+            ->sum('nominalOrder');
+
+        return $lastMonthRevenue;
     }
 
     public function averageLaundryTime()
@@ -164,4 +171,20 @@ class dashboardController extends Controller
 
         return $averageLaundryTime;
     }
+
+    public function mostOrdersDay()
+    {
+        date_default_timezone_set('Asia/Jakarta');
+        $currentMonth = Carbon::now()->format('Y-m');
+
+        $mostOrdersDay = DB::table('orders')
+        ->select(DB::raw('DATE(orderDate) as order_day'), DB::raw('COUNT(*) as order_count'))
+        ->where('orderDate', 'LIKE', $currentMonth.'%')
+        ->groupBy('order_day')
+        ->orderByDesc('order_count')
+        ->first();
+
+    return $mostOrdersDay->order_count ?? 0;
+}
+
 }
