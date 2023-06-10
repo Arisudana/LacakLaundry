@@ -2,6 +2,7 @@
 <html lang="en">
 
 <head>
+    <title>LacakLaundry</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
@@ -33,6 +34,7 @@
                         <li><a href="/dashboard">Dashboard</a></li>
                     </div>
                 </div>
+
                 <li><a href="{{ route('performance') }}">Performance</a></li>
                 <li><a href="{{ route('viewOrder') }}">Orders</a></li>
                 <li><a href="/settings">Settings</a></li>
@@ -137,9 +139,8 @@
                         </ul>
                     </div>
                 </div>
+
             </div>
-
-
             <div class="card ordersCount">
                 <div class="card-body">
                     <div class="card-title d-flex justify-content-between">
@@ -286,7 +287,6 @@
         // Set the formatted date as the content of the subtitle element
         document.getElementById("current-date").textContent = formattedDate;
     </script>
-
 
 </body>
 <style>
