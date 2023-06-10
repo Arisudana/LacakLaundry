@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Settings</title>
+    <title>LacakLaundry</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/css/bootstrap.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -57,7 +57,7 @@
                             </div>
                             <div class="length-pair">
                                 <div class="title-4 regular16px">Role</div>
-                                <div class="title-5 mulish-bold-steel-gray-20px bold-text">Administrator</div>
+                                <div class="title-5 mulish-bold-steel-gray-20px bold-text">{{ $role }}</div>
                             </div>
                             <div class="length-pair">
                                 <div class="title-4 regular16px">Email</div>
