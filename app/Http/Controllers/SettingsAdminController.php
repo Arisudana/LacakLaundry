@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use App\Models\AkunAdmin;
 use App\Models\AkunStaff;
 use Illuminate\Http\Request;
