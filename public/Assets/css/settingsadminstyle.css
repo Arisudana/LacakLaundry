@@ -4,6 +4,8 @@ body {
 }
 
 .table-container {
+    display: flex;
+    flex-direction: column;
     background-color: #ffffff;
     padding: 20px;
     border-radius: 5px;
@@ -313,10 +315,16 @@ li:hover::before {
     white-space: nowrap;
 }
 
+.settings {
+    width: 100%;
+}
+
 .settings-list-row {
-    width: 1130px;
     border-bottom: 1px solid #DADADA;
     display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 0;
 }
 
 .settings-list {
@@ -341,13 +349,12 @@ li:hover::before {
     min-height: 18px;
     white-space: nowrap;
     padding: 10px 0;
-    cursor: pointer;
     background: none;
     border: none;
     cursor: pointer;
     text-align: left;
-    width: 1100px;
     text-decoration: none;
+    width: 900px;
 }
 
 .settings-item a {
@@ -363,10 +370,8 @@ li:hover::before {
     background-color: #f5f5f5;
 }
 
-.icon-arrow-right-1 {
-    margin-left: auto;
-}
-
+.icon-arrow-right-1,
 .icon-arrow-right-2 {
     margin-left: auto;
+    cursor: pointer;
 }

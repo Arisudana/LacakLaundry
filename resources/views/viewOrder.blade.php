@@ -26,7 +26,7 @@
             </div>
             <ul class="sidebar-nav">
                 <li><a href="/dashboard">Dashboard</a></li>
-                <li><a href="{{ route('revenueDetail') }}">Performance</a></li>
+                <li><a href="{{ route('performance') }}">Performance</a></li>
                 <div class="selected">
                     <div class="sheet">
                         <li><a href="{{ route('viewOrder') }}">Orders</a></li>
