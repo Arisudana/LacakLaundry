@@ -9,6 +9,7 @@ use App\Http\Controllers\SettingsAdminController;
 use App\Http\Controllers\SettingsStaffController;
 use App\Http\Controllers\revenueDetailController;
 use App\Http\Controllers\OrdersController;
+use App\Http\Controllers\settingsOrderController;
 
 /*
 |--------------------------------------------------------------------------
@@ -47,6 +48,7 @@ Route::middleware(['authAdminStaff'])->group(function(){
     Route::get('viewOrder', [OrdersController::class, 'viewOrder'])->name('viewOrder');
     Route::get('logout', [loginController::class, 'logout'])->name('logout');
     Route::post('/input', [newController::class, 'submitOrder']);
+    Route::get('settings/order', [settingsOrderController::class, 'viewSettingsOrder']);
 
     Route::controller(SettingsAdminController::class)->group(function(){
         Route::get('/settings', 'SettingsAdmin');
@@ -54,7 +56,6 @@ Route::middleware(['authAdminStaff'])->group(function(){
         Route::post('/settings/edit/update', 'SubmitEdit');
         Route::get('/settings/staff', 'SettingsListStaff');
         Route::get('/settings/staff/add', 'SettingsAddStaff');
-        Route::get('/settings/order', 'SettingsOrder');
     });
 });
 

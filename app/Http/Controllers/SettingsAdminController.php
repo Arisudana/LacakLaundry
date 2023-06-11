@@ -37,11 +37,6 @@ class SettingsAdminController extends Controller
         return view('SettingsAddStaff');
     }
 
-    public function SettingsOrder()
-    {
-        return view('SettingsOrder');
-    }
-
     public function SettingsEditProfile($id)
     {
         $user = Auth::user();

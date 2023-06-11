@@ -358,6 +358,11 @@
             height: 40px;
         }
 
+        .form-select {
+            width: 1007px;
+            height: 48px;
+        }
+
         .vector-1 {
             height: 17px;
             margin-top: 1px;
@@ -441,13 +446,15 @@
                 </div>
                 <div class="right-container">
                     <div class="form-group row" style="padding-top:30px;">
-                        <label for="labelsettings" class="col-sm-4 col-form-label custom-label">Laundry Type</label>
-                        <select class="form-select" label for="orderType" id="orderType" name="orderType">
-                            <option selected>Choose the option for the type of the laundry</option>
-                            <option value="Cuci Basah">Cuci Basah</option>
-                            <option value="Cuci Kering">Cuci Kering</option>
-                            <option value="Cuci Kering Setrika">Cuci Kering Setrika</option>
-                        </select>
+                        <label for="orderType" class="col-sm-4 col-form-label custom-label">Laundry Type</label>
+                        <div class="col-lg-8">
+                            <select class="form-select form-select-lg mb-3" id="orderType" name="orderType">
+                                <option selected>Choose the option for the type of the laundry</option>
+                                <option value="Cuci Basah">Cuci Basah</option>
+                                <option value="Cuci Kering">Cuci Kering</option>
+                                <option value="Cuci Kering Setrika">Cuci Kering Setrika</option>
+                            </select>
+                        </div>
                     </div>
                 </div>
                 <div class="right-container">
@@ -459,7 +466,7 @@
                     </div>
                 </div>
                 <div class="overlap-group-1">
-                    <button type="submit" class="button-label">Submit</button>
+                    <button type="submit" class="button-label">Create</button>
                 </div>
                 </form>
             </div>
