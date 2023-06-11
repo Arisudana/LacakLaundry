@@ -117,11 +117,10 @@ class dashboardController extends Controller
 
     public function totalRevenue()
     {
-        $currentMonth = Carbon::now()->format('Y-m');
-
         $totalRevenue = DB::connection('mysql')
             ->table('orders')
-            ->where('orderDate', 'like', $currentMonth . '%')
+            ->whereYear('orderDate', Carbon::now()->year)
+            ->whereMonth('orderDate', Carbon::now()->month)
             ->sum('nominalOrder');
 
         return $totalRevenue;
@@ -132,6 +131,7 @@ class dashboardController extends Controller
 
         $averageMonthlyRevenue = DB::connection('mysql')
             ->table('orders')
+            ->whereYear('orderDate', Carbon::now()->year)
             ->whereMonth('orderDate', Carbon::now()->month)
             ->avg('nominalOrder');
         $averageMonthlyRevenue = round($averageMonthlyRevenue, 0);
