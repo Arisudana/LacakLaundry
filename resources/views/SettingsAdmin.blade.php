@@ -15,15 +15,13 @@
 <body>
     <div class="sidebar">
         <div class="sidebar-brand">
-
-            <img class="sidebar-brand-picture" src="{{ asset('Image/logo.jpg') }}" alt="Profile Picture">
+            <img class="sidebar-brand-picture" src="{{ asset('Image/logo.jpg')}}" alt="Profile Picture">
             <span class="brand-text">LacakLaundry</span>
         </div>
         <ul class="sidebar-nav">
             <li><a href="/dashboard">Dashboard</a></li>
-
-            <li><a href="/revenueDetail">Performance</a></li>
-            <li><a href="/viewOrder">Orders</a></li>
+            <li><a href="{{ route('performance') }}">Performance</a></li>
+            <li><a href="{{ route('viewOrder') }}">Orders</a></li>
             <div class="selected">
                 <div class="sheet">
                     <li><a href="/settings">Settings</a></li>
@@ -54,7 +52,7 @@
                         <div class="flex-col">
                             <div class="length-pair">
                                 <div class="title-4 regular16px">Name</div>
-                                <div class="title-5 mulish-bold-steel-gray-20px bold-text">{{ Auth::user()->firstName }}
+                                <div class="title-5 mulish-bold-steel-gray-20px bold-text">{{Auth::user()->lastName}} {{Auth::user()->firstName}}
                                 </div>
                             </div>
                             <div class="length-pair">
@@ -63,10 +61,10 @@
                             </div>
                             <div class="length-pair">
                                 <div class="title-4 regular16px">Email</div>
-                                <div class="title-5 mulish-bold-steel-gray-20px bold-text">{{ Auth::user()->email }}
+                                <div class="title-5 mulish-bold-steel-gray-20px bold-text">{{Auth::user()->email}}
                                 </div>
                             </div>
-                            <a href="#" style="text-decoration: none;">
+                            <a href="/settings/edit/{id}" style="text-decoration: none;">
                                 <div class="overlap-group-1">
                                     <img class="vector-1"
                                         src="https://anima-uploads.s3.amazonaws.com/projects/646bcdfa56fd98051a2e06f4/releases/646bd21885600e5d5e42adf8/img/vector-5.svg"
@@ -82,7 +80,7 @@
                         <div class="settings">
                             <div class="settings-list-row">
                                 <ul class="settings-list">
-                                    <li class="settings-item"><a href="#"><button
+                                    <li class="settings-item"><a href="/settings/staff"><button
                                                 class="mulish-bold-steel-gray-20px bold-text">Staff</button></a>
                                     </li>
                                 </ul>
@@ -92,7 +90,7 @@
                             </div>
                             <div class="settings-list-row">
                                 <ul class="settings-list">
-                                    <li class="settings-item" style="margin-top: 10px;"><a href="#"><button
+                                    <li class="settings-item" style="margin-top: 10px;"><a href="/settings/order"><button
                                                 class="mulish-bold-steel-gray-20px bold-text">Order
                                                 Settings</button></a></li>
                                 </ul>
@@ -117,10 +115,9 @@
                             </div>
                     @endif
                 </div>
-            </div>
 
+            </div>
         </div>
-    </div>
     </div>
 
 
