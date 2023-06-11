@@ -7,59 +7,16 @@ body {
     margin-top: 10px;
 }
 
-.table-container {
-    background-color: #ffffff;
-    padding: 20px;
-    border-radius: 5px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    margin-left: 0px;
-    flex: 1;
-    /* Tambahkan margin kiri */
-}
-
-table {
-    border-collapse: collapse;
-    width: 100%;
-}
-
-th,
-td {
-    border: 0;
+.btn-primary {
+    background-color: #144896;
+    color: white;
     padding: 8px;
-    text-align: left;
-}
-
-td {
-    border-top: 1px solid #eee;
-}
-
-.table-title {
-    text-align: left;
-    margin-bottom: 20px;
-    font-weight: 600;
-}
-
-.table-content {
-    font-size: 13px;
-}
-
-.table-head {
-    color: #9FA2B4;
-}
-
-.customer-info {
-    font-size: 12px;
-    color: #666;
-}
-
-.date-info {
-    font-size: 12px;
-    color: #666;
+    padding-left: 15px;
+    padding-right: 15px;
 }
 
 .sidebar {
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     margin: 0;
@@ -68,7 +25,6 @@ td {
     background-color: #363740;
     padding-top: 20px;
 
-    flex: 1;
 }
 
 .sidebar-brand {
@@ -92,6 +48,7 @@ td {
     margin-right: 7px;
 }
 
+
 .sidebar-nav {
     list-style: none;
     padding: 0;
@@ -112,7 +69,7 @@ td {
     padding-bottom: 15px;
 }
 
-.sidebar-nav li:hover::before {
+li:hover::before {
     content: '';
     position: absolute;
     top: 0;
@@ -121,6 +78,7 @@ td {
     width: 2px;
     background-color: #ffffff;
 }
+
 
 .sidebar-nav li a:hover {
     background-color: rgb(156, 157, 164, .08);
@@ -145,12 +103,12 @@ td {
     background-color: #ffffff;
 }
 
-.profile-container {
+/* .profile-container {
     display: flex;
-    align-items: center;
+    align-items: end;
     justify-content: space-between;
-    margin-bottom: 20px;
-}
+
+} */
 
 .left-container {
     display: inline-flex;
@@ -162,7 +120,6 @@ td {
 .profile-text {
     font-weight: bold;
     font-size: 18px;
-    margin-left: 15px;
 }
 
 .profile-picture {
@@ -180,127 +137,6 @@ td {
     margin-right: 10px;
 }
 
-.pagination {
-    display: flex;
-    justify-content: end;
-    align-items: center;
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-}
-
-.page-item {
-    margin: 0 2px;
-}
-
-.page-link {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 30px;
-    height: 30px;
-    border-radius: 5px;
-    color: #9FA2B4;
-    text-decoration: none;
-    transition: background-color 0.3s;
-}
-
-.page-link:hover {
-    background-color: #f5f5f5;
-}
-
-.page-item.disabled .page-link {
-    opacity: 0.5;
-    pointer-events: none;
-}
-
-.page-item.disabled .page-link:hover {
-    background-color: transparent;
-}
-
-.pagination-info {
-    margin-right: 17px;
-    margin-top: 2px;
-    font-size: 12px;
-    color: #9FA2B4;
-    align-items: center;
-    display: flex;
-}
-
-.rowpage-text {
-    margin-right: 50px;
-}
-
-.dropdown {
-    position: relative;
-    display: inline-block;
-    margin-right: 10px;
-    font-size: 10px;
-}
-
-.dropdown-menu {
-    font-size: 12px;
-    min-width: unset;
-    text-align: center;
-}
-
-.dropdown-toggle::after {
-    display: none;
-}
-
-.btn-sm {
-    padding: 0.01rem 0.2rem;
-    font-size: 12px;
-    line-height: 1.5;
-    border-radius: 0.2rem;
-    background-color: transparent;
-    border-color: transparent;
-    color: #9FA2B4;
-}
-
-.btn-sm:hover {
-    background-color: transparent;
-    border-color: transparent;
-    color: #000;
-}
-
-.table-header {
-    display: flex;
-    align-items: center;
-    justify-content: end;
-    margin-top: -40px;
-    margin-bottom: 20px;
-}
-
-.sort-btn {
-    cursor: pointer;
-    color: #000;
-    font-size: 13px;
-    font-weight: 700;
-    margin-right: 20px;
-    margin-left: 3px;
-}
-
-.sort-btn:hover {
-    background-color: transparent;
-    border-color: transparent;
-    color: #363740;
-}
-
-.ascending-icon::after {
-    content: "Sort";
-}
-
-.descending-icon::after {
-    content: "Sort";
-}
-
-.filter-btn {
-    cursor: pointer;
-    color: #000;
-    font-size: 13px;
-    font-weight: 700;
-}
 .detail-text {
     list-style: none;
     text-decoration: none;
@@ -309,9 +145,67 @@ td {
     font-weight: 700;
     margin-right: 10px;
     margin-left: 3px;
+    text-decoration: none;
 }
 
 .detail-text:hover {
     background-color: transparent;
     border-color: transparent;
+}
+
+.totalsCount {
+    padding-top: 1.5%;
+    padding-bottom: 1.5%;
+}
+
+.statusTitle {
+    text-align: center;
+    color: #9FA2B4;
+    font-weight: 600;
+}
+
+.statusCount {
+    font-size: 40px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.statusCardRow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 3%;
+}
+
+.statusCard {
+    width: 280px;
+    /* Adjust the width as needed */
+    margin: auto;
+    /* Center the card horizontally */
+}
+
+.statusCard:hover {
+    outline: 2px solid #144896;
+}
+
+.statusCard:hover .statusTitle,
+.statusCard:hover .statusCount {
+    color: #144896;
+}
+.chartTitle{
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+.chartSubtitle{
+    font-size: 0.9rem;
+}
+.chartInfoTitle {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #9FA2B4;
+}
+
+.chartInfoText {
+    font-size: 1.8rem;
+    font-weight: bold;
 }
