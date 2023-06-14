@@ -9,7 +9,9 @@ use Carbon\Carbon;
 class newController extends Controller
 {
     public function newOrder(){
-        return view('newOrder');
+
+        $orderSettingsData = $this->getOrderSettingsData();
+        return view('newOrder')->with(compact('orderSettingsData'));
     }
     public function submitOrder(Request $orders){
         date_default_timezone_set('Asia/Jakarta');
@@ -24,5 +26,33 @@ class newController extends Controller
         ]);
 
         return redirect('/');
+    }
+
+    public function getOrderSettingsData(){
+        $overdueTimeValue = DB::table('order_settings')
+        ->where('id',1)
+        ->value('value');
+
+        $cuciBasahValue = DB::table('order_settings')
+        ->where('id',2)
+        ->value('value');
+
+        $cuciKeringValue = DB::table('order_settings')
+        ->where('id',3)
+        ->value('value');
+
+        $cuciKeringSetrikaValue = DB::table('order_settings')
+        ->where('id',4)
+        ->value('value');
+
+        $orderSettingsData = [
+            'overdueTimeValue'=>$overdueTimeValue,
+            'cuciBasahValue'=>$cuciBasahValue,
+            'cuciKeringValue'=>$cuciKeringValue,
+            'cuciKeringSetrikaValue'=>$cuciKeringSetrikaValue
+        ];
+
+        return $orderSettingsData;
+
     }
 }
