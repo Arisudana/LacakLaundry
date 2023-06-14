@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Order extends Model
 {
     protected $table = 'orders'; // Specify the table name if it's different from the default convention
+    public $timestamps = false;
 
     protected $fillable = [
         'customerName',
@@ -16,6 +17,9 @@ class Order extends Model
         'orderWeight',
         'orderDate',
         'orderStatus',
+        'dateWashed',
+        'dateIroned',
+        'dateReady'
     ];
 
 }

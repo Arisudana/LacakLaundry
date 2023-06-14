@@ -417,62 +417,67 @@
                         <span class="profile-text" style="font-weight: bold; font-size: 20px;"> New Order</span>
                     </div>
                 </div>
-                <div class="right-container">
-                    <form action="/input" method="POST">
+                <form action="/input" method="POST">
+                    {{ csrf_field() }}
+                    <div class="right-container">
                         <div class="form-group row" style="padding-top:40px;">
-                            {{ csrf_field() }}
                             <label for="labelsettings" class="col-sm-4 col-form-label custom-label">Name</label>
                             <div class="col-sm-8">
                                 <input type="text" class="form-control" id="customerName" name="customerName">
                             </div>
                         </div>
-                </div>
-                <div class="right-container">
-                    <div class="form-group row" style="padding-top:30px;">
-                        <label for="labelsettings" class="col-sm-4 col-form-label custom-label">Phone Number</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" id="phoneNumber" name="phoneNumber">
+                    </div>
+                    <div class="right-container">
+                        <div class="form-group row" style="padding-top:30px;">
+                            <label for="labelsettings" class="col-sm-4 col-form-label custom-label">Phone Number</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" id="phoneNumber" name="phoneNumber">
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="right-container">
-                    <div class="form-group row" style="padding-top:30px;">
-                        <label for="labelsettings" class="col-sm-4 col-form-label custom-label">Laundry Weight
-                            (Kilogram)</label>
-                        <div class="col-sm-8">
-                            <input type="number" class="form-control" id="orderWeight" name="orderWeight">
+                    <div class="right-container">
+                        <div class="form-group row" style="padding-top:30px;">
+                            <label for="labelsettings" class="col-sm-4 col-form-label custom-label">Laundry Weight
+                                (Kilogram)</label>
+                            <div class="col-sm-8">
+                                <input type="number" class="form-control" id="orderWeight" name="orderWeight">
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="right-container">
-                    <div class="form-group row" style="padding-top:30px;">
-                        <label for="orderType" class="col-sm-4 col-form-label custom-label">Laundry Type</label>
-                        <div class="col-lg-8">
-                            <select class="form-select form-select-lg mb-3" id="orderType" name="orderType">
-                                <option selected>Choose the option for the type of the laundry</option>
-                                <option value="Cuci Basah">Cuci Basah</option>
-                                <option value="Cuci Kering">Cuci Kering</option>
-                                <option value="Cuci Kering Setrika">Cuci Kering Setrika</option>
-                            </select>
+                    <div class="right-container">
+                        <div class="form-group row" style="padding-top:30px;">
+                            <label for="orderType" class="col-sm-4 col-form-label custom-label">Laundry Type</label>
+                            <div class="col-lg-8">
+                                <select class="form-select form-select-lg mb-3" id="orderType" name="orderType">
+                                    <option selected>Choose the option for the type of the laundry</option>
+                                    <option value="Cuci Basah">Cuci Basah</option>
+                                    <option value="Cuci Kering">Cuci Kering</option>
+                                    <option value="Cuci Kering Setrika">Cuci Kering Setrika</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="right-container">
-                    <div class="form-group row" style="padding-top:30px;">
-                        <label for="labelsettings" class="col-sm-4 col-form-label custom-label">Total Price</label>
-                        <div class="col-sm-8">
-                            <input type="number" class="form-control" id="nominalOrder" name="nominalOrder">
+                    <div class="right-container">
+                        <div class="form-group row" style="padding-top:30px;">
+                            <label for="labelsettings" class="col-sm-4 col-form-label custom-label">Total Price</label>
+                            <div class="col-sm-8">
+                                <input type="number" class="form-control" id="nominalOrder" name="nominalOrder">
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="overlap-group-1">
-                    <button type="submit" class="button-label">Create</button>
-                </div>
+                    <div class="overlap-group-1">
+                        <button type="submit" class="button-label">Create</button>
+                    </div>
                 </form>
             </div>
         </div>
     </div>
     <script>
+        var overdueTime = {{ $orderSettingsData['overdueTimeValue'] }}
+        var cuciBasahPrice = {{ $orderSettingsData['cuciBasahValue'] }}
+        var cuciKeringPrice = {{ $orderSettingsData['cuciKeringValue'] }}
+        var cuciKeringSetrikaPrice = {{ $orderSettingsData['cuciKeringSetrikaValue'] }}
+
         document.addEventListener('DOMContentLoaded', function() {
             var orderType = document.getElementById('orderType');
             var orderWeight = document.getElementById('orderWeight');
@@ -482,11 +487,11 @@
                 var totalPrice = orderWeight.value;
 
                 if (selectedOption === 'Cuci Basah') {
-                    totalPrice *= 3000;
+                    totalPrice *=cuciBasahPrice ;
                 } else if (selectedOption === 'Cuci Kering') {
-                    totalPrice *= 4000;
+                    totalPrice *= cuciKeringPrice;
                 } else if (selectedOption === 'Cuci Kering Setrika') {
-                    totalPrice *= 5000;
+                    totalPrice *= cuciKeringSetrikaPrice;
                 }
 
                 document.getElementById('nominalOrder').value = totalPrice;

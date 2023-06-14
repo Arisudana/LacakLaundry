@@ -388,8 +388,9 @@
             <div class="col-lg-9 offset-lg-3">
                 <div class="profile-container">
                     <div class="left-container">
-                        <a href="/settings" style="text-decoration: none;"><svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                height="16" fill="currentColor" class="bi-caret-left-fill" viewBox="0 0 16 16">
+                        <a href="/settings" style="text-decoration: none;"><svg xmlns="http://www.w3.org/2000/svg"
+                                width="16" height="16" fill="currentColor" class="bi-caret-left-fill"
+                                viewBox="0 0 16 16">
                                 <path
                                     d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />
                             </svg></a>
@@ -399,46 +400,60 @@
                 <div class="right-container">
                     <div class="subtitle-1 bold19px">Time</div>
                 </div>
-                <div class="right-container">
+                <form action="/settings/save" method="POST">
+                    {{ csrf_field() }}
+                    <div class="right-container">
+
+                        <div class="form-group row" style="padding-top:10px;">
+                            <label for="labelsettings" class="col-sm-4 col-form-label custom-label">Overdue Time</label>
+                            <div class="col-sm-8">
+                                <input type="number" class="form-control" id="overdueTime" name="overdueTime"
+                                    placeholder= " {{ $orderSettingsData['overdueTimeValue'] }} Days">
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="form-group row" style="padding-top:10px;">
-                        <label for="labelsettings" class="col-sm-4 col-form-label custom-label">Overdue Time</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" id="kupon" placeholder="3 Days">
+                        <div class="right-container">
+                            <div class="subtitle-1 bold19px" style="padding-top:30px;">Price</div>
                         </div>
-                    </div>
-                </div>
-                <div class="right-container">
-                    <div class="subtitle-1 bold19px" style="padding-top:30px;">Price</div>
-                </div>
-                <div class="right-container">
-                    <div class="form-group row" style="padding-top:10px;">
-                        <label for="labelsettings" class="col-sm-4 col-form-label custom-label">Cuci Basah</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" id="input" placeholder="3000">
+                        <div class="right-container">
+                            <div class="form-group row" style="padding-top:10px;">
+                                <label for="labelsettings" class="col-sm-4 col-form-label custom-label">Cuci
+                                    Basah</label>
+                                <div class="col-sm-8">
+                                    <input type="number" class="form-control" id="cuciBasah" name="cuciBasah"
+                                        placeholder="{{ $orderSettingsData['cuciBasahValue'] }}">
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="right-container">
-                    <div class="form-group row" style="padding-top:30px;">
-                        <label for="labelsettings" class="col-sm-4 col-form-label custom-label">Cuci Kering</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" id="input" placeholder="4000">
+                        <div class="right-container">
+                            <div class="form-group row" style="padding-top:30px;">
+                                <label for="labelsettings" class="col-sm-4 col-form-label custom-label">Cuci
+                                    Kering</label>
+                                <div class="col-sm-8">
+                                    <input type="number" class="form-control" id="cuciKering" name="cuciKering"
+                                        placeholder="{{ $orderSettingsData['cuciKeringValue'] }}">
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
-                <div class="right-container">
-                    <div class="form-group row" style="padding-top:30px;">
-                        <label for="labelsettings" class="col-sm-4 col-form-label custom-label">Cuci Setrika</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" id="input" placeholder="5000">
+                        <div class="right-container">
+                            <div class="form-group row" style="padding-top:30px;">
+                                <label for="labelsettings" class="col-sm-4 col-form-label custom-label">Cuci Kering
+                                    Setrika</label>
+                                <div class="col-sm-8">
+                                    <input type="number" class="form-control" id="cuciKeringSetrika"
+                                        name="cuciKeringSetrika" placeholder="{{ $orderSettingsData['cuciKeringSetrikaValue'] }}">
+                                </div>
+                            </div>
                         </div>
+
                     </div>
-                </div>
-                <a href="#" style="text-decoration: none;">
+
                     <div class="overlap-group-1">
-                        <div class="label">Save</div>
+                        <button type="submit" class="button-label">Save</button>
                     </div>
-                </a>
+                </form>
             </div>
         </div>
     </div>
