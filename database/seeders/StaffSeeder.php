@@ -18,6 +18,7 @@ class StaffSeeder extends Seeder
                 'password' => bcrypt('12345678'),
                 'firstName' => 'Misael',
                 'lastName' => 'Riciardo',
+                'file' => '',
                 'email' => 'staff@example.com',
             ]);
         }

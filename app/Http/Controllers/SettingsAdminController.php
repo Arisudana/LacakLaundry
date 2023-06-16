@@ -54,18 +54,33 @@ class SettingsAdminController extends Controller
 
     public function SettingsStaffAdd(Request $request)
     {
+        // menyimpan data file yang diupload ke variabel $file
+		$file = $request->file('file');
+
+		$nama_file = time()."_".$file->getClientOriginalName();
+
+      	        // isi dengan nama folder tempat kemana file diupload
+		$tujuan_upload = 'data_file';
+		$file->move($tujuan_upload,$nama_file);
+
         DB::table('akun_staff')->insert([
             'lastName' => $request->lastName,
             'firstName' => $request->firstName,
             'email' => $request->email,
             'username' => $request->username,
-            'password' => bcrypt($request->password)
+            'password' => bcrypt($request->password),
+            'file' => $nama_file,
         ]);
 
         $request->validate([
             'password' => 'required',
             'password_confirmation' => 'required|same:password',
         ]);
+
+        $this->validate($request, [
+			'file' => 'required',
+			'keterangan' => 'required',
+		]);
 
         return redirect('/settings/staff');
 

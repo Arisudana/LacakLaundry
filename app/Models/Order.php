@@ -19,7 +19,7 @@ class Order extends Model
         'orderStatus',
         'dateWashed',
         'dateIroned',
-        'dateReady'
+        'dateReady',
     ];
 
 }

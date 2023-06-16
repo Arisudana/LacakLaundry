@@ -414,8 +414,16 @@
                         <span class="profile-text" style="font-weight: bold; font-size: 20px;"> Settings</span>
                     </div>
                 </div>
-                <form action="/settings/staff/store" method="POST">
+                <form action="/settings/staff/store" method="POST" enctype="multipart/form-data">
                     {{ csrf_field() }}
+                    <div class="right-container">
+                        <div class="form-group row" style="padding-top:40px;">
+                            <label for="labelsettings" class="col-sm-4 col-form-label custom-label">Photo Profile</label>
+                            <div class="col-sm-8">
+                                <input type="file" class="form-control" name="file">
+                            </div>
+                        </div>
+                    </div>
                     <div class="right-container">
                         <div class="form-group row" style="padding-top:40px;">
                             <label for="labelsettings" class="col-sm-4 col-form-label custom-label">First Name</label>
