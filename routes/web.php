@@ -9,6 +9,7 @@ use App\Http\Controllers\SettingsAdminController;
 use App\Http\Controllers\SettingsStaffController;
 use App\Http\Controllers\revenueDetailController;
 use App\Http\Controllers\OrdersController;
+use App\Http\Controllers\OrdersController1;
 use App\Http\Controllers\settingsOrderController;
 
 /*
@@ -26,12 +27,12 @@ Route::get('/', function () {
     return redirect(route('dashboard'));
 });
 
-Route::middleware(['guest'])->group(function(){
+Route::middleware(['guest'])->group(function () {
     Route::get('login', [loginController::class, 'viewLogin'])->name('login');
     Route::post('login', [loginController::class, 'login']);
 });
 
-Route::middleware(['authAdminStaff'])->group(function(){
+Route::middleware(['authAdminStaff'])->group(function () {
 
     Route::get('admin', function () {
         return "admin";
@@ -49,6 +50,7 @@ Route::middleware(['authAdminStaff'])->group(function(){
     Route::get('logout', [loginController::class, 'logout'])->name('logout');
     Route::post('/input', [newController::class, 'submitOrder']);
     Route::get('settings/order', [settingsOrderController::class, 'viewSettingsOrder']);
+    Route::post('/settings/save', [settingsOrderController::class, 'updateOrderSettings']);
 
     Route::controller(SettingsAdminController::class)->group(function(){
         Route::get('/settings', 'SettingsAdmin');
@@ -59,6 +61,3 @@ Route::middleware(['authAdminStaff'])->group(function(){
         Route::post('/settings/staff/store', 'SettingsStaffAdd');
     });
 });
-
-
-
