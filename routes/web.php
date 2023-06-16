@@ -50,6 +50,7 @@ Route::middleware(['authAdminStaff'])->group(function () {
     Route::get('logout', [loginController::class, 'logout'])->name('logout');
     Route::post('/input', [newController::class, 'submitOrder']);
     Route::get('settings/order', [settingsOrderController::class, 'viewSettingsOrder']);
+    Route::post('/settings/save', [settingsOrderController::class, 'updateOrderSettings']);
 
     Route::controller(SettingsAdminController::class)->group(function(){
         Route::get('/settings', 'SettingsAdmin');

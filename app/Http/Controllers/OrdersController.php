@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class OrdersController extends Controller
@@ -27,4 +29,5 @@ class OrdersController extends Controller
 
         return view('viewOrder', compact('latestOngoingOrders', 'latestOverdueOrders', 'latestFinishedOrders'));
     }
+
 }
