@@ -4,30 +4,40 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Carbon\Carbon;
 
-class newController extends Controller
+
+class settingsOrderController extends Controller
 {
-    public function newOrder(){
-
+    public function viewSettingsOrder()
+    {
         $orderSettingsData = $this->getOrderSettingsData();
-        return view('newOrder')->with(compact('orderSettingsData'));
-    }
-    public function submitOrder(Request $orders){
-        date_default_timezone_set('Asia/Jakarta');
-        DB::table('orders')->insert([
-            'customerName'=> $orders->customerName,
-            'phoneNumber'=> $orders->phoneNumber,
-            'orderWeight'=> $orders->orderWeight,
-            'orderType'=> $orders->orderType,
-            'nominalOrder'=> $orders->nominalOrder,
-            'orderDate'=> Carbon::now(),
-            'orderStatus' => 'Ongoing'
-        ]);
-
-        return redirect('/');
+        return view('SettingsOrder')->with(compact('orderSettingsData'));
     }
 
+    public function updateOrderSettings(Request $orderSettings){
+
+        DB::table('order_settings')
+        ->where('id',1)
+        ->update(['value'=>$orderSettings->overdueTime]);
+
+        DB::table('order_settings')
+        ->where('id',2)
+        ->update(['value'=>$orderSettings->cuciBasah]);
+
+        DB::table('order_settings')
+        ->where('id',3)
+        ->update(['value'=>$orderSettings->cuciKering]);
+
+        DB::table('order_settings')
+        ->where('id',4)
+        ->update(['value'=>$orderSettings->cuciKeringSetrika]);
+
+
+
+        return redirect('/settings');
+
+
+    }
     public function getOrderSettingsData(){
         $overdueTimeValue = DB::table('order_settings')
         ->where('id',1)

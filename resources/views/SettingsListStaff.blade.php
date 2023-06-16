@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Settings</title>
+    <title>LacakLaundry</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/css/bootstrap.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -383,28 +383,29 @@
 
 <body>
     <div class="sidebar">
-        <<div class="sidebar-brand">
-            <img class="sidebar-brand-picture" src="{{ asset('Image/logo.jpg')}}" alt="Profile Picture">
+        <div class="sidebar-brand">
+            <img class="sidebar-brand-picture" src="{{ asset('Image/logo.jpg') }}" alt="Profile Picture">
             <span class="brand-text">LacakLaundry</span>
-        </div>
-        <ul class="sidebar-nav">
-            <li><a href="/dashboard">Dashboard</a></li>
-            <li><a href="{{ route('performance') }}">Performance</a></li>
-            <li><a href="{{ route('viewOrder') }}">Orders</a></li>
-            <div class="selected">
-                <div class="sheet">
-                    <li><a href="/settings">Settings</a></li>
-                </div>
+    </div>
+    <ul class="sidebar-nav">
+        <li><a href="/dashboard">Dashboard</a></li>
+        <li><a href="{{ route('performance') }}">Performance</a></li>
+        <li><a href="#">Orders</a></li>
+        <div class="selected">
+            <div class="sheet">
+                <li><a href="/settings">Settings</a></li>
             </div>
-        </ul>
+        </div>
+    </ul>
     </div>
     <div class="container">
         <div class="row">
             <div class="col-lg-9 offset-lg-3">
                 <div class="profile-container">
                     <div class="left-container">
-                        <a href="/settings" style="text-decoration: none;"><svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                height="16" fill="currentColor" class="bi-caret-left-fill" viewBox="0 0 16 16">
+                        <a href="/settings" style="text-decoration: none;"><svg xmlns="http://www.w3.org/2000/svg"
+                                width="16" height="16" fill="currentColor" class="bi-caret-left-fill"
+                                viewBox="0 0 16 16">
                                 <path
                                     d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />
                             </svg></a>
@@ -434,31 +435,17 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>Alif Destiano</td>
+                                <td>{{ Auth::user()->lastName }} {{ Auth::user()->firstName }}</td>
                                 <td>
-                                    alifdestiano47@gmail.com
+                                    {{ Auth::user()->email }}
                                 </td>
-                                <td>Administrator</td>
+                                <td>{{ $role }}</td>
                                 <td>
-                                    <div class="green-status">Active</div>
-                                </td>
-                                <td>
-                                    <button class="more-button"><svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                            height="16" fill="currentColor" class="bi bi-three-dots-vertical"
-                                            viewBox="0 0 16 16">
-                                            <path
-                                                d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
-                                        </svg></button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Mushab Umair</td>
-                                <td>
-                                    mushabmusheb57@gmail.com
-                                </td>
-                                <td>Staff</td>
-                                <td>
-                                    <div class="green-status">Active</div>
+                                    @if (Auth::user()->status)
+                                        <div class="green-status">Active</div>
+                                    @else
+                                        <div class="gray-status">Inactive</div>
+                                    @endif
                                 </td>
                                 <td>
                                     <button class="more-button"><svg xmlns="http://www.w3.org/2000/svg" width="16"
@@ -470,25 +457,36 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td>Tilman Eldon</td>
-                                <td>
-                                    eldonsavedata@gmail.com
-                                </td>
-                                <td>Staff</td>
-                                <td>
-                                    <div class="gray-status">Inactive</div>
-                                </td>
-                                <td>
-                                    <button class="more-button"><svg xmlns="http://www.w3.org/2000/svg" width="16"
-                                            height="16" fill="currentColor" class="bi bi-three-dots-vertical"
-                                            viewBox="0 0 16 16">
-                                            <path
-                                                d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
-                                        </svg></button>
-                                </td>
                             </tr>
                         </tbody>
+                        <tbody>
+                            @foreach ($akun_staff as $user)
+                                <tr>
+                                    <td>{{ $user->lastName }} {{ $user->firstName }}</td>
+                                    <td>
+                                        {{ $user->email }}
+                                    </td>
+                                    <td>Staff</td>
+                                    <td>
+                                        @if ($user->status)
+                                            <div class="green-status">Active</div>
+                                        @else
+                                            <div class="gray-status">Inactive</div>
+                                        @endif
+                                    </td>
+                                    <td>
+                                        <button class="more-button"><svg xmlns="http://www.w3.org/2000/svg"
+                                                width="16" height="16" fill="currentColor"
+                                                class="bi bi-three-dots-vertical" viewBox="0 0 16 16">
+                                                <path
+                                                    d="M9.5 13a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0zm0-5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z" />
+                                            </svg></button>
+                                    </td>
+                                </tr>
+                            @endforeach
+                        </tbody>
                     </table>
+                    {{ $akun_staff->links() }}
                 </div>
             </div>
         </div>

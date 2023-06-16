@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('firstName', 55);
             $table->string('lastName', 55);
             $table->string('email', 255);
+            $table->boolean('status')->default(0);
+            $table->timestamps();
         });
     }
 

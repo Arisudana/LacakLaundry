@@ -40,11 +40,14 @@
                 <div class="">
                     <div class="profile-container">
                         <div class="left-container">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi bi-caret-left-fill" viewBox="0 0 16 16">
-                                <path
-                                    d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />
-                            </svg><span class="profile-text">Performance</span>
+                            <a href="/dashboard" style="text-decoration: none; color: black;">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                    fill="currentColor" class="bi bi-caret-left-fill" viewBox="0 0 16 16">
+                                    <path
+                                        d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />
+                                </svg>
+                                <span class="profile-text" href="/dashboard">Performance</span>
+                            </a>
                         </div>
                         <span class="admin-text">{{ Auth::user()->firstName }}</span>
                         <img class="profile-picture" src="admin.jpg" alt="Profile Picture">
@@ -122,24 +125,30 @@
                             <ul class="pagination">
                                 <div class="pagination-info">
                                     <span class="rowpage-text">Rows per page:
-                                        <form method="GET" action="{{ route('revenueDetail') }}" class="form-inline">
+                                        <form method="GET" action="{{ route('revenueDetail') }}"
+                                            class="form-inline">
                                             <div class="dropdown">
-                                                <select name="rowsPerPage" class="form-select" onchange="this.form.submit()">
-                                                    @for($i = 1; $i <= 10; $i++)
-                                                        <option value="{{ $i }}" {{ Request::get('rowsPerPage') == $i ? 'selected' : '' }}>{{ $i }}</option>
+                                                <select name="rowsPerPage" class="form-select"
+                                                    onchange="this.form.submit()">
+                                                    @for ($i = 1; $i <= 10; $i++)
+                                                        <option value="{{ $i }}"
+                                                            {{ Request::get('rowsPerPage') == $i ? 'selected' : '' }}>
+                                                            {{ $i }}</option>
                                                     @endfor
                                                 </select>
                                             </div>
                                         </form>
                                     </span>
                                     @php
-                                        $rows = (request()->input('rowsPerPage') != null) ? request()->input('rowsPerPage') : 6;
-                                        $page = (request()->input('page') != null) ? request()->input('page') : 1;
+                                        $rows = request()->input('rowsPerPage') != null ? request()->input('rowsPerPage') : 6;
+                                        $page = request()->input('page') != null ? request()->input('page') : 1;
                                     @endphp
-                                    <span>{{ $rows * $page - $rows + 1 }}-{{ $rows * $page }} of {{ $orders->total() }}</span>
+                                    <span>{{ $rows * $page - $rows + 1 }}-{{ $rows * $page }} of
+                                        {{ $orders->total() }}</span>
                                 </div>
                                 <li class="page-item {{ !$orders->onFirstPage() ?: 'disabled' }}">
-                                    <a class="page-link" href="{{ $orders->appends($_GET)->previousPageUrl() }}" tabindex="-1"
+                                    <a class="page-link" href="{{ $orders->appends($_GET)->previousPageUrl() }}"
+                                        tabindex="-1"
                                         aria-disabled="{{ $orders->onFirstPage() ? 'true' : 'false' }}">&lt;</a>
                                 </li>
                                 <li class="page-item {{ $orders->hasMorePages() ?: 'disabled' }}">

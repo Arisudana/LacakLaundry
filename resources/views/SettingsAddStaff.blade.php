@@ -2,7 +2,7 @@
 <html>
 
 <head>
-    <title>Settings</title>
+    <title>LacakLaundry</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/css/bootstrap.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -311,16 +311,9 @@
             cursor: pointer;
             text-align: left;
             text-decoration: none;
-            width: 1180px;
-            margin-left: 350px;
-            margin-right: 170px;
-            border-radius: 8px;
-            gap: 9px;
-            height: 42px;
-            justify-content: center;
-            margin-top: 36px;
-            min-width: 168px;
-            padding: 11px 13px;
+            display: flex;
+            width: 980px;
+            height: 50px;
         }
 
         .overlap-group-1 {
@@ -344,21 +337,27 @@
             text-align: center;
         }
 
-        .label {
-            align-self: flex-end;
-            transform: translateY(-11px);
+        .button-label {
+            font-family: Mulish;
+            font-size: 15px;
             color: #ffffff;
             font-weight: 700;
             letter-spacing: 0;
             bottom: 10px;
-            text-align: center;
-            white-space: nowrap;
-            width: 113px;
+            align-items: center;
+            justify-content: center;
+            display: flex;
+            width: 100%;
         }
 
         .form-control {
             width: 1000px;
             height: 40px;
+        }
+
+        .form-select {
+            width: 1007px;
+            height: 48px;
         }
 
         .vector-1 {
@@ -393,7 +392,7 @@
         <ul class="sidebar-nav">
             <li><a href="/dashboard">Dashboard</a></li>
             <li><a href="{{ route('performance') }}">Performance</a></li>
-            <li><a href="{{ route('viewOrder') }}">Orders</a></li>
+            <li><a href="#">Orders</a></li>
             <div class="selected">
                 <div class="sheet">
                     <li><a href="/settings">Settings</a></li>
@@ -415,43 +414,62 @@
                         <span class="profile-text" style="font-weight: bold; font-size: 20px;"> Settings</span>
                     </div>
                 </div>
-                <div class="right-container">
-                    <div class="form-group row" style="padding-top:40px;">
-                        <label for="labelsettings" class="col-sm-4 col-form-label custom-label">Name</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" id="input">
+                <form action="/settings/staff/store" method="POST">
+                    {{ csrf_field() }}
+                    <div class="right-container">
+                        <div class="form-group row" style="padding-top:40px;">
+                            <label for="labelsettings" class="col-sm-4 col-form-label custom-label">First Name</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="lastName">
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="right-container">
-                    <div class="form-group row" style="padding-top:30px;">
-                        <label for="labelsettings" class="col-sm-4 col-form-label custom-label">Username</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" id="input">
+                    <div class="right-container">
+                        <div class="form-group row" style="padding-top:40px;">
+                            <label for="labelsettings" class="col-sm-4 col-form-label custom-label">Last Name</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="firstName">
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="right-container">
-                    <div class="form-group row" style="padding-top:30px;">
-                        <label for="labelsettings" class="col-sm-4 col-form-label custom-label">Password</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" id="input">
+                    <div class="right-container">
+                        <div class="form-group row" style="padding-top:30px;">
+                            <label for="labelsettings" class="col-sm-4 col-form-label custom-label">Username</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="username">
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="right-container">
-                    <div class="form-group row" style="padding-top:30px;">
-                        <label for="labelsettings" class="col-sm-4 col-form-label custom-label">Confirm Password</label>
-                        <div class="col-sm-8">
-                            <input type="text" class="form-control" id="kupon">
+                    <div class="right-container">
+                        <div class="form-group row" style="padding-top:30px;">
+                            <label for="labelsettings" class="col-sm-4 col-form-label custom-label">Email</label>
+                            <div class="col-sm-8">
+                                <input type="text" class="form-control" name="email">
+                            </div>
                         </div>
                     </div>
-                </div>
-                <a href="#" style="text-decoration: none;">
+                    <div class="right-container">
+                        <div class="form-group row" style="padding-top:30px;">
+                            <label for="password" class="col-sm-4 col-form-label custom-label">Password</label>
+                            <div class="col-sm-8">
+                                <input type="password" class="form-control" name="password" id="password">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="right-container">
+                        <div class="form-group row" style="padding-top:30px;">
+                            <label for="confirm_password" class="col-sm-4 col-form-label custom-label">Confirm
+                                Password</label>
+                            <div class="col-sm-8">
+                                <input type="password" class="form-control" name="password_confirmation"
+                                    id="confirm_password">
+                            </div>
+                        </div>
+                    </div>
                     <div class="overlap-group-1">
-                        <div class="label">Save</div>
+                        <button type="submit" class="button-label">Create</button>
                     </div>
-                </a>
+                </form>
             </div>
         </div>
     </div>

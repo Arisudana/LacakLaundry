@@ -1,0 +1,211 @@
+body {
+    background-color: #F7F8FC;
+    font-family: Mulish;
+}
+
+.container {
+    margin-top: 10px;
+}
+
+.btn-primary {
+    background-color: #144896;
+    color: white;
+    padding: 8px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.sidebar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin: 0;
+    height: 100vh;
+    width: 180px;
+    background-color: #363740;
+    padding-top: 20px;
+
+}
+
+.sidebar-brand {
+    font-size: 14px;
+    font-weight: 700;
+    color: #A4A6B3;
+    margin-left: 6px;
+    vertical-align: middle;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 40px;
+    margin-top: 10px;
+}
+
+.sidebar-brand-picture {
+    width: 19px;
+    height: 19px;
+    border-radius: 50%;
+    align-items: center;
+    margin-right: 7px;
+}
+
+
+.sidebar-nav {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.sidebar-nav li {
+    position: relative;
+}
+
+.sidebar-nav li a {
+    font-size: 13px;
+    display: block;
+    color: #A4A6B3;
+    text-decoration: none;
+    text-indent: 55px;
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+li:hover::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 2px;
+    background-color: #ffffff;
+}
+
+
+.sidebar-nav li a:hover {
+    background-color: rgb(156, 157, 164, .08);
+    color: #A4A6B3;
+}
+
+.sheet {
+    background-color: rgb(156, 157, 164, .08);
+    content: '';
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 180px;
+}
+
+.selected {
+    content: '';
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 2px;
+    background-color: #ffffff;
+}
+
+/* .profile-container {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+
+} */
+
+.left-container {
+    display: inline-flex;
+    flex: 1;
+    margin-left: 0px;
+    align-items: center;
+}
+
+.profile-text {
+    font-weight: bold;
+    font-size: 18px;
+}
+
+.profile-picture {
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    align-items: center;
+    border: 2px solid #ccc;
+    padding: 1px;
+}
+
+.admin-text {
+    font-weight: 500;
+    font-size: 13px;
+    margin-right: 10px;
+}
+
+.detail-text {
+    list-style: none;
+    text-decoration: none;
+    color: #144896;
+    font-size: 13px;
+    font-weight: 700;
+    margin-right: 10px;
+    margin-left: 3px;
+    text-decoration: none;
+}
+
+.detail-text:hover {
+    background-color: transparent;
+    border-color: transparent;
+}
+
+.totalsCount {
+    padding-top: 1.5%;
+    padding-bottom: 1.5%;
+}
+
+.statusTitle {
+    text-align: center;
+    color: #9FA2B4;
+    font-weight: 600;
+}
+
+.statusCount {
+    font-size: 40px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.statusCardRow {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 3%;
+}
+
+.statusCard {
+    width: 280px;
+    /* Adjust the width as needed */
+    margin: auto;
+    /* Center the card horizontally */
+}
+
+.statusCard:hover {
+    outline: 2px solid #144896;
+}
+
+.statusCard:hover .statusTitle,
+.statusCard:hover .statusCount {
+    color: #144896;
+}
+.chartTitle{
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+.chartSubtitle{
+    font-size: 0.9rem;
+}
+.chartInfoTitle {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #9FA2B4;
+}
+
+.chartInfoText {
+    font-size: 1.8rem;
+    font-weight: bold;
+}

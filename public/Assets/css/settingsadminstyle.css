@@ -372,6 +372,6 @@ li:hover::before {
 
 .icon-arrow-right-1,
 .icon-arrow-right-2 {
-    margin-left: 10px;
+    margin-left: auto;
     cursor: pointer;
 }
