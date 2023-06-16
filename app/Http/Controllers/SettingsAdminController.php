@@ -59,7 +59,7 @@ class SettingsAdminController extends Controller
             'firstName' => $request->firstName,
             'email' => $request->email,
             'username' => $request->username,
-            'password' => $request->password = Hash::make($request->password)
+            'password' => bcrypt($request->password)
         ]);
 
         $request->validate([
