@@ -16,7 +16,8 @@ class AkunStaff extends Model implements AuthenticatableContract
 
     protected $fillable = [
         'username',
-        'password'
+        'password',
+        'file'
     ];
     protected $hidden = [
         'password'

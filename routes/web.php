@@ -49,8 +49,15 @@ Route::middleware(['authAdminStaff'])->group(function () {
     Route::get('viewOrder', [OrdersController::class, 'viewOrder'])->name('viewOrder');
     Route::get('logout', [loginController::class, 'logout'])->name('logout');
     Route::post('/input', [newController::class, 'submitOrder']);
+    Route::get('settings/order', [settingsOrderController::class, 'viewSettingsOrder']);
+    Route::post('/settings/save', [settingsOrderController::class, 'updateOrderSettings']);
 
-    Route::controller(SettingsAdminController::class)->group(function(){
+    Route::get('test', [ordersController1::class, 'viewOngoingProgress'])->name('ongoing');
+    Route::post('/test/washed', [ordersController1::class, 'storeWash']);
+    Route::post('/test/iron', [ordersController1::class, 'storeIron']);
+    Route::post('/test/ready', [ordersController1::class, 'storeReady']);
+
+    Route::controller(SettingsAdminController::class)->group(function () {
         Route::get('/settings', 'SettingsAdmin');
         Route::get('/settings/edit/{id}', 'SettingsEditProfile');
         Route::post('/settings/edit/update', 'SubmitEdit');
