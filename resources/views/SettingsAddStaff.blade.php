@@ -414,7 +414,7 @@
                         <span class="profile-text" style="font-weight: bold; font-size: 20px;"> Settings</span>
                     </div>
                 </div>
-                <form action="/settings/staff/store" method="POST" enctype="multipart/form-data">
+                <form action="/settings/store" method="POST" enctype="multipart/form-data">
                     {{ csrf_field() }}
                     <div class="right-container">
                         <div class="form-group row" style="padding-top:40px;">

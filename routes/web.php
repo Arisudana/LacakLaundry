@@ -41,6 +41,19 @@ Route::middleware(['authAdminStaff'])->group(function () {
         return "staff";
     })->name('staff')->middleware('role:staff');
 
+    Route::get('ongoing', [ordersController1::class, 'viewOngoingProgress'])->name('ongoing');
+    Route::post('/ongoing/washed', [ordersController1::class, 'storeOngoingWashed']);
+    Route::post('/ongoing/ironed', [ordersController1::class, 'storeOngoingIroned']);
+    Route::post('/ongoing/ready', [ordersController1::class, 'storeOngoingReady']);
+
+    Route::get('overdue', [ordersController1::class, 'viewOverdueProgress'])->name('overdue');
+    Route::post('/overdue/washed', [ordersController1::class, 'storeOverdueWashed']);
+    Route::post('/overdue/ironed', [ordersController1::class, 'storeOverdueIroned']);
+    Route::post('/overdue/ready', [ordersController1::class, 'storeOverdueReady']);
+
+    Route::get('finished', [ordersController1::class, 'viewFinished'])->name('finished');
+
+
     Route::get('dashboard', [dashboardController::class, 'viewDashboard'])->name('dashboard');
     Route::get('performance', [performanceController::class, 'viewPerformance'])->name('performance');
     Route::get('newOrder', [newController::class, 'newOrder'])->name('newOrder');
@@ -51,17 +64,12 @@ Route::middleware(['authAdminStaff'])->group(function () {
     Route::get('settings/order', [settingsOrderController::class, 'viewSettingsOrder']);
     Route::post('/settings/save', [settingsOrderController::class, 'updateOrderSettings']);
 
-    Route::get('test', [ordersController1::class, 'viewOngoingProgress'])->name('ongoing');
-    Route::post('/test/washed', [ordersController1::class, 'storeWash']);
-    Route::post('/test/iron', [ordersController1::class, 'storeIron']);
-    Route::post('/test/ready', [ordersController1::class, 'storeReady']);
-
     Route::controller(SettingsController::class)->group(function () {
         Route::get('/settings', 'Settings');
         Route::get('/settings/edit/{id}', 'SettingsEditProfile');
         Route::post('/settings/edit/update', 'SubmitEdit');
         Route::get('/settings/staff', 'SettingsListStaff');
         Route::get('/settings/staff/add', 'SettingsAddStaff');
-        Route::post('/settings/staff/store', 'SettingsStaffAdd');
+        Route::post('/settings/store', 'SettingsStaffAdd');
     });
 });

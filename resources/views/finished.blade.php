@@ -203,10 +203,6 @@
             margin-bottom: 30px
         }
 
-        .row-tanggal {
-            height: 39px;
-        }
-
         /* isi tabel */
         .customer-info {
             font-size: 12px;
@@ -233,6 +229,15 @@
         }
 
         .button {
+            background-color: #28C797;
+            border-radius: 5px;
+            border-style: solid;
+            border-color: #28C797;
+            font-size: 9px;
+            color: white;
+        }
+
+        .button.clicked {
             background-color: #144896;
             border-radius: 5px;
             border-style: solid;
@@ -368,11 +373,10 @@
                     <div class="left-container">
                         <a href="/viewOrder" style="text-decoration: none; color:#000"><svg
                                 xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
-                                class="bi-caret-left-fill" viewBox="0 0 16 16">
+                                class="bi bi-caret-left-fill" viewBox="0 0 16 16">
                                 <path
                                     d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />
-                            </svg></a>
-                        <span class="profile-text" style="font-weight: bold; font-size: 20px; "> Orders</span>
+                            </svg></a><span class="profile-text">Orders</span>
                     </div>
                     <span class="admin-text">{{ Auth::user()->firstName }}</span>
                     <img class="profile-picture" src="{{ url('/data_file/' . Auth::user()->file) }}"
@@ -380,7 +384,7 @@
                 </div>
 
                 <div class="table-container">
-                    <h5 class="table-title">Ongoing Laundries</h5>
+                    <h5 class="table-title">Finished Laundries</h5>
 
                     <!-- tabel -->
 
@@ -407,7 +411,7 @@
                                     </td>
                                     <td style="padding-left:4%"><b>{{ $p->orderWeight }} kg</b></td>
                                     <td><b>{{ date('M d, Y', strtotime($p->orderDate)) }}</b>
-                                        <small class="customer-info"><br>
+                                        <small class="date-info"><br>
                                             {{ date('H:i', strtotime($p->orderDate)) }}
                                         </small>
                                     </td>
@@ -433,7 +437,7 @@
                                                     </div>
 
                                                     <div class="row row-tanggal">
-                                                        <div class="content" style="flex-grow:1"> <b> Done
+                                                        <div class="content" style="flex-grow:1"><b> Received
                                                             <br>
                                                             {{ date('d/m/y', strtotime($p->orderDate)) }}</b>
 
@@ -442,8 +446,9 @@
 
                                                     <div class="row row-button">
                                                         <div class="content" style="flex-grow:1">
-                                                            <button type="submit" class="received-button">Done</button>
-
+                                                            <form action="/test/saved" method="POST"
+                                                                class="washedForm">
+                                                            </form>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -459,28 +464,20 @@
                                                     </div>
 
                                                     <div class="row row-tanggal">
-                                                        <div class="content" style="flex-grow:1"><b> Washed
+                                                        <div class="content" style="flex-grow:1"> <b> Washed
                                                             <br>
-
-                                                            @if ($p->dateWashed == null)
-                                                                {{ '' }}
-                                                            @else
-                                                                {{ date('d/m/y', strtotime($p->dateWashed)) }}
-                                                            @endif</b>
+                                                            {{ date('d/m/y', strtotime($p->dateWashed)) }}</b>
 
                                                         </div>
                                                     </div>
 
                                                     <div class="row row-button">
                                                         <div class="content" style="flex-grow:1">
-                                                            <form action="/ongoing/washed" method="POST"
+                                                            <form action="/test/washed" method="POST"
                                                                 class="washedForm">
                                                                 {{ csrf_field() }}
                                                                 <input type="hidden" name="idValue"
                                                                     value="{{ $p->id }}">
-                                                                <button type="submit" class="button myButton"
-                                                                    data-column="washed"
-                                                                    onclick="changeButton()">Update</button>
                                                             </form>
                                                         </div>
                                                     </div>
@@ -500,33 +497,24 @@
                                                     <div class="row row-tanggal">
                                                         <div class="content" style="flex-grow:1"> <b> Iron
                                                             <br>
-                                                            <div id="ironed">
-                                                                @if ($p->dateIroned == null)
-                                                                    {{ '' }}
-                                                                @else
-                                                                    {{ date('d/m/y', strtotime($p->dateIroned)) }}
-                                                                @endif</b>
+                                                            {{ date('d/m/y', strtotime($p->dateIroned)) }}</b>
 
-
-                                                            </div>
                                                         </div>
                                                     </div>
 
                                                     <div class="row row-button">
                                                         <div class="content" style="flex-grow:1">
-                                                            <form action="/ongoing/ironed" method="POST"
+                                                            <form action="/test/ironed" method="POST"
                                                                 class="washedForm">
                                                                 {{ csrf_field() }}
                                                                 <input type="hidden" name="idValue"
                                                                     value="{{ $p->id }}">
-                                                                <button type="submit" class="button myButton"
-                                                                    data-column="washed">Update</button>
                                                             </form>
 
-                                                            </form>
                                                         </div>
                                                     </div>
                                                 </div>
+
 
                                                 <div class="col-md-1"
                                                     style="text-align:center; flex-direction:column">
@@ -540,27 +528,20 @@
                                                     </div>
 
                                                     <div class="row row-tanggal">
-                                                        <div class="content" style="flex-grow:1"> <b>  Ready
+                                                        <div class="content" style="flex-grow:1"> <b> Ready
                                                             <br>
-                                                            @if ($p->dateReady == null)
-                                                                {{ '' }}
-                                                            @else
-                                                                {{ date('d/m/y', strtotime($p->dateReady)) }}
-                                                            @endif</b>
+                                                            {{ date('d/m/y', strtotime($p->dateReady)) }}
+                                                        </div></b>
 
-
-                                                        </div>
                                                     </div>
 
                                                     <div class="row row-button">
                                                         <div class="content" style="flex-grow:1">
-                                                            <form action="/ongoing/ready" method="POST"
+                                                            <form action="/test/ready" method="POST"
                                                                 class="readyForm">
                                                                 {{ csrf_field() }}
                                                                 <input type="hidden" name="idValue"
                                                                     value="{{ $p->id }}">
-                                                                <button type="submit" class="button myButton"
-                                                                    data-column="washed">Finish</button>
                                                             </form>
                                                         </div>
                                                     </div>
@@ -593,8 +574,9 @@
 
                                                     <div class="row row-button">
                                                         <div class="content" style="flex-grow:1">
-                                                            <button type="submit"
-                                                                class="received-button">Done</button>
+                                                            <form action="/test/saved" method="POST"
+                                                                class="washedForm">
+                                                            </form>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -611,26 +593,20 @@
                                                     </div>
 
                                                     <div class="row row-tanggal">
-                                                        <div class="content" style="flex-grow:1"> <b> Washed
+                                                        <div class="content" style="flex-grow:1"> <b>  Washed
                                                             <br>
-                                                            @if ($p->dateWashed == null)
-                                                                {{ '' }}
-                                                            @else
-                                                                {{ date('d/m/y', strtotime($p->dateWashed)) }}
-                                                            @endif</b>
+                                                            {{ date('d/m/y', strtotime($p->dateWashed)) }}</b>
 
                                                         </div>
                                                     </div>
 
                                                     <div class="row row-button">
                                                         <div class="content" style="flex-grow:1">
-                                                            <form action="/ongoing/washed" method="POST"
+                                                            <form action="/test/washed" method="POST"
                                                                 class="washedForm">
                                                                 {{ csrf_field() }}
                                                                 <input type="hidden" name="idValue"
                                                                     value="{{ $p->id }}">
-                                                                <button type="submit" class="button myButton"
-                                                                    data-column="washed">Update</button>
                                                             </form>
                                                         </div>
                                                     </div>
@@ -650,24 +626,19 @@
                                                     <div class="row row-tanggal">
                                                         <div class="content" style="flex-grow:1"> <b> Ready
                                                             <br>
-                                                            @if ($p->dateReady == null)
-                                                                {{ '' }}
-                                                            @else
-                                                                {{ date('d/m/y', strtotime($p->dateReady)) }}
-                                                            @endif</b>
+
+                                                            {{ date('d/m/y', strtotime($p->dateReady)) }}</b>
 
                                                         </div>
                                                     </div>
 
                                                     <div class="row row-button">
                                                         <div class="content" style="flex-grow:1">
-                                                            <form action="/ongoing/ready" method="POST"
+                                                            <form action="/test/ready" method="POST"
                                                                 class="readyForm">
                                                                 {{ csrf_field() }}
                                                                 <input type="hidden" name="idValue"
                                                                     value="{{ $p->id }}">
-                                                                <button type="submit" class="button myButton"
-                                                                    data-column="washed">Finish</button>
                                                             </form>
                                                         </div>
                                                     </div>
@@ -678,6 +649,8 @@
                                     </td>
                                 </tr>
                             @endforeach
+
+
 
                             <script>
                                 const expandableRows = document.querySelectorAll('.expandable-row');
@@ -691,6 +664,47 @@
                                 });
 
 
+
+
+                                // var buttons = document.getElementsByClassName('myButton');
+                                // Array.from(buttons).forEach(function(button) {
+                                //     button.addEventListener('click', function() {
+                                //         changeButton(this);
+                                //     });
+                                // });
+
+                                // function changeButton(button) {
+                                //     if (button.getAttribute('disabled') !== 'true') {
+                                //         // var timestamp = new Date();
+                                //         // var formattedTimestamp = timestamp.toISOString();
+                                //         // var columnID = button.dataset.column;
+
+                                //         // Disable the button
+                                //         button.setAttribute('disabled', 'true');
+                                //         button.innerText = 'Done';
+                                //         button.classList.add('clicked');
+                                //     }
+                                // }
+
+                                // document.getElementById('12').addEventListener('submit', function(event) {
+                                //     event.preventDefault(); // Prevent the default form submission
+
+                                //     // Set the current timestamp value in the hidden input field
+                                //     document.getElementById('13').value = new Date().toISOString();
+
+                                //     // Submit the form
+                                //     this.submit();
+                                // });
+
+                                // Check if the button should be disabled on page load
+                                window.addEventListener('load', function() {
+                                    var button = document.getElementsByClassName('myButton');
+                                    var buttonDisabled = sessionStorage.getItem('buttonDisabled');
+                                    if (buttonDisabled) {
+                                        button.setAttribute('disabled', 'true');
+                                        button.innerText = 'Done';
+                                    }
+                                });
                             </script>
                         </tbody>
                     </table>

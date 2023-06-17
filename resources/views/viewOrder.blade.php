@@ -52,7 +52,7 @@
                     <div class="table-container">
                         <h4 class="table-title">Ongoing</h4>
                         <div class="table-header">
-                            <a class="detail-text" href="#">View Details</a>
+                            <a class="detail-text" href="/ongoing">View Details</a>
                         </div>
                         <table id="order-table" class="table-content">
                             <thead class="table-head">
@@ -79,7 +79,7 @@
                     <div class="table-container">
                         <h4 class="table-title">Overdue</h4>
                         <div class="table-header">
-                            <a class="detail-text" href="#">View Details</a>
+                            <a class="detail-text" href="/overdue">View Details</a>
                         </div>
                         <table id="order-table" class="table-content">
                             <thead class="table-head">
@@ -106,7 +106,7 @@
                     <div class="table-container">
                         <h4 class="table-title">Finished</h4>
                         <div class="table-header">
-                            <a class="detail-text" href="#">View Details</a>
+                            <a class="detail-text" href="/finished">View Details</a>
                         </div>
                         <table id="order-table" class="table-content">
                             <thead class="table-head">
