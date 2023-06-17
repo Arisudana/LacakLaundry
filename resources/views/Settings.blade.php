@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/css/bootstrap.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="icon" href="{{ asset('Image/logo1.png') }}" type="image/png">
     <link
         href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;0,1000;1,300&display=swap"
         rel="stylesheet">
@@ -20,8 +21,8 @@
         </div>
         <ul class="sidebar-nav">
             <li><a href="/dashboard">Dashboard</a></li>
-            <li><a href="{{ route('performance') }}">Performance</a></li>
-            <li><a href="{{ route('viewOrder') }}">Orders</a></li>
+            <li><a href="/performance">Performance</a></li>
+            <li><a href="/viewOrder">Orders</a></li>
             <div class="selected">
                 <div class="sheet">
                     <li><a href="/settings">Settings</a></li>

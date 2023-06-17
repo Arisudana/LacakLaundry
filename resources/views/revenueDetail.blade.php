@@ -14,7 +14,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <link href="Assets/css/revenuestyle.css" rel="stylesheet">
     <script src="Assets/js/revenue.js"></script>
-
+    <link rel="icon" href="{{ asset('Image/logo1.png') }}" type="image/png">
 </head>
 
 <body>
@@ -28,10 +28,10 @@
                 <li><a href="/dashboard">Dashboard</a></li>
                 <div class="selected">
                     <div class="sheet">
-                        <li><a href="{{ route('revenueDetail') }}">Performance</a></li>
+                        <li><a href="/performance">Performance</a></li>
                     </div>
                 </div>
-                <li><a href="{{ route('viewOrder') }}">Orders</a></li>
+                <li><a href="/viewOrder">Orders</a></li>
                 <li><a href="/settings">Settings</a></li>
             </ul>
         </div>
@@ -40,13 +40,13 @@
                 <div class="">
                     <div class="profile-container">
                         <div class="left-container">
-                            <a href="/dashboard" style="text-decoration: none; color: black;">
+                            <a href="/performance" style="text-decoration: none; color: black;">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
                                     fill="currentColor" class="bi bi-caret-left-fill" viewBox="0 0 16 16">
                                     <path
                                         d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />
                                 </svg>
-                                <span class="profile-text" href="/dashboard">Performance</span>
+                                <span class="profile-text" href="/performance">Performance</span>
                             </a>
                         </div>
                         <span class="admin-text">{{ Auth::user()->firstName }}</span>

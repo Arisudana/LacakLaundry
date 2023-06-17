@@ -23,7 +23,8 @@
             width: 100%;
         }
     </style>
-    <title>Login Page</title>
+    <title>LacakLaundry</title>
+    <link rel="icon" href="{{ asset('Image/logo1.png') }}" type="image/png">
 </head>
 
 <body>
