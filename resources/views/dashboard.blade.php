@@ -113,7 +113,7 @@
                                     <div class="col-12 chartInfoTitle ">Total Revenue</div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-12 chartInfoText">Rp {{ $totalRevenue }}</div>
+                                    <div class="col-12 chartInfoText">Rp {{ number_format($totalRevenue, 0, '.', '.') }}</div>
                                 </div>
                             </li>
                             <li class="list-group-item text-center chartInfo" style="padding-bottom: 6%; padding-top:6%;">
@@ -121,7 +121,7 @@
                                     <div class="col-12 chartInfoTitle">Average revenue per day</div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-12 chartInfoText">Rp {{ $averageMonthlyRevenue }}</div>
+                                    <div class="col-12 chartInfoText">Rp {{ number_format($averageMonthlyRevenue, 0, '.', '.') }}</div>
                                 </div>
                             </li>
                             <li class="list-group-item text-center chartInfo" style="padding-bottom: 6%; padding-top:6%;">

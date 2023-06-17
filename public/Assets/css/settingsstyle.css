@@ -126,7 +126,17 @@ td {
     background-color: #ffffff;
 }
 
-li:hover::before {
+/* li:hover::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 2px;
+    background-color: #ffffff;
+} */
+
+.sidebarbutton:hover::before {
     content: '';
     position: absolute;
     top: 0;

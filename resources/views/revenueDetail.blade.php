@@ -115,8 +115,8 @@
                                         {{-- <td>{{ $loop->iteration }}</td> --}}
                                         <td>{{ $order->id }}</td>
                                         <td>{{ $order->customerName }}</td>
-                                        <td>{{ $order->orderDate }}</td>
-                                        <td>Rp {{ $order->nominalOrder }}</td>
+                                        <td>{{ date('M d, Y', strtotime($order->orderDate)) }}</td>
+                                        <td>Rp {{ number_format($order->nominalOrder, 0, '.', '.') }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>

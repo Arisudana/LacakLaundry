@@ -156,7 +156,7 @@
                                                                     value="{{ $p->id }}">
                                                                 <button type="submit" class="button myButton"
                                                                     data-column="washed"
-                                                                    onclick="changeButton()">Update</button>
+                                                                    ">Update</button>
                                                             </form>
                                                         </div>
                                                     </div>

@@ -18,7 +18,7 @@ use Illuminate\Database\Seeder;
                 'password' => bcrypt('87654321'),
                 'firstName' => 'Desitano',
                 'lastName' => 'Alif',
-                'file' => '1686942148_1-ed5672ef2baf1b60fbf9acd6d461191a.jpg',
+                'file' => '1686989889_farhanrizqigiting.png',
                 'email' => 'admin321@example.com',
             ]);
         }

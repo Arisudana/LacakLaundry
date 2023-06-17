@@ -8,7 +8,7 @@ use App\Models\Order;
 use Carbon\Carbon;
 
 
-class ordersController1 extends Controller
+class progressController extends Controller
 {
     public function viewOngoingProgress()
     {

@@ -16,7 +16,7 @@
 <body>
     <div class="sidebar">
         <div class="sidebar-brand">
-            <img class="sidebar-brand-picture" src="Logo.jpg" alt="Profile Picture">
+            <img class="sidebar-brand-picture" src="{{ asset('Image/logo.jpg') }}" alt="Profile Picture">
             <span class="brand-text">LacakLaundry</span>
         </div>
         <ul class="sidebar-nav">

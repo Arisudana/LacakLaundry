@@ -44,7 +44,8 @@
                                     fill="currentColor" class="bi bi-caret-left-fill" viewBox="0 0 16 16">
                                     <path
                                         d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />
-                                </svg><span class="profile-text" href="/dashboard">Orders</span>
+                                </svg>
+                                <span class="profile-text" href="/dashboard">Orders</span>
                             </a>
                         </div>
                         <span class="admin-text">{{ Auth::user()->firstName }}</span>
@@ -72,7 +73,7 @@
                                         <td>{{ $order1->id }}</td>
                                         <td>{{ $order1->customerName }}</td>
                                         <td>{{ $order1->orderWeight }} Kg</td>
-                                        <td>{{ $order1->orderDate }}</td>
+                                        <td>{{ date('M d, Y', strtotime($order1->orderDate)) }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -99,7 +100,7 @@
                                         <td>{{ $order2->id }}</td>
                                         <td>{{ $order2->customerName }}</td>
                                         <td>{{ $order2->orderWeight }} Kg</td>
-                                        <td>{{ $order2->orderDate }}</td>
+                                        <td>{{ date('M d, Y', strtotime($order2->orderDate)) }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
@@ -126,7 +127,7 @@
                                         <td>{{ $order3->id }}</td>
                                         <td>{{ $order3->customerName }}</td>
                                         <td>{{ $order3->orderWeight }} Kg</td>
-                                        <td>{{ $order3->orderDate }}</td>
+                                        <td>{{ date('M d, Y', strtotime($order3->orderDate)) }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
