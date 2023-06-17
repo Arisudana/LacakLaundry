@@ -148,22 +148,25 @@ li:hover::before {
     color: #A4A6B3;
 }
 
-.right-container {
+/* .right-container {
     display: flex;
     margin-left: 350px;
     margin-right: 170px;
+} */
+.container-atas{
+    padding-top: 10px;
 }
 
 .custom-label {
     width: 827px;
-    height: 18px;
+    /* height: 18px; */
     font-style: normal;
     font-weight: 600;
     font-size: 12px;
-    line-height: 18px;
     color: #144896;
     flex: none;
     order: 0;
+
     align-self: stretch;
     flex-grow: 0;
     font-weight: bold;
@@ -173,7 +176,7 @@ li:hover::before {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    margin-bottom: 20px;
+    /* margin-bottom: 20px; */
 }
 
 .left-container {
@@ -195,11 +198,12 @@ li:hover::before {
 }
 
 .overlap-group1 {
-    align-self: center;
+    /* align-self: center; */
     border-radius: 75.5px;
     height: 151px;
     margin-bottom: 74px;
-    position: relative;
+    /* position: relative; */
+   text-align: center;
     width: 151px;
 }
 
@@ -297,11 +301,15 @@ li:hover::before {
     background: none;
     border: none;
     cursor: pointer;
-    text-align: left;
+    text-align: center;
     text-decoration: none;
     display: flex;
     width: 980px;
     height: 50px;
+}
+
+.cont {
+    padding-left: 250px;
 }
 
 .overlap-group-1 {
@@ -309,8 +317,8 @@ li:hover::before {
     background-color: #034c81;
     display: flex;
     width: 980px;
-    margin-left: 350px;
-    margin-right: 170px;
+    /* margin-left: 350px;
+    margin-right: 170px; */
     border-radius: 8px;
     gap: 9px;
     height: 42px;
@@ -336,6 +344,7 @@ li:hover::before {
     justify-content: center;
     display: flex;
     width: 100%;
+    display: inline;
 }
 
 .form-control {

@@ -112,14 +112,14 @@ class SettingsController extends Controller
                 'lastName' => $request->lastName,
                 'firstName' => $request->firstName,
                 'email' => $request->email,
-                'file' => $request->nama_file
+                // 'file' => $request->nama_file
             ]);
         } elseif ($isStaff) {
             DB::table('akun_staff')->where('username',$request->id)->update([
                 'lastName' => $request->lastName,
                 'firstName' => $request->firstName,
                 'email' => $request->email,
-                'file' => $request->nama_file
+                // 'file' => $request->nama_file
             ]);
         }
 

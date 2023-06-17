@@ -53,19 +53,19 @@
                                 <input type="text" name="username" class="form-control" id="email"
                                     placeholder="Username">
                             </div>
-                            <div class="mb-3">
-                                <label for="password" class="form-label">Password</label>
+                            <div class="mb-3" style="position:relative">
+                                <label for="password" class="form-label" >Password <span style="position: absolute; right: 0" class="form-text text-end" >
+                                    <a  href="javascript:void(alert('Sorry! Please contact your administator for the password :)'))">Forgot Password?</a>
+                                </span></label>
                                 <input type="password" name="password" class="form-control" id="password"
                                     placeholder="Password">
-                                <div class="form-text text-end">
-                                    <a href="#">Forgot Password?</a>
-                                </div>
+
                             </div>
                             <div class="text-center">
                                 <button type="submit" class="btn btn-primary full-width-btn">Log In</button>
                             </div>
                             <div class="mt-4 form-text text-center">
-                                <h6>Want to join? <a href="#">Contact our Sales Department</a></h6>
+                                <h6>Want to join? <a href="http://wa.me/6281287135011" target="_blank" >Contact our Sales Department</a></h6>
                             </div>
                         </form>
                     </div>

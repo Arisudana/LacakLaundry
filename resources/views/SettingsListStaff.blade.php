@@ -18,9 +18,9 @@
         <div class="sidebar-brand">
             <img class="sidebar-brand-picture" src="{{ asset('Image/logo.jpg') }}" alt="Profile Picture">
             <span class="brand-text">LacakLaundry</span>
-    </div>
-    <ul class="sidebar-nav">
-        <li><a href="/dashboard">Dashboard</a></li>
+        </div>
+        <ul class="sidebar-nav">
+            <li><a href="/dashboard">Dashboard</a></li>
             <li><a href="/performance">Performance</a></li>
             <li><a href="/viewOrder">Orders</a></li>
             <div class="selected">
@@ -28,8 +28,9 @@
                     <li><a href="/settings">Settings</a></li>
                 </div>
             </div>
-    </ul>
+        </ul>
     </div>
+    
     <div class="container">
         <div class="row">
             <div class="col-lg-9 offset-lg-3">
@@ -123,8 +124,8 @@
             </div>
         </div>
     </div>
-    </div>
-    </div>
+
+
 
 
 </body>

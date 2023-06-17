@@ -20,12 +20,12 @@
             <span class="brand-text">LacakLaundry</span>
         </div>
         <ul class="sidebar-nav">
-            <li><a href="/dashboard">Dashboard</a></li>
-            <li><a href="/performance">Performance</a></li>
-            <li><a href="/viewOrder">Orders</a></li>
+            <li class="sidebarbutton"><a href="/dashboard">Dashboard</a></li>
+            <li class="sidebarbutton"><a href="/performance">Performance</a></li>
+            <li class="sidebarbutton"><a href="/viewOrder">Orders</a></li>
             <div class="selected">
                 <div class="sheet">
-                    <li><a href="/settings">Settings</a></li>
+                    <li class="sidebarbutton"><a href="/settings">Settings</a></li>
                 </div>
             </div>
         </ul>
@@ -89,12 +89,13 @@
                                     alt="icon / arrow - right" />
                             </div>
                             <div class="settings-list-row">
-                                <ul class="settings-list">
-                                    <li class="settings-item" style="margin-top: 10px;"><a
-                                            href="/settings/order"><button
+                                <a href="/settings/order">
+                                    <ul class="settings-list">
+                                        <li class="settings-item" style="margin-top: 10px;"><button
                                                 class="mulish-bold-steel-gray-20px bold-text">Order
-                                                Settings</button></a></li>
-                                </ul>
+                                                Settings</button></li>
+                                    </ul>
+                                </a>
                                 <img class="icon-arrow-right-2"
                                     src="https://anima-uploads.s3.amazonaws.com/projects/646bcdfa56fd98051a2e06f4/releases/646bd21885600e5d5e42adf8/img/icon---arrow---right-1.svg"
                                     alt="icon / arrow - right" />

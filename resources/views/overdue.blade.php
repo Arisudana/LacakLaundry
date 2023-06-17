@@ -365,49 +365,6 @@
                                         nextRow.classList.toggle('hidden-row');
                                     });
                                 });
-
-
-
-
-                                // var buttons = document.getElementsByClassName('myButton');
-                                // Array.from(buttons).forEach(function(button) {
-                                //     button.addEventListener('click', function() {
-                                //         changeButton(this);
-                                //     });
-                                // });
-
-                                // function changeButton(button) {
-                                //     if (button.getAttribute('disabled') !== 'true') {
-                                //         // var timestamp = new Date();
-                                //         // var formattedTimestamp = timestamp.toISOString();
-                                //         // var columnID = button.dataset.column;
-
-                                //         // Disable the button
-                                //         button.setAttribute('disabled', 'true');
-                                //         button.innerText = 'Done';
-                                //         button.classList.add('clicked');
-                                //     }
-                                // }
-
-                                // document.getElementById('12').addEventListener('submit', function(event) {
-                                //     event.preventDefault(); // Prevent the default form submission
-
-                                //     // Set the current timestamp value in the hidden input field
-                                //     document.getElementById('13').value = new Date().toISOString();
-
-                                //     // Submit the form
-                                //     this.submit();
-                                // });
-
-                                // Check if the button should be disabled on page load
-                                window.addEventListener('load', function() {
-                                    var button = document.getElementsByClassName('myButton');
-                                    var buttonDisabled = sessionStorage.getItem('buttonDisabled');
-                                    if (buttonDisabled) {
-                                        button.setAttribute('disabled', 'true');
-                                        button.innerText = 'Done';
-                                    }
-                                });
                             </script>
                         </tbody>
                     </table>

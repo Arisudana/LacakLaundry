@@ -86,7 +86,7 @@
                                     <div class="col-12 chartInfoTitle ">Average revenue per day</div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-12 chartInfoText">Rp {{ $averageRevenuePerDayMonthly }}</div>
+                                    <div class="col-12 chartInfoText">Rp {{ number_format($averageRevenuePerDayMonthly, 0, '.', '.') }}</div>
                                 </div>
                             </li>
                             <li class="list-group-item text-center" style="padding-bottom: 5%; padding-top:5%;">
@@ -122,19 +122,19 @@
                         <li class="list-group-item totalsCount " >
                             <div class="row" >
                                 <div class="col-6">Total</div>
-                                <div class="col-6 text-end">{{ $totalRevenue}}</div>
+                                <div class="col-6 text-end">Rp {{ number_format($totalRevenue, 0, '.', '.')}}</div>
                             </div>
                         </li>
                         <li class="list-group-item totalsCount">
                             <div class="row">
                                 <div class="col-6">Current Month</div>
-                                <div class="col-6 text-end">{{ $currentMonthRevenue }}</div>
+                                <div class="col-6 text-end">Rp {{ number_format($currentMonthRevenue, 0, '.', '.') }}</div>
                             </div>
                         </li>
                         <li class="list-group-item totalsCount">
                             <div class="row">
                                 <div class="col-6">Last Month</div>
-                                <div class="col-6 text-end">{{ $lastMonthRevenue}}</div>
+                                <div class="col-6 text-end">Rp {{ number_format($lastMonthRevenue, 0, '.', '.')}}</div>
                             </div>
                         </li>
                     </ul>
