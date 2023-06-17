@@ -9,9 +9,9 @@ use App\Models\AkunStaff;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
-class SettingsAdminController extends Controller
+class SettingsController extends Controller
 {
-    public function SettingsAdmin()
+    public function Settings()
     {
         $user = Auth::user();
         $isAdmin = AkunAdmin::where('username', $user->username)->exists();
@@ -25,7 +25,7 @@ class SettingsAdminController extends Controller
             $role = null;
         }
 
-        return view('SettingsAdmin', compact('role'));
+        return view('Settings', compact('role'));
     }
 
     public function SettingsListStaff()
@@ -82,7 +82,7 @@ class SettingsAdminController extends Controller
 			'keterangan' => 'required',
 		]);
 
-        return redirect('/settings/staff');
+        return redirect('SettingsListStaff');
 
     }
 
@@ -111,13 +111,15 @@ class SettingsAdminController extends Controller
             DB::table('akun_admin')->where('username',$request->id)->update([
                 'lastName' => $request->lastName,
                 'firstName' => $request->firstName,
-                'email' => $request->email
+                'email' => $request->email,
+                'file' => $nama_file
             ]);
         } elseif ($isStaff) {
             DB::table('akun_staff')->where('username',$request->id)->update([
                 'lastName' => $request->lastName,
                 'firstName' => $request->firstName,
-                'email' => $request->email
+                'email' => $request->email,
+                'file' => $nama_file
             ]);
         }
 

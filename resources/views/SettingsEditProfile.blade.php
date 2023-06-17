@@ -386,7 +386,7 @@
                     <div class="subtitle-1 bold19px">Profile</div>
                     <div class="flex-row-1">
                         <div class="overlap-group1">
-                            <img class="profilepicture" src="Surya.jpeg" alt="avatar / man / _header" />
+                            <img class="profilepicture" src="{{ url('/data_file/' . Auth::user()->file) }}" />
                             <div class="profile-circle"></div>
                             <div class="text-group">
                                 <div class="title-5 mulish-bold-steel-gray-20px bold-text">{{ Auth::user()->lastName }}
