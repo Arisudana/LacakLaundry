@@ -203,6 +203,10 @@
             margin-bottom: 30px
         }
 
+        .row-tanggal {
+            height: 39px;
+        }
+
         /* isi tabel */
         .customer-info {
             font-size: 12px;
@@ -229,15 +233,6 @@
         }
 
         .button {
-            background-color: #28C797;
-            border-radius: 5px;
-            border-style: solid;
-            border-color: #28C797;
-            font-size: 9px;
-            color: white;
-        }
-
-        .button.clicked {
             background-color: #144896;
             border-radius: 5px;
             border-style: solid;
@@ -245,6 +240,7 @@
             font-size: 9px;
             color: white;
         }
+
 
         .received-button {
             background-color: #144896;
@@ -361,7 +357,7 @@
         <ul class="sidebar-nav">
             <li><a href="/dashboard">Overview</a></li>
             <li><a href="/performance">Performance</a></li>
-            <li><a href="/viewOrder">History</a></li>
+            <li><a href="/viewOrder">Orders</a></li>
             <li><a href="/settings">Settings</a></li>
         </ul>
     </div>
@@ -371,14 +367,20 @@
             <div class="col-lg-12   ">
                 <div class="profile-container">
                     <div class="left-container">
-                        <span class="profile-text">&lt; Orders</span>
+                        <a href="/viewOrder" style="text-decoration: none; color:#000"><svg
+                                xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-caret-left-fill" viewBox="0 0 16 16">
+                                <path
+                                    d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />
+                            </svg></a><span class="profile-text">Orders</span>
                     </div>
-                    <span class="admin-text">Administrator</span>
-                    <img class="profile-picture" src="Logo.jpg" alt="Profile Picture">
+                    <span class="admin-text">{{ Auth::user()->firstName }}</span>
+                    <img class="profile-picture" src="{{ url('/data_file/' . Auth::user()->file) }}"
+                        alt="Profile Picture">
                 </div>
 
                 <div class="table-container">
-                    <h5 class="table-title">Ongoing Laundries</h5>
+                    <h5 class="table-title">Overdue Laundries</h5>
 
                     <!-- tabel -->
 
@@ -398,16 +400,14 @@
 
                             @foreach ($orders as $p)
                                 <tr class="expandable-row">
-                                    <td style="text-align:center; width:225px; padding-right:70px">{{ $p->id }}
+                                    <td style="text-align:center; width:225px; padding-right:70px">
+                                        <b>{{ $p->id }}</b>
                                     </td>
                                     <td><b> {{ $p->customerName }}</b><br>
-                                        <small class="customer-info">
-                                            Updated:
-                                            {{ date('M d, Y', strtotime($p->orderDate)) }}
-                                        </small>
+
                                     </td>
                                     <td style="padding-left:4%"><b>{{ $p->orderWeight }} kg</b></td>
-                                    <td><b>{{ $p->orderDate }}</b>
+                                    <td><b>{{ date('M d, Y', strtotime($p->orderDate))}}</b>
                                         <small class="customer-info"><br>
                                             {{ date('H:i', strtotime($p->orderDate)) }}
                                         </small>
@@ -434,10 +434,10 @@
                                                     </div>
 
                                                     <div class="row row-tanggal">
-                                                        <div class="content" style="flex-grow:1">
-                                                            Received
-                                                            <br>
-                                                            {{ date('d/m/y', strtotime($p->orderDate)) }}
+                                                        <div class="content" style="flex-grow:1"><b>Received
+                                                                <br>
+                                                                {{ date('d/m/y', strtotime($p->orderDate)) }}</b>
+
                                                         </div>
                                                     </div>
 
@@ -459,10 +459,14 @@
                                                     </div>
 
                                                     <div class="row row-tanggal">
-                                                        <div class="content" style="flex-grow:1">
-                                                            Washed
-                                                            <br>
-                                                            {{ date('d-m-y', strtotime($p->dateWashed)) }}
+                                                        <div class="content" style="flex-grow:1"> <b> Washed
+                                                                <br>
+                                                                @if ($p->dateWashed == null)
+                                                                    {{ '' }}
+                                                                @else
+                                                                    {{ date('d/m/y', strtotime($p->dateWashed)) }}
+                                                                @endif
+                                                            </b>
                                                         </div>
                                                     </div>
 
@@ -474,13 +478,14 @@
                                                                 <input type="hidden" name="idValue"
                                                                     value="{{ $p->id }}">
                                                                 <button type="submit" class="button myButton"
-                                                                    data-column="washed">Next</button>
+                                                                    data-column="washed">Update</button>
                                                             </form>
                                                         </div>
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-1" style="text-align:center; flex-direction:column">
+                                                <div class="col-md-1"
+                                                    style="text-align:center; flex-direction:column">
                                                     <div class="row">
                                                         <div class="content" style="flex-grow:1">
                                                             <img class="iron"
@@ -491,10 +496,14 @@
                                                     </div>
 
                                                     <div class="row row-tanggal">
-                                                        <div class="content" style="flex-grow:1">
-                                                            Iron
-                                                            <br>
-                                                            {{ date('d-M-y', strtotime($p->dateIroned)) }}
+                                                        <div class="content" style="flex-grow:1"> <b> Iron
+                                                                <br>
+                                                                @if ($p->dateIroned == null)
+                                                                    {{ '' }}
+                                                                @else
+                                                                    {{ date('d/m/y', strtotime($p->dateIroned)) }}
+                                                                @endif
+                                                            </b>
                                                         </div>
                                                     </div>
 
@@ -506,7 +515,7 @@
                                                                 <input type="hidden" name="idValue"
                                                                     value="{{ $p->id }}">
                                                                 <button type="submit" class="button myButton"
-                                                                    data-column="washed">Next</button>
+                                                                    data-column="washed">Update</button>
                                                             </form>
 
                                                             </form>
@@ -526,10 +535,14 @@
                                                     </div>
 
                                                     <div class="row row-tanggal">
-                                                        <div class="content" style="flex-grow:1">
-                                                            Ready
-                                                            <br>
-                                                            {{ date('d-m-y', strtotime($p->dateReady)) }}
+                                                        <div class="content" style="flex-grow:1"> <b> Ready
+                                                                <br>
+                                                                @if ($p->dateReady == null)
+                                                                    {{ '' }}
+                                                                @else
+                                                                    {{ date('d/m/y', strtotime($p->dateReady)) }}
+                                                                @endif
+                                                            </b>
                                                         </div>
                                                     </div>
 
@@ -541,7 +554,7 @@
                                                                 <input type="hidden" name="idValue"
                                                                     value="{{ $p->id }}">
                                                                 <button type="submit" class="button myButton"
-                                                                    data-column="washed">Next</button>
+                                                                    data-column="washed">Finish</button>
                                                             </form>
                                                         </div>
                                                     </div>
@@ -565,16 +578,17 @@
                                                     </div>
 
                                                     <div class="row row-tanggal">
-                                                        <div class="content" style="flex-grow:1">
-                                                            Received
-                                                            <br>
-                                                            {{ date('d/m/y', strtotime($p->orderDate)) }}
+                                                        <div class="content" style="flex-grow:1"> <b> Received
+                                                                <br>
+                                                                {{ date('d/m/y', strtotime($p->orderDate)) }}</b>
+
                                                         </div>
                                                     </div>
 
                                                     <div class="row row-button">
                                                         <div class="content" style="flex-grow:1">
-                                                            <button type="submit" class="received-button">Done</button>
+                                                            <button type="submit"
+                                                                class="received-button">Done</button>
 
                                                         </div>
                                                     </div>
@@ -592,10 +606,14 @@
                                                     </div>
 
                                                     <div class="row row-tanggal">
-                                                        <div class="content" style="flex-grow:1">
-                                                            Washed
-                                                            <br>
-                                                            {{ date('d/m/y', strtotime($p->dateWashed)) }}
+                                                        <div class="content" style="flex-grow:1"> <b> Washed
+                                                                <br>
+                                                                @if ($p->dateWashed == null)
+                                                                    {{ '' }}
+                                                                @else
+                                                                    {{ date('d/m/y', strtotime($p->dateWashed)) }}
+                                                                @endif
+                                                            </b>
                                                         </div>
                                                     </div>
 
@@ -607,7 +625,7 @@
                                                                 <input type="hidden" name="idValue"
                                                                     value="{{ $p->id }}">
                                                                 <button type="submit" class="button myButton"
-                                                                    data-column="washed">Next</button>
+                                                                    data-column="washed">Update</button>
                                                             </form>
                                                         </div>
                                                     </div>
@@ -625,10 +643,15 @@
                                                     </div>
 
                                                     <div class="row row-tanggal">
-                                                        <div class="content" style="flex-grow:1">
-                                                            Ready
-                                                            <br>
-                                                            {{ date('d/m/y', strtotime($p->dateReady)) }}
+                                                        <div class="content" style="flex-grow:1"> <b> Ready
+                                                                <br>
+                                                                @if ($p->dateReady == null)
+                                                                    {{ '' }}
+                                                                @else
+                                                                    {{ date('d/m/y', strtotime($p->dateReady)) }}
+                                                                @endif
+                                                            </b>
+
                                                         </div>
                                                     </div>
 
@@ -640,7 +663,7 @@
                                                                 <input type="hidden" name="idValue"
                                                                     value="{{ $p->id }}">
                                                                 <button type="submit" class="button myButton"
-                                                                    data-column="washed">Next</button>
+                                                                    data-column="washed">Finish</button>
                                                             </form>
                                                         </div>
                                                     </div>

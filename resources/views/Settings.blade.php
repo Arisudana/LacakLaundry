@@ -9,13 +9,13 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Mulish:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;0,1000;1,300&display=swap"
         rel="stylesheet">
-    <link href="Assets/css/settingsadminstyle.css" rel="stylesheet">
+    <link href="Assets/css/settingsstyle.css" rel="stylesheet">
 </head>
 
 <body>
     <div class="sidebar">
         <div class="sidebar-brand">
-            <img class="sidebar-brand-picture" src="{{ asset('Image/logo.jpg')}}" alt="Profile Picture">
+            <img class="sidebar-brand-picture" src="{{ asset('Image/logo.jpg') }}" alt="Profile Picture">
             <span class="brand-text">LacakLaundry</span>
         </div>
         <ul class="sidebar-nav">
@@ -41,10 +41,8 @@
                     <div class="subtitle-1 bold19px">Profile</div>
                     <div class="flex-row-1">
                         <div class="overlap-group1">
-                            <img class="profilepicture"
-                                src="https://cdns.klimg.com/bola.net/library/upload/21/2023/04/645x430/maguire-dt-1_f8b85a8.jpg"
-                                alt="avatar / man / _header" />
-                            <div class="profile-circle"></div>
+                            <img class="profile-circle" src="{{ url('/data_file/' . Auth::user()->file) }}" />
+                            <div class="profilepicture"></div>
                         </div>
                         <img class="line-1"
                             src="https://anima-uploads.s3.amazonaws.com/projects/646bcdfa56fd98051a2e06f4/releases/646bd21885600e5d5e42adf8/img/line-1.svg"
@@ -52,7 +50,8 @@
                         <div class="flex-col">
                             <div class="length-pair">
                                 <div class="title-4 regular16px">Name</div>
-                                <div class="title-5 mulish-bold-steel-gray-20px bold-text">{{Auth::user()->lastName}} {{Auth::user()->firstName}}
+                                <div class="title-5 mulish-bold-steel-gray-20px bold-text">{{ Auth::user()->lastName }}
+                                    {{ Auth::user()->firstName }}
                                 </div>
                             </div>
                             <div class="length-pair">
@@ -61,7 +60,7 @@
                             </div>
                             <div class="length-pair">
                                 <div class="title-4 regular16px">Email</div>
-                                <div class="title-5 mulish-bold-steel-gray-20px bold-text">{{Auth::user()->email}}
+                                <div class="title-5 mulish-bold-steel-gray-20px bold-text">{{ Auth::user()->email }}
                                 </div>
                             </div>
                             <a href="/settings/edit/{id}" style="text-decoration: none;">
@@ -90,7 +89,8 @@
                             </div>
                             <div class="settings-list-row">
                                 <ul class="settings-list">
-                                    <li class="settings-item" style="margin-top: 10px;"><a href="/settings/order"><button
+                                    <li class="settings-item" style="margin-top: 10px;"><a
+                                            href="/settings/order"><button
                                                 class="mulish-bold-steel-gray-20px bold-text">Order
                                                 Settings</button></a></li>
                                 </ul>

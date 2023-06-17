@@ -47,7 +47,7 @@
                             </svg><span class="profile-text">Orders</span>
                         </div>
                         <span class="admin-text">{{Auth::user()->firstName}}</span>
-                        <img class="profile-picture" src="admin.jpg" alt="Profile Picture">
+                        <img class="profile-picture" src="{{ url('/data_file/' . Auth::user()->file) }}" alt="Profile Picture">
                     </div>
                     <div class="table-container">
                         <h4 class="table-title">Ongoing</h4>

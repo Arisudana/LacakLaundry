@@ -3,7 +3,7 @@
 
 <head>
     <title>LacakLaundry</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/css/bootstrap.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -408,7 +408,7 @@
                             <label for="labelsettings" class="col-sm-4 col-form-label custom-label">Overdue Time</label>
                             <div class="col-sm-8">
                                 <input type="number" class="form-control" id="overdueTime" name="overdueTime"
-                                    placeholder= " {{ $orderSettingsData['overdueTimeValue'] }} Days">
+                                    placeholder=" {{ $orderSettingsData['overdueTimeValue'] }} Days">
                             </div>
                         </div>
                     </div>
@@ -443,13 +443,13 @@
                                     Setrika</label>
                                 <div class="col-sm-8">
                                     <input type="number" class="form-control" id="cuciKeringSetrika"
-                                        name="cuciKeringSetrika" placeholder="{{ $orderSettingsData['cuciKeringSetrikaValue'] }}">
+                                        name="cuciKeringSetrika"
+                                        placeholder="{{ $orderSettingsData['cuciKeringSetrikaValue'] }}">
                                 </div>
                             </div>
                         </div>
 
                     </div>
-
                     <div class="overlap-group-1">
                         <button type="submit" class="button-label">Save</button>
                     </div>

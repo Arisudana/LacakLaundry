@@ -9,9 +9,9 @@ use App\Models\AkunStaff;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 
-class SettingsAdminController extends Controller
+class SettingsController extends Controller
 {
-    public function SettingsAdmin()
+    public function Settings()
     {
         $user = Auth::user();
         $isAdmin = AkunAdmin::where('username', $user->username)->exists();
@@ -25,7 +25,7 @@ class SettingsAdminController extends Controller
             $role = null;
         }
 
-        return view('SettingsAdmin', compact('role'));
+        return view('Settings', compact('role'));
     }
 
     public function SettingsListStaff()
@@ -54,12 +54,22 @@ class SettingsAdminController extends Controller
 
     public function SettingsStaffAdd(Request $request)
     {
+        // menyimpan data file yang diupload ke variabel $file
+		$file = $request->file('file');
+
+		$nama_file = time()."_".$file->getClientOriginalName();
+
+      	        // isi dengan nama folder tempat kemana file diupload
+		$tujuan_upload = 'data_file';
+		$file->move($tujuan_upload,$nama_file);
+
         DB::table('akun_staff')->insert([
             'lastName' => $request->lastName,
             'firstName' => $request->firstName,
             'email' => $request->email,
             'username' => $request->username,
-            'password' => bcrypt($request->password)
+            'password' => bcrypt($request->password),
+            'file' => $nama_file,
         ]);
 
         $request->validate([
@@ -67,7 +77,12 @@ class SettingsAdminController extends Controller
             'password_confirmation' => 'required|same:password',
         ]);
 
-        return redirect('/settings/staff');
+        $this->validate($request, [
+			'file' => 'required',
+			'keterangan' => 'required',
+		]);
+
+        return redirect('/settings/store');
 
     }
 
@@ -96,13 +111,15 @@ class SettingsAdminController extends Controller
             DB::table('akun_admin')->where('username',$request->id)->update([
                 'lastName' => $request->lastName,
                 'firstName' => $request->firstName,
-                'email' => $request->email
+                'email' => $request->email,
+                'file' => $request->nama_file
             ]);
         } elseif ($isStaff) {
             DB::table('akun_staff')->where('username',$request->id)->update([
                 'lastName' => $request->lastName,
                 'firstName' => $request->firstName,
-                'email' => $request->email
+                'email' => $request->email,
+                'file' => $request->nama_file
             ]);
         }
 

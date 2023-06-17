@@ -50,7 +50,7 @@
                             </div>
                             <div class="col-auto">
                                 <span class="admin-text">{{ Auth::user()->firstName }}</span>
-                                <img class="profile-picture" src="admin.jpg" alt="Profile Picture">
+                                <img class="profile-picture" src="{{ url('/data_file/' . Auth::user()->file) }}" alt="Profile Picture">
                             </div>
                         </div>
                         <div class="row mt-2">

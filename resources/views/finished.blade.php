@@ -361,7 +361,7 @@
         <ul class="sidebar-nav">
             <li><a href="/dashboard">Overview</a></li>
             <li><a href="/performance">Performance</a></li>
-            <li><a href="/viewOrder">History</a></li>
+            <li><a href="/viewOrder">Orders</a></li>
             <li><a href="/settings">Settings</a></li>
         </ul>
     </div>
@@ -371,14 +371,20 @@
             <div class="col-lg-12   ">
                 <div class="profile-container">
                     <div class="left-container">
-                        <span class="profile-text">&lt; Orders</span>
+                        <a href="/viewOrder" style="text-decoration: none; color:#000"><svg
+                                xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor"
+                                class="bi bi-caret-left-fill" viewBox="0 0 16 16">
+                                <path
+                                    d="m3.86 8.753 5.482 4.796c.646.566 1.658.106 1.658-.753V3.204a1 1 0 0 0-1.659-.753l-5.48 4.796a1 1 0 0 0 0 1.506z" />
+                            </svg></a><span class="profile-text">Orders</span>
                     </div>
-                    <span class="admin-text">Administrator</span>
-                    <img class="profile-picture" src="Logo.jpg" alt="Profile Picture">
+                    <span class="admin-text">{{ Auth::user()->firstName }}</span>
+                    <img class="profile-picture" src="{{ url('/data_file/' . Auth::user()->file) }}"
+                        alt="Profile Picture">
                 </div>
 
                 <div class="table-container">
-                    <h5 class="table-title">Ongoing Laundries</h5>
+                    <h5 class="table-title">Finished Laundries</h5>
 
                     <!-- tabel -->
 
@@ -398,13 +404,10 @@
 
                             @foreach ($orders as $p)
                                 <tr class="expandable-row">
-                                    <td style="text-align:center; width:225px; padding-right:70px">{{ $p->id }}
+                                    <td style="text-align:center; width:225px; padding-right:70px"><b>{{ $p->id }}</b>
                                     </td>
                                     <td><b> {{ $p->customerName }}</b><br>
-                                        <small class="customer-info">
-                                            Updated:
-                                            {{ $p->orderDate }}
-                                        </small>
+
                                     </td>
                                     <td style="padding-left:4%"><b>{{ $p->orderWeight }} kg</b></td>
                                     <td><b>{{ date('M d, Y', strtotime($p->orderDate)) }}</b>
@@ -434,10 +437,10 @@
                                                     </div>
 
                                                     <div class="row row-tanggal">
-                                                        <div class="content" style="flex-grow:1">
-                                                            Received
+                                                        <div class="content" style="flex-grow:1"><b> Received
                                                             <br>
-                                                            {{ date('d/m/y', strtotime($p->orderDate)) }}
+                                                            {{ date('d/m/y', strtotime($p->orderDate)) }}</b>
+
                                                         </div>
                                                     </div>
 
@@ -445,9 +448,6 @@
                                                         <div class="content" style="flex-grow:1">
                                                             <form action="/test/saved" method="POST"
                                                                 class="washedForm">
-
-                                                                <button type="submit" class="button myButton"
-                                                                    data-column="washed">Next</button>
                                                             </form>
                                                         </div>
                                                     </div>
@@ -464,10 +464,10 @@
                                                     </div>
 
                                                     <div class="row row-tanggal">
-                                                        <div class="content" style="flex-grow:1">
-                                                            Washed
+                                                        <div class="content" style="flex-grow:1"> <b> Washed
                                                             <br>
-                                                            {{ date('d/m/y', strtotime($p->dateWashed)) }}
+                                                            {{ date('d/m/y', strtotime($p->dateWashed)) }}</b>
+
                                                         </div>
                                                     </div>
 
@@ -478,14 +478,13 @@
                                                                 {{ csrf_field() }}
                                                                 <input type="hidden" name="idValue"
                                                                     value="{{ $p->id }}">
-                                                                <button type="submit" class="button myButton"
-                                                                    data-column="washed">Next</button>
                                                             </form>
                                                         </div>
                                                     </div>
                                                 </div>
 
-                                                <div class="col-md-1" style="text-align:center; flex-direction:column">
+                                                <div class="col-md-1"
+                                                    style="text-align:center; flex-direction:column">
                                                     <div class="row">
                                                         <div class="content" style="flex-grow:1">
                                                             <img class="iron"
@@ -496,10 +495,10 @@
                                                     </div>
 
                                                     <div class="row row-tanggal">
-                                                        <div class="content" style="flex-grow:1">
-                                                            Iron
+                                                        <div class="content" style="flex-grow:1"> <b> Iron
                                                             <br>
-                                                            {{ date('d/m/y', strtotime($p->dateIroned)) }}
+                                                            {{ date('d/m/y', strtotime($p->dateIroned)) }}</b>
+
                                                         </div>
                                                     </div>
 
@@ -510,8 +509,6 @@
                                                                 {{ csrf_field() }}
                                                                 <input type="hidden" name="idValue"
                                                                     value="{{ $p->id }}">
-                                                                <button type="submit" class="button myButton"
-                                                                    data-column="washed">Next</button>
                                                             </form>
 
                                                         </div>
@@ -531,11 +528,11 @@
                                                     </div>
 
                                                     <div class="row row-tanggal">
-                                                        <div class="content" style="flex-grow:1">
-                                                            Ready
+                                                        <div class="content" style="flex-grow:1"> <b> Ready
                                                             <br>
                                                             {{ date('d/m/y', strtotime($p->dateReady)) }}
-                                                        </div>
+                                                        </div></b>
+
                                                     </div>
 
                                                     <div class="row row-button">
@@ -545,8 +542,6 @@
                                                                 {{ csrf_field() }}
                                                                 <input type="hidden" name="idValue"
                                                                     value="{{ $p->id }}">
-                                                                <button type="submit" class="button myButton"
-                                                                    data-column="washed">Next</button>
                                                             </form>
                                                         </div>
                                                     </div>
@@ -570,10 +565,10 @@
                                                     </div>
 
                                                     <div class="row row-tanggal">
-                                                        <div class="content" style="flex-grow:1">
-                                                            Received
+                                                        <div class="content" style="flex-grow:1"> <b> Received
                                                             <br>
-                                                            {{ date('d/m/y', strtotime($p->orderDate)) }}
+                                                            {{ date('d/m/y', strtotime($p->orderDate)) }}</b>
+
                                                         </div>
                                                     </div>
 
@@ -581,9 +576,6 @@
                                                         <div class="content" style="flex-grow:1">
                                                             <form action="/test/saved" method="POST"
                                                                 class="washedForm">
-
-                                                                <button type="submit" class="button myButton"
-                                                                    data-column="washed">Next</button>
                                                             </form>
                                                         </div>
                                                     </div>
@@ -601,10 +593,10 @@
                                                     </div>
 
                                                     <div class="row row-tanggal">
-                                                        <div class="content" style="flex-grow:1">
-                                                            Washed
+                                                        <div class="content" style="flex-grow:1"> <b>  Washed
                                                             <br>
-                                                            {{ date('d/m/y', strtotime($p->dateWashed)) }}
+                                                            {{ date('d/m/y', strtotime($p->dateWashed)) }}</b>
+
                                                         </div>
                                                     </div>
 
@@ -615,8 +607,6 @@
                                                                 {{ csrf_field() }}
                                                                 <input type="hidden" name="idValue"
                                                                     value="{{ $p->id }}">
-                                                                <button type="submit" class="button myButton"
-                                                                    data-column="washed">Next</button>
                                                             </form>
                                                         </div>
                                                     </div>
@@ -634,10 +624,11 @@
                                                     </div>
 
                                                     <div class="row row-tanggal">
-                                                        <div class="content" style="flex-grow:1">
-                                                            Ready
+                                                        <div class="content" style="flex-grow:1"> <b> Ready
                                                             <br>
-                                                            {{ date('d/m/y', strtotime($p->dateReady)) }}
+
+                                                            {{ date('d/m/y', strtotime($p->dateReady)) }}</b>
+
                                                         </div>
                                                     </div>
 
@@ -648,8 +639,6 @@
                                                                 {{ csrf_field() }}
                                                                 <input type="hidden" name="idValue"
                                                                     value="{{ $p->id }}">
-                                                                <button type="submit" class="button myButton"
-                                                                    data-column="washed">Next</button>
                                                             </form>
                                                         </div>
                                                     </div>
