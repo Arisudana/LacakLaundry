@@ -18,6 +18,7 @@
         rel="stylesheet">
     <link href="Assets/css/performancestyle.css" rel="stylesheet">
     <title>LacakLaundry</title>
+    <link rel="icon" href="{{ asset('Image/logo1.png') }}" type="image/png">
 </head>
 
 <body>
