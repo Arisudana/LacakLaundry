@@ -403,11 +403,11 @@
                                     <td><b> {{ $p->customerName }}</b><br>
                                         <small class="customer-info">
                                             Updated:
-                                            {{ $p->orderDate }}
+                                            {{ date('M d, Y', strtotime($p->orderDate)) }}
                                         </small>
                                     </td>
                                     <td style="padding-left:4%"><b>{{ $p->orderWeight }} kg</b></td>
-                                    <td><b>{{ date('M d, Y', strtotime($p->orderDate)) }}</b>
+                                    <td><b>{{ $p->orderDate }}</b>
                                         <small class="customer-info"><br>
                                             {{ date('H:i', strtotime($p->orderDate)) }}
                                         </small>
@@ -444,7 +444,6 @@
                                                     <div class="row row-button">
                                                         <div class="content" style="flex-grow:1">
                                                             <button type="submit" class="received-button">Done</button>
-
                                                         </div>
                                                     </div>
                                                 </div>
@@ -463,20 +462,19 @@
                                                         <div class="content" style="flex-grow:1">
                                                             Washed
                                                             <br>
-                                                            {{ date('d/m/y', strtotime($p->dateWashed)) }}
+                                                            {{ date('d-m-y', strtotime($p->dateWashed)) }}
                                                         </div>
                                                     </div>
 
                                                     <div class="row row-button">
                                                         <div class="content" style="flex-grow:1">
-                                                            <form action="/ongoing/washed" method="POST"
+                                                            <form action="/overdue/washed" method="POST"
                                                                 class="washedForm">
                                                                 {{ csrf_field() }}
                                                                 <input type="hidden" name="idValue"
                                                                     value="{{ $p->id }}">
                                                                 <button type="submit" class="button myButton"
-                                                                    data-column="washed"
-                                                                    onclick="changeButton()">Next</button>
+                                                                    data-column="washed">Next</button>
                                                             </form>
                                                         </div>
                                                     </div>
@@ -496,14 +494,13 @@
                                                         <div class="content" style="flex-grow:1">
                                                             Iron
                                                             <br>
-                                                            <div id="ironed">
-                                                                {{ date('d/m/y', strtotime($p->dateIroned)) }}</div>
+                                                            {{ date('d-M-y', strtotime($p->dateIroned)) }}
                                                         </div>
                                                     </div>
 
                                                     <div class="row row-button">
                                                         <div class="content" style="flex-grow:1">
-                                                            <form action="/ongoing/ironed" method="POST"
+                                                            <form action="/overdue/ironed" method="POST"
                                                                 class="washedForm">
                                                                 {{ csrf_field() }}
                                                                 <input type="hidden" name="idValue"
@@ -532,13 +529,13 @@
                                                         <div class="content" style="flex-grow:1">
                                                             Ready
                                                             <br>
-                                                            {{ date('d/m/y', strtotime($p->dateReady)) }}
+                                                            {{ date('d-m-y', strtotime($p->dateReady)) }}
                                                         </div>
                                                     </div>
 
                                                     <div class="row row-button">
                                                         <div class="content" style="flex-grow:1">
-                                                            <form action="/ongoing/ready" method="POST"
+                                                            <form action="/overdue/ready" method="POST"
                                                                 class="readyForm">
                                                                 {{ csrf_field() }}
                                                                 <input type="hidden" name="idValue"
@@ -549,110 +546,113 @@
                                                         </div>
                                                     </div>
                                                 </div>
-                                            @elseif ($p->orderType == 'Cuci Basah' || 'Cuci Kering')
-                                                <div class="row row-expand-2" style="margin-top:5px">
+                                            </div>
+                                        @elseif ($p->orderType == 'Cuci Basah' || 'Cuci Kering')
+                                            <div class="row row-expand-2" style="margin-top:5px">
 
-                                                    {{-- Orientasi Kolom --}}
-                                                    <div class="col-md-1"
-                                                        style="text-align:center; flex-direction:column">
+                                                {{-- Orientasi Kolom --}}
+                                                <div class="col-md-1"
+                                                    style="text-align:center; flex-direction:column">
 
-                                                        {{-- if error occurs, add display:flex --}}
-                                                        <div class="row">
-                                                            <div class="content" style="flex-grow:1;">
-                                                                <img class="vector"
-                                                                    src="{{ asset('Assets/Icon/Vector.png') }}"
-                                                                    alt="">
-                                                                <br>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="row row-tanggal">
-                                                            <div class="content" style="flex-grow:1">
-                                                                Received
-                                                                <br>
-                                                                {{ date('d/m/y', strtotime($p->orderDate)) }}
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="row row-button">
-                                                            <div class="content" style="flex-grow:1">
-                                                                <button type="submit"
-                                                                    class="received-button">Next</button>
-                                                            </div>
+                                                    {{-- if error occurs, add display:flex --}}
+                                                    <div class="row">
+                                                        <div class="content" style="flex-grow:1;">
+                                                            <img class="vector"
+                                                                src="{{ asset('Assets/Icon/Vector.png') }}"
+                                                                alt="">
+                                                            <br>
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-md-1"
-                                                        style="text-align:center; flex-direction:column">
-                                                        <div class="row">
-                                                            <div class="content" style="flex-grow:1;">
-                                                                <img class="expand-image"
-                                                                    src="{{ asset('Assets/Icon/WashingMachine.png') }}"
-                                                                    alt="" style="margin-bottom:13px">
-                                                                <br>
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="row row-tanggal">
-                                                            <div class="content" style="flex-grow:1">
-                                                                Washed
-                                                                <br>
-                                                                {{ date('d/m/y', strtotime($p->dateWashed)) }}
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="row row-button">
-                                                            <div class="content" style="flex-grow:1">
-                                                                <form action="/ongoing/washed" method="POST"
-                                                                    class="washedForm">
-                                                                    {{ csrf_field() }}
-                                                                    <input type="hidden" name="idValue"
-                                                                        value="{{ $p->id }}">
-                                                                    <button type="submit" class="button myButton"
-                                                                        data-column="washed">Next</button>
-                                                                </form>
-                                                            </div>
+                                                    <div class="row row-tanggal">
+                                                        <div class="content" style="flex-grow:1">
+                                                            Received
+                                                            <br>
+                                                            {{ date('d/m/y', strtotime($p->orderDate)) }}
                                                         </div>
                                                     </div>
 
-                                                    <div class="col-md-1"
-                                                        style="text-align:center; flex-direction:column">
-                                                        <div class="row">
-                                                            <div class="content" style="flex-grow:1">
-                                                                <img class="expand-image"
-                                                                    src="{{ asset('Assets/Icon/Clothes.png') }}"
-                                                                    alt="">
-                                                                <br>
-                                                            </div>
-                                                        </div>
+                                                    <div class="row row-button">
+                                                        <div class="content" style="flex-grow:1">
+                                                            <button type="submit" class="received-button">Done</button>
 
-                                                        <div class="row row-tanggal">
-                                                            <div class="content" style="flex-grow:1">
-                                                                Ready
-                                                                <br>
-                                                                {{ date('d/m/y', strtotime($p->dateReady)) }}
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="row row-button">
-                                                            <div class="content" style="flex-grow:1">
-                                                                <form action="/ongoing/ready" method="POST"
-                                                                    class="readyForm">
-                                                                    {{ csrf_field() }}
-                                                                    <input type="hidden" name="idValue"
-                                                                        value="{{ $p->id }}">
-                                                                    <button type="submit" class="button myButton"
-                                                                        data-column="washed">Next</button>
-                                                                </form>
-                                                            </div>
                                                         </div>
                                                     </div>
-
                                                 </div>
+
+                                                <div class="col-md-1"
+                                                    style="text-align:center; flex-direction:column">
+                                                    <div class="row">
+                                                        <div class="content" style="flex-grow:1;">
+                                                            <img class="expand-image"
+                                                                src="{{ asset('Assets/Icon/WashingMachine.png') }}"
+                                                                alt="" style="margin-bottom:13px">
+                                                            <br>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row row-tanggal">
+                                                        <div class="content" style="flex-grow:1">
+                                                            Washed
+                                                            <br>
+                                                            {{ date('d/m/y', strtotime($p->dateWashed)) }}
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row row-button">
+                                                        <div class="content" style="flex-grow:1">
+                                                            <form action="/overdue/washed" method="POST"
+                                                                class="washedForm">
+                                                                {{ csrf_field() }}
+                                                                <input type="hidden" name="idValue"
+                                                                    value="{{ $p->id }}">
+                                                                <button type="submit" class="button myButton"
+                                                                    data-column="washed">Next</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-md-1"
+                                                    style="text-align:center; flex-direction:column">
+                                                    <div class="row">
+                                                        <div class="content" style="flex-grow:1">
+                                                            <img class="expand-image"
+                                                                src="{{ asset('Assets/Icon/Clothes.png') }}"
+                                                                alt="">
+                                                            <br>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row row-tanggal">
+                                                        <div class="content" style="flex-grow:1">
+                                                            Ready
+                                                            <br>
+                                                            {{ date('d/m/y', strtotime($p->dateReady)) }}
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="row row-button">
+                                                        <div class="content" style="flex-grow:1">
+                                                            <form action="/overdue/ready" method="POST"
+                                                                class="readyForm">
+                                                                {{ csrf_field() }}
+                                                                <input type="hidden" name="idValue"
+                                                                    value="{{ $p->id }}">
+                                                                <button type="submit" class="button myButton"
+                                                                    data-column="washed">Next</button>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
                                         @endif
                                     </td>
                                 </tr>
                             @endforeach
+
+
 
                             <script>
                                 const expandableRows = document.querySelectorAll('.expandable-row');
@@ -665,9 +665,9 @@
                                     });
                                 });
 
-                                window.onload = function() {
-                                    changeButton();
-                                };
+
+
+
                                 // var buttons = document.getElementsByClassName('myButton');
                                 // Array.from(buttons).forEach(function(button) {
                                 //     button.addEventListener('click', function() {
@@ -675,23 +675,19 @@
                                 //     });
                                 // });
 
-                                function changeButton() {
+                                // function changeButton(button) {
+                                //     if (button.getAttribute('disabled') !== 'true') {
+                                //         // var timestamp = new Date();
+                                //         // var formattedTimestamp = timestamp.toISOString();
+                                //         // var columnID = button.dataset.column;
 
-                                }
-
-                                //     var ironedDiv = document.getElementById("ironed");
-                                //     var button = document.getElementsByClassName('myButton');
-                                //     var dateValue = ironedDiv.textContent.trim();
-
-
-                                //     // Disable the button
-                                //     if (dateValue !== "") {
+                                //         // Disable the button
                                 //         button.setAttribute('disabled', 'true');
                                 //         button.innerText = 'Done';
                                 //         button.classList.add('clicked');
                                 //     }
-
                                 // }
+
                                 // document.getElementById('12').addEventListener('submit', function(event) {
                                 //     event.preventDefault(); // Prevent the default form submission
 
