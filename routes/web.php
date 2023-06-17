@@ -5,8 +5,7 @@ use App\Http\Controllers\newController;
 use App\Http\Controllers\dashboardController;
 use App\Http\Controllers\performanceController;
 use App\Http\Controllers\loginController;
-use App\Http\Controllers\SettingsAdminController;
-use App\Http\Controllers\SettingsStaffController;
+use App\Http\Controllers\SettingsController;
 use App\Http\Controllers\revenueDetailController;
 use App\Http\Controllers\OrdersController;
 use App\Http\Controllers\OrdersController1;
@@ -57,8 +56,8 @@ Route::middleware(['authAdminStaff'])->group(function () {
     Route::post('/test/iron', [ordersController1::class, 'storeIron']);
     Route::post('/test/ready', [ordersController1::class, 'storeReady']);
 
-    Route::controller(SettingsAdminController::class)->group(function () {
-        Route::get('/settings', 'SettingsAdmin');
+    Route::controller(SettingsController::class)->group(function () {
+        Route::get('/settings', 'Settings');
         Route::get('/settings/edit/{id}', 'SettingsEditProfile');
         Route::post('/settings/edit/update', 'SubmitEdit');
         Route::get('/settings/staff', 'SettingsListStaff');
